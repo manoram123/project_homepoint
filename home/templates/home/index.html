@@ -1,0 +1,238 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block content %}
+    <!-- main -->
+    <div class="main pt-0" id = 'm'>
+      <!-- header -->
+      {% include 'navbar.html' %}
+      {% for m in messages %}
+      <div class="alert alert-success text-center alert-dismissible fixed-top fade show container col-md-3 mt-5 message-alert" data-aos = 'fade-down' data-aos-duration = '600' role="alert">
+          <p class = 'm-0'>{{ m }}</p>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      {% endfor %}
+      <div class="container landing mt-5 pt-5">
+        <div class="row m-0">
+          <div class="col-md-4">
+            <div class="">
+              <div class="t mb-1" data-aos = 'fade-right' data-aos-duration = '1000'>
+                <h1 class = 'mt-xl-1 text-xl-left text-center'>Find A Decent Stayings Near You</h1>
+                <p class = 'text-xl-left text-center'>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
+                <button class= 'btn btn-primary d-block mx-xl-0 mx-auto' type="button" name="button">Explore</button>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="side-image mt-4" data-aos = 'fade-left' data-aos-duration = '1000'>
+              <img class= 'img img-fluid' src="{% static 'static_images/sideimage.png' %}" alt="">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <hr class = "mb-5 container p-0">
+      <!-- header -->
+
+      <!--section -->
+      <div class="container">
+        <h4 class = 'mb-3'>Find the place you are looking for...</h4>
+        <form class="" action="" method="post">
+          <div class="search row px-3">
+            <div class="col-md-4 d-flex p-0 search-box left-rounded my-1">
+              <div class="search-icons text-dark text-center">
+                <span class=''> <i class='fas fa-map-marked-alt'></i> </span>
+              </div>
+              <input class = 'form-control' type="text" name="" value="" placeholder="Search the location...">
+            </div>
+            <div class="col-md-4 d-flex p-0 search-box my-1">
+              <div class="search-icons text-dark text-center">
+                <span class=''> <i class='fas fa-bed'></i> </span>
+              </div>
+              <input class = 'form-control' type="text" name="" value="" placeholder="Looking For...">
+              <div class="search-icons">
+                <span> <i class = 'fas fa-caret-down'></i> </span>
+              </div>
+            </div>
+            <div class="col-md-2 search-box p-0 d-flex my-1">
+              <div class="search-icons text-dark text-center">
+                <span> <i class = 'fas fa-users'></i> </span>
+              </div>
+              <input class = 'form-control' type="number" name="" value="" placeholder="People">
+            </div>
+            <div class="col-md-2 p-0 input-group-append my-1">
+              <button class = 'btn btn-primary btn-block right-rounded' type="button" name="button">Search</button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <!-- section -->
+      <hr class='container mt-5 mb-5 p-0'>
+      <!-- new listings -->
+      <div class="container p-0 px-3">
+        <h4>Ideal Hostels Near Kathmandu</h4>
+        <div class="scroll-box mt-4 d-flex">
+          <div class="box-card mx-2 shadow">
+            <div class="box-image rounded" style = "background: url('{% static 'static_images/hsotel.jpg' %}'); background-size:cover">
+            </div>
+            <div class="info">
+              <p class="m-0 font-weight-bold px-2">City Boys Hostel</p>
+              <p class="m-0 text-secondary px-2">Dillibazaar, Kathmandu</p>
+              <p class="m-0 text-secondary px-2">Price: 10,500</p>
+              <span class="mt-4 d-flex px-2">
+                <p class="btn btn-primary btn-sm">4.9</p>
+                <p class="text text-primary mx-2 mt-2">Delightful</p>
+              </span>
+            </div>
+          </div>
+
+          <div class="box-card mx-2 shadow">
+            <div class="box-image rounded" style = "background: url('{% static 'static_images/hostel3.jpeg' %}'); background-size:cover">
+            </div>
+            <div class="info">
+              <p class="m-0 font-weight-bold px-2">KTM Boys Hostel</p>
+              <p class="m-0 text-secondary px-2">Satdobato, Lalitpur</p>
+              <p class="m-0 text-secondary px-2">Price: 10,500</p>
+              <span class="mt-4 d-flex px-2">
+                <p class="btn btn-primary btn-sm">4.1</p>
+                <p class="text text-primary mx-2 mt-2">Pleasant</p>
+              </span>
+            </div>
+          </div>
+
+
+          <div class="box-card mx-2 shadow">
+            <div class="box-image rounded" style = "background: url('{% static 'static_images/girl_hostel.jpg' %}'); background-size:cover">
+            </div>
+            <div class="info">
+              <p class="m-0 font-weight-bold px-2">Gokarna's Girls Hostel</p>
+              <p class="m-0 text-secondary px-2">Thulo Varyang, Kathmandu</p>
+              <p class="m-0 text-secondary px-2">Price: 10,500</p>
+              <span class="mt-4 d-flex px-2">
+                <p class="btn btn-primary btn-sm">4.9</p>
+                <p class="text text-primary mx-2 mt-2">Delightful</p>
+              </span>
+            </div>
+          </div>
+
+
+          <div class="box-card mx-2 shadow">
+            <div class="box-image rounded" style = "background: url('{% static 'static_images/hostel2.jpg' %}'); background-size:cover">
+            </div>
+            <div class="info">
+              <p class="m-0 font-weight-bold px-2">Amir Boys Hostel</p>
+              <p class="m-0 text-secondary px-2">Satdobato, Lalitpur</p>
+              <p class="m-0 text-secondary px-2">Price: 10,500</p>
+              <span class="mt-4 px-2 d-flex">
+                <p class="btn btn-primary btn-sm">3.8</p>
+                <p class="text text-primary mx-2 mt-2">Good</p>
+              </span>
+            </div>
+          </div>
+
+
+          <div class="box-card mx-2 shadow">
+            <div class="box-image rounded discover" style = "background: url('{% static 'static_images/hostel.jpg' %}'); background-size:cover"></div>
+            <p class="discover-quote text-light pl-4">Discover more for your best choices to stay.</p>
+            <button class="browse-more d-block mx-auto px-5 text-primary py-1" type="button" name="button">Browse More</button>
+          </div>
+
+
+        </div>
+      </div>
+      <!-- new listings -->
+      <hr class="container mb-5 p-0">
+
+      <div class="container">
+        <h4 class ="">What is your catch?</h4>
+
+        <div class="row">
+          <div class="col-md-6 mt-1">
+            <div class="category rounded shadow pt-2 mx-auto" style="background: url('{% static 'static_images/hostelc.jpg' %}');background-position: center; background-size: cover; background-repeat: no-repeat;">
+            </div>
+            <p class ='text-dark text-center rounded mx-2 bg-light shadow d-inline px-2 category-text'>Hostel</p>
+          </div>
+          <div class="col-md-6 mt-1">
+            <div class="category rounded shadow pt-2 mx-auto" style="background: url('{% static 'static_images/room.svg' %}'); background-position: center; background-size: cover; background-repeat: no-repeat;">
+            </div>
+            <p class = 'text-center rounded mx-2 bg-light shadow d-inline px-2 category-text'>Room</p>
+          </div>
+
+          <div class="col-md-6 mt-1">
+            <div class="category rounded shadow pt-2 mx-auto img-fluid" style="background: url('{% static 'static_images/hotel.jpg' %}'); background-position: center; background-size: cover; background-repeat: no-repeat;">
+            </div>
+            <p class ='text-dark text-center rounded mx-2 bg-light shadow d-inline px-2 category-text'>Hotel</p>
+          </div>
+        </div>
+        </div>
+      <hr class='container p-0'>
+
+      <div class="container border rounded shadow py-3 mt-5">
+        <h4 class = 'text-center'>List your property</h4>
+        <p class = 'text-center'>Set a best deal and list your property here for rentals and bookings</p>
+        <button class = 'btn btn-primary d-block mx-auto' type="button" name="button">List My Property</button>
+      </div>
+
+      <hr class='container p-0'>
+
+      <div class="mt-5 container row">
+
+      </div>
+
+      <hr class='container p-0'>
+
+      <div class="container-fluid interior pt-5 px-5 mt-5 pb-md-0 pb-5" style = "background: linear-gradient(rgba(0,0,0,0.60),rgba(0,0,0,0.60)), url('{% static 'static_images/interior.jpg' %}'); background-position: center; background-size: cover; background-attachment: fixed;">
+        <h4 class = 'text-light'><span> <i class = 'fas fa-info-circle'></i> </span> Information</h4>
+        <p class = 'text-light mt-5'>Lorem ipsum dolor sit amet, consectetur
+          adipisicing elit, sed do eiusmod tempor
+          incididunt ut labore et dolore magna aliqua. Ut
+           enim ad minim veniam, quis nostrud
+           exercitation ullamco laboris nisi ut
+           aliquip ex ea commodo consequat. Duis aute
+           irure dolor in reprehenderit in voluptate
+           velit esse cillum dolore eu fugiat nulla
+           pariatur. Excepteur sint occaecat cupidatat
+            non proident, sunt in culpa qui
+            officia deserunt mollit anim id est laborum.</p>
+          <a class = 'btn btn-outline-primary' href="#">About Us</a>
+      </div>
+
+      <hr class='container p-0'>
+
+      <hr class='container p-0'>
+
+      <hr class='container p-0'>
+
+      <div class="container-fluid bg-dark row d-flex py-5 mx-auto">
+        <div class="row mx-auto col-md-12">
+          <div class="col-md-3 col-sm-6">
+            <h6 class = 'text-light'><span> <i class ="fas fa-services"></i> </span>Our Services</h6>
+            <ul class = "list-unstyled">
+              <li> <a class="nav-link p-1 m-0" href="#">Home Rentals</a> </li>
+              <li> <a class="nav-link p-1 m-0" href="#">Bookings</a> </li>
+              <li> <a class="nav-link p-1 m-0" href="#">Deals</a> </li>
+            </ul>
+          </div>
+          <div class="col-md-3 col-sm-6">
+            <h6 class = 'text-light'><span> <i class ="fas fa-services"></i> </span>Lates News</h6>
+          </div>
+          <div class="col-md-3 col-sm-6">
+            <h6 class = 'text-light'><span> <i class ="fas fa-services"></i> </span>About Us</h6>
+          </div>
+          <div class="col-md-3 col-sm-6">
+            <div class="d-flex social-links p-0">
+              <span class = 'text-light mx-2'> <i class ="fab fa-facebook-square"></i> </span>
+              <span class = 'text-light mx-2'> <i class ="fab fa-instagram"></i> </span>
+              <span class = 'text-light mx-2'> <i class ="fab fa-twitter"></i> </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      </div>
+    <!-- main -->
+
+
+{% endblock %}
+

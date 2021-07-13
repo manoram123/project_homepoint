@@ -1,0 +1,75 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block content %}
+{% include 'navbar.html' %}
+
+<!-- message alert -->
+<div id='message-pop' class="alert text-center alert-dismissible ml-auto message-alert alert-hide">
+    <p class='m-0' id='alert-message'>Note</p>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<!-- message alert -->
+
+<div class="bg-light page py-5 px-5">
+    <div class="card bg-light shadow col-md-6 mx-auto">
+        <article class="card-body mx-auto" style="max-width: 400px;">
+            <h4 class="card-title mt-3 text-center">Create Account</h4>
+            <p class="text-center">Get started with your free account</p>
+            <form id='user_form' method="POST">
+                {% csrf_token %}
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text bg-light"> <i class="fas fa-user"></i> </span>
+                    </div>
+                    <input id='name' name="name" class="form-control" placeholder="Full name" type="text" required>
+                </div> <!-- form-group// -->
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text  bg-light"> <i class="fas fa-envelope"></i> </span>
+                    </div>
+                    <input id='email' name="email" class="form-control" placeholder="Email address" type="email" required>
+                </div> <!-- form-group// -->
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text  bg-light"> <i class="fa fa-phone"></i> </span>
+                    </div>
+                    <!--		<select class="custom-select" style="max-width: 120px;">-->
+                    <!--        <option value="+977">+977</option>-->
+                    <!--		    <option value="+971">+971</option>-->
+                    <!--		    <option value="+972">+972</option>-->
+                    <!--		    <option value="+198">+198</option>-->
+                    <!--		    <option value="+701">+701</option>-->
+                    <!--		</select>-->
+                    <input id='phone' name="phone" class="form-control" placeholder="Phone number" type="text" required>
+                </div> <!-- form-group// -->
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text  bg-light"> <i class="fa fa-fingerprint"></i> </span>
+                    </div>
+                    <input id='username' name='username' class="form-control" placeholder="Username" type="text">
+                </div> <!-- form-group// -->
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text  bg-light"> <i class="fa fa-lock"></i> </span>
+                    </div>
+                    <input id='password' name='password' class="form-control" placeholder="Create password" type="password" required>
+                </div> <!-- form-group// -->
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text  bg-light"> <i class="fa fa-lock"></i> </span>
+                    </div>
+                    <input id='confirm_password' name='confirm_password' class="form-control" placeholder="Repeat password" type="password" required>
+                </div> <!-- form-group// -->
+                <div class="form-group">
+                    <button type="submit" id='create_user' class="btn btn-outline-primary btn-block"> Create Account
+                    </button>
+                </div> <!-- form-group// -->
+                <p class="text-center">Already Have an account? <a class="text-primaryt" href="/accounts/login">Log
+                        In</a> </p>
+            </form>
+        </article>
+    </div>
+</div>
+{% endblock %}

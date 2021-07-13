@@ -1,0 +1,48 @@
+{%extends 'layout.html'%}
+{% block content %}
+{% include 'navbar.html'%}
+<!-- message alert -->
+<div id='message-pop' class="alert text-center alert-dismissible ml-auto message-alert alert-hide">
+    <p class='m-0' id='alert-message'>Note</p>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<!-- message alert -->
+<div class="bg-light page py-5 px-5">
+    <div class="card bg-light shadow col-md-6 mx-auto my-5">
+        <article class="card-body mx-auto" style="max-width: 400px;">
+            <h4 class="card-title mt-3 text-center">Login</h4>
+            <p class="text-center">Please login with your account </p>
+            <hr>
+            <form id="login-form" class="" method='POST'>
+                {% csrf_token %}
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text bg-light"> <i class="fas fa-user"></i> </span>
+                    </div>
+                    <input id='username' name="username" class="form-control" placeholder="Username" type="text">
+                </div> <!-- form-group// -->
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text bg-light"> <i class="fa fa-lock"></i> </span>
+                    </div>
+                    <input id='password' name='password' class="form-control" placeholder="Password" type="password">
+                </div> <!-- form-group// -->
+
+                <div class='px-2 text-secondary m-0'>
+                    <input type="checkbox" id='remember'>
+                    <label for="remember">Remember me</label>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-outline-primary btn-block">Login</button>
+                    <a href="#" class='d-block text-primary text-right small-text mt-2'>Forgot Password?</a>
+                    <hr>
+                </div> <!-- form-group// -->
+                <p class="text-center">Don't have an account? <a class="text-primary" href="/accounts/register">Create account</a> </p>
+            </form>
+        </article>
+    </div> <!-- card.// -->
+</div>
+{% endblock %}
