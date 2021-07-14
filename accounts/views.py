@@ -26,12 +26,13 @@ def login_user(request):
             if user is not None:
                 login(request, user)
                 usr = User.objects.get(username=useri)
-                return redirect("/")
+                return JsonResponse({"message": ["success", "Logged in!"]})
             else:
                 return JsonResponse({"message": ['error', "Incorrect password!"]})
     return render(request, 'accounts/login.html')
 
 
+@unauthenticated_user
 def register(request):
     if request.method == 'POST':
         data = request.POST

@@ -1,0 +1,47 @@
+{% load static %}
+<div class="container-fluid bg-dark row d-flex py-5 mx-auto">
+    <div class="row mx-auto col-md-12">
+      <div class="col-md-3 col-sm-6">
+        <h6 class = 'text-light'><span> <i class ="fas fa-services"></i> </span>Our Services</h6>
+        <ul class = "list-unstyled">
+          <li> <a class="nav-link p-1 m-0" href="#">Home Rentals</a> </li>
+          <li> <a class="nav-link p-1 m-0" href="#">Bookings</a> </li>
+          <li> <a class="nav-link p-1 m-0" href="#">Deals</a> </li>
+          <li> <a class="nav-link p-1 m-0" href="#">Marketting</a> </li>
+        </ul>
+      </div>
+      <div class="col-md-3 col-sm-6">
+        <h6 class = 'text-light'><span> <i class ="fas fa-services"></i> </span>Lates News</h6>
+        <div class = 'news row'>
+            <div class = 'news-image rounded shadow col-md-3' style="background: url('{% static 'static_images/lockdown.jpg' %}'); background-position: center; background-size: cover; background-repeat: no-repeat;"></div>
+            <p 
+            class = 'col-md-9 news-text'>All the hotels and restaurant business are hault for few weeks by the government due to ongoing situation. <br>
+            <small class = 'text-muted ml-auto p-0 m-0'>Updated: 12 Jul, 2021</small>  
+            </p>
+        </div>
+        <div class = 'news row'>
+            <div class = 'news-image rounded shadow col-md-3' style="background: url('{% static 'static_images/lamda.jpg' %}'); background-position: center; background-size: cover; background-repeat: no-repeat;"></div>
+            <p 
+            class = 'col-md-9 news-text'>The Lambda variant has been around for while. It was first detected in Peru back in August 2020 and has steadily grown in presence there. <br>
+            <small class = 'text-muted ml-auto p-0 m-0'>Updated: 12 Jul, 2021</small>  
+            </p>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6">
+        <h6 class = 'text-light'><span> <i class ="fas fa-services"></i> </span>About Us</h6>
+        <p class = 'footer-text'>Grow your real estate business with us.</p>
+        <ul class = 'list-unstyled footer-text'>
+            <li><span><i class = 'fas fa-map-marked-alt mx-2'></i></span>Satdobato, Lalitpur</li>
+            <li><span><i class = 'fas fa-envelope mx-2'></i></span>homepoint996@gmail.com</li>
+            <li><span><i class = 'fas fa-phone mx-2'></i></span>+977-0752689</li>
+        </ul>
+      </div>
+      <div class="col-md-3 col-sm-6">
+        <div class="d-flex social-links p-0">
+          <span class = 'text-light mx-2'> <i class ="fab fa-facebook-square"></i> </span>
+          <span class = 'text-light mx-2'> <i class ="fab fa-instagram"></i> </span>
+          <span class = 'text-light mx-2'> <i class ="fab fa-twitter"></i> </span>
+        </div>
+      </div>
+    </div>
+  </div>

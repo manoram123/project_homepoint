@@ -22,7 +22,7 @@ $(document).on('submit', '#user_form', function (e) {
                 $('.message-alert').addClass('alert-success');
                 setTimeout(function () {
                     window.location.href = '/accounts/login';
-                }, 5000);
+                }, 1000);
             }
             $('#alert-message').html(data.message[1]);
             $('.message-alert').css("display", "block");
@@ -45,36 +45,37 @@ $(document).on('submit', '#login-form', function (e) {
     e.preventDefault();
     $.ajax({
         type: 'POST',
-        url: "/accounts/login/",
+        url: '/accounts/login/',
         data: {
             username: $('#username').val(),
             password: $('#password').val(),
             csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
         },
-        success: function (data) {
+        success: function(data){
+            console.log(data.message[0])
             if (data.message[0] == 'error') {
                 $('.message-alert').removeClass('alert-success');
                 $('.message-alert').addClass('alert-danger');
             }
-            else if (data.message[0] == 'success') {
+            else if(data.message[0] == 'success'){
                 $('.message-alert').removeClass('alert-danger');
                 $('.message-alert').addClass('alert-success');
                 setTimeout(function () {
-                    window.location.href = '/accounts/login';
-                }, 5000);
+                    window.location.href = '/';
+                }, 1000);
             }
             $('#alert-message').html(data.message[1]);
             $('.message-alert').css("display", "block");
             $('.message-alert').removeClass('alert-hide');
             $('.message-alert').addClass('alert-show');
+
             setTimeout(function () {
                 $('.message-alert').addClass('alert-hide');
                 $('.message-alert').removeClass('alert-show');
             }, 5000) //alert fadeOut
-
         },
-        error: function () {
-            alert('failed')
+        error: function(error){
+            alert("error")
         }
     })
 })
