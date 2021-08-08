@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="dashboard.css">
+    <title></title>
+  </head>
+  <body>
+
+    <div class="d-flex">
+      <div class="navigate-wrapper">
+        <div id = 'navigate' class="navigation bg-light border px-2">
+          <div class="profile d-flex mt-4">
+            <div class="profile-image rounded-circle" style = "background:url('mano.jpg'); background-size:cover"></div>
+            <p class='my-0 px-3'>Manoram <br><span class= 'text-primary'>Baudel</span></p>
+          </div>
+          <hr class=''>
+          <div class="interactions my-auto">
+            <div class="space"></div>
+            <ul class = 'list-unstyled'>
+              <li class = 'py-2 my-3 int-item'><a class ='nav-link text-secondary p-0' href = 'dashboard.html'><i class="fas fa-clipboard mx-2 i-icon"></i><span class = 'mx-4'>Overview</span></a></li>
+              <li class = 'py-2 my-3 int-item'><a class ='nav-link text-secondary p-0' href = 'profile.html'><i class="fas fa-user mx-2 i-icon"></i><span class = 'mx-4'>Profile</span></a></li>
+              <li class = 'py-2 my-3 int-item int-item-active'><a class ='nav-link text-secondary p-0' href = 'listings.html'><i class="fas fa-list-alt mx-2 i-icon"></i><span class = 'mx-4'>My Listings</span></a></li>
+              <li class = 'py-2 my-3 int-item'><a class ='nav-link text-secondary p-0' href = ''><i class="fas fa-home mx-2 i-icon"></i><span class = 'mx-4'>Rentals</span></a></li>
+              <li class = 'py-2 my-3 int-item'><a class ='nav-link text-secondary p-0' href = ''><i class="fas fa-comment-alt mx-2 i-icon"></i><span class = 'mx-4'>Inbox</span></a></li>
+              <li class = 'py-2 my-3 int-item'><a class ='nav-link text-secondary p-0' href = ''><i class="fas fa-cog mx-2 i-icon"></i><span class = 'mx-4'>Settings</span></a></li>
+            </ul>
+          </div>
+          <hr>
+          <div class="space my-5 py-4"></div>
+        </div>
+      </div>
+    <div class="content container p-0 py-4 mx-auto row">
+      <div class="container-fluid mx-auto row">
+        <div class="col-md-8 mx-auto px-5">
+          <div class="user-activity my-4">
+            <div class="d-flex">
+              <h5 class = 'my-2'>Your Listed Properties</h5><span class = 'py-2'><i class='fas fa-list-alt mx-2'></i></span>
+            </div>
+
+
+            <div class="activity-card my-3 py-4 mx-auto row container bg-light border rounded">
+              <div class="prop-img rounded col-md-4 col-sm-4 mx-auto" style="background: url('hotel.jpg');background-position: center; background-size: cover; background-repeat: no-repeat;"></div>
+              <div class="prop-info text-secondary col-md-8 col-sm-8">
+                <p class = 'prop-title mx-md-0 mx-auto m-0'>Sumishan Hotel and Lodge Boarding Sevice/Free Wifi/Breakfast/Summer Offer</p>
+                <small class='m-0 d-block prop-type'><i class="fas fa-ad text-dark mx-1"></i>Hotel</small>
+                <small class='m-0 d-block'>From Rs. 1,400</small>
+                <small class='m-0 d-block'>Listed on 27 Jul, 2021</small>
+                <small class='m-0 d-block status'><i class="fas fa-circle text-success mx-1"></i>Available</small>
+                <button class = 'btn btn-secondary btn-sm my-1' type="button" name="button">Edit <i class='fas fa-pen'></i> </button>
+                <button class = 'btn btn-info btn-sm my-1' type="button" name="button">View <i class='fas fa-eye'></i> </button>
+                <button class = 'btn btn-danger btn-sm' type="button" name="button">Remove <i class='fas fa-trash'></i> </button>
+              </div>
+            </div>
+
+            <div class="activity-card my-3 py-4 mx-auto row container bg-light border rounded">
+              <div class="prop-img rounded col-md-4 col-sm-4 mx-auto" style="background: url('hotel.jpg');background-position: center; background-size: cover; background-repeat: no-repeat;"></div>
+              <div class="prop-info text-secondary col-md-8 col-sm-8">
+                <p class = 'prop-title mx-md-0 mx-auto m-0'>Sumishan Hotel and Lodge Boarding Sevice/Free Wifi/Breakfast/Summer Offer</p>
+                <small class='m-0 d-block prop-type'><i class="fas fa-ad text-dark mx-1"></i>Hotel</small>
+                <small class='m-0 d-block'>From Rs. 1,400</small>
+                <small class='m-0 d-block'>Listed on 27 Jul, 2021</small>
+                <small class='m-0 d-block status'><i class="fas fa-circle text-success mx-1"></i>Available</small>
+                <button class = 'btn btn-secondary btn-sm my-1' type="button" name="button">Edit <i class='fas fa-pen'></i> </button>
+                <button class = 'btn btn-info btn-sm my-1' type="button" name="button">View <i class='fas fa-eye'></i> </button>
+                <button class = 'btn btn-danger btn-sm' type="button" name="button">Remove <i class='fas fa-trash'></i> </button>
+              </div>
+            </div>
+
+            <div class="activity-card my-3 py-4 mx-auto row container bg-light border rounded">
+              <div class="prop-img rounded col-md-4 col-sm-4 mx-auto" style="background: url('hotel.jpg');background-position: center; background-size: cover; background-repeat: no-repeat;"></div>
+              <div class="prop-info text-secondary col-md-8 col-sm-8">
+                <p class = 'prop-title mx-md-0 mx-auto m-0'>Sumishan Hotel and Lodge Boarding Sevice/Free Wifi/Breakfast/Summer Offer</p>
+                <small class='m-0 d-block prop-type'><i class="fas fa-ad text-dark mx-1"></i>Hotel</small>
+                <small class='m-0 d-block'>From Rs. 1,400</small>
+                <small class='m-0 d-block'>Listed on 27 Jul, 2021</small>
+                <small class='m-0 d-block status'><i class="fas fa-circle text-success mx-1"></i>Available</small>
+                <button class = 'btn btn-secondary btn-sm my-1' type="button" name="button">Edit <i class='fas fa-pen'></i> </button>
+                <button class = 'btn btn-info btn-sm my-1' type="button" name="button">View <i class='fas fa-eye'></i> </button>
+                <button class = 'btn btn-danger btn-sm' type="button" name="button">Remove <i class='fas fa-trash'></i> </button>
+              </div>
+            </div>
+
+
+          </div>
+          <hr>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <script src = 'script.js'></script>
+  </body>
+</html>

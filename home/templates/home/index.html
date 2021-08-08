@@ -73,17 +73,29 @@
       <div class="container p-0 px-3">
         <h4>Ideal Hostels Near Kathmandu</h4>
         <div class="scroll-box mt-4 d-flex">
-          <div class="box-card mx-2 shadow">
-            <div class="box-image rounded" style = "background: url('{% static 'static_images/hsotel.jpg' %}'); background-size:cover">
+          <div class="box-card mx-2 pb-3 rounded shadow">
+            <div class="box-image" style = "background: url('{% static 'static_images/hsotel.jpg' %}'); background-size:cover">
             </div>
             <div class="info">
               <p class="m-0 font-weight-bold px-2">City Boys Hostel</p>
-              <p class="m-0 text-secondary px-2">Dillibazaar, Kathmandu</p>
-              <p class="m-0 text-secondary px-2">Price: 10,500</p>
-              <span class="mt-4 d-flex px-2">
-                <p class="btn btn-primary btn-sm">4.9</p>
-                <p class="text text-primary mx-2 mt-2">Delightful</p>
-              </span>
+              <div class="small px-2">
+                <div class="rating text-warning d-flex">
+                  <i class = 'fas fa-star'></i>
+                  <i class = 'fas fa-star'></i>
+                  <i class = 'fas fa-star'></i>
+                  <i class = 'far fa-star'></i>
+                  <i class = 'far fa-star'></i>
+                </div>
+              </div>
+              <small class = 'small text-secondary m-0 d-block px-2'>Listed by - Gokarna Adhikary</small>
+              <small class="m-0 text-secondary px-2">Dillibazaar, Kathmandu</small>
+              <small class="m-0 text-secondary px-2">10,500/month</small>
+              <div class="container row m-0 mt-1 p-0">
+                <small class = 'text-success small col-md-4 col-sm-4 my-1'> <i class = 'fas fa-wifi mr-1'></i>Internet</small>
+                <small class = 'text-success small col-md-4 col-sm-4 my-1'> <i class = 'fas fa-car mr-1'></i>Parking</small>
+                <small class = 'text-success small col-md-4 col-sm-4 my-1'> <i class = 'fas fa-utensils mr-1'></i>Breakfast</small>
+                <small class = 'text-success small col-md-4 col-sm-4 my-1'> <i class = 'fas fa-dumbbell mr-1'></i>Gym</small>
+              </div>
             </div>
           </div>
 
@@ -175,9 +187,79 @@
       </div>
 
       <hr class='container p-0'>
+      <!-- section -->
+      <hr class='container mt-5 mb-5 p-0'>
+      <!-- new listings -->
+      <div class="container p-0 px-3">
+        <h4>Find best deals on hotels</h4>
+        <div class="scroll-box mt-4 d-flex">
+          <div class="box-card mx-2 shadow">
+            <div class="box-image rounded" style = "background: url('{% static 'static_images/hsotel.jpg' %}'); background-size:cover">
+            </div>
+            <div class="info">
+              <p class="m-0 font-weight-bold px-2">Hotel Annapurna</p>
+              <p class="m-0 text-secondary px-2">Dillibazaar, Kathmandu</p>
+              <p class="m-0 text-secondary px-2">1,499/Night</p>
+              <span class="mt-4 d-flex px-2">
+                <p class="btn btn-primary btn-sm">4.9</p>
+                <p class="text text-primary mx-2 mt-2">Delightful</p>
+              </span>
+            </div>
+          </div>
 
-      <div class="mt-5 container row">
+          <div class="box-card mx-2 shadow">
+            <div class="box-image rounded" style = "background: url('{% static 'static_images/hostel3.jpeg' %}'); background-size:cover">
+            </div>
+            <div class="info">
+              <p class="m-0 font-weight-bold px-2">KTM Boys Hostel</p>
+              <p class="m-0 text-secondary px-2">Satdobato, Lalitpur</p>
+              <p class="m-0 text-secondary px-2">Price: 10,500</p>
+              <span class="mt-4 d-flex px-2">
+                <p class="btn btn-primary btn-sm">4.1</p>
+                <p class="text text-primary mx-2 mt-2">Pleasant</p>
+              </span>
+            </div>
+          </div>
 
+
+          <div class="box-card mx-2 shadow">
+            <div class="box-image rounded" style = "background: url('{% static 'static_images/girl_hostel.jpg' %}'); background-size:cover">
+            </div>
+            <div class="info">
+              <p class="m-0 font-weight-bold px-2">Gokarna's Girls Hostel</p>
+              <p class="m-0 text-secondary px-2">Thulo Varyang, Kathmandu</p>
+              <p class="m-0 text-secondary px-2">Price: 10,500</p>
+              <span class="mt-4 d-flex px-2">
+                <p class="btn btn-primary btn-sm">4.9</p>
+                <p class="text text-primary mx-2 mt-2">Delightful</p>
+              </span>
+            </div>
+          </div>
+
+
+          <div class="box-card mx-2 shadow">
+            <div class="box-image rounded" style = "background: url('{% static 'static_images/hostel2.jpg' %}'); background-size:cover">
+            </div>
+            <div class="info">
+              <p class="m-0 font-weight-bold px-2">Amir Boys Hostel</p>
+              <p class="m-0 text-secondary px-2">Satdobato, Lalitpur</p>
+              <p class="m-0 text-secondary px-2">Price: 10,500</p>
+              <span class="mt-4 px-2 d-flex">
+                <p class="btn btn-primary btn-sm">3.8</p>
+                <p class="text text-primary mx-2 mt-2">Good</p>
+              </span>
+            </div>
+          </div>
+
+
+          <div class="box-card mx-2 shadow">
+            <div class="box-image rounded discover" style = "background: url('{% static 'static_images/hostel.jpg' %}'); background-size:cover"></div>
+            <p class="discover-quote text-light pl-4">Discover more for your best choices to stay.</p>
+            <button class="browse-more d-block mx-auto px-5 text-primary py-1" type="button" name="button">Browse More</button>
+          </div>
+
+
+        </div>
       </div>
 
       <hr class='container p-0'>

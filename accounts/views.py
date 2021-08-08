@@ -3,6 +3,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.models import User
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
+from accounts.models import Profile
 
 
 # Create your views here.
@@ -66,6 +67,8 @@ def register(request):
                         reg_success = messages.info(
                             request, 'Successfully registered!')
                         print(reg_success)
+                        profile = Profile.objects.create(
+                            user=user, active_status=True, verified=False)
                         return JsonResponse({"message": ['success', "Successfully registered! Please Wait..."]})
 
                 except Exception as e:

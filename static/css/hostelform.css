@@ -1,0 +1,66 @@
+*{
+  font-family: poppins;
+}
+
+.poster-image{
+  height: 4ch;
+  width: 4ch;
+}
+
+.input-title{
+  background: red;
+  position: relative;
+  top: 3ch;
+  left: 1.5ch;
+  transition: .3s;
+}
+
+.add-image{
+  outline: none;
+  color: #707070;
+  height: 10ch;
+  width: 10ch;
+}
+
+.custom-add{
+  display: block;
+  color: #707070;
+  height: 8ch;
+  width: 8ch;
+  border: 1px dashed;
+}
+
+.cancel-btn{
+  color: #fcfcfc;
+  display: none;
+}
+
+.cancel-btn:hover{
+  color: #ff082d;
+}
+
+.add-image .fa-file-image{
+  font-size: 2em;
+}
+
+.slot1, .slot2, .slot3, .slot4, .slot5{
+  display: none;
+}
+
+.poster-small{
+  display: block;
+  font-size: .7em;
+  margin-top: -.5ch;
+}
+
+.form-select{
+  width: 100%;
+}
+
+.p-desc{
+  font-size: .7em;
+}
+
+.t-sm{
+  font-size: .8em;
+}

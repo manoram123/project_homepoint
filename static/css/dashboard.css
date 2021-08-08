@@ -1,0 +1,124 @@
+* {
+  font-family: poppins;
+}
+.navigate-wrapper {
+  width: 5ch;
+  height: 100vh;
+  z-index: 999;
+  background: red;
+}
+.navigation {
+  position: sticky;
+  left: 0;
+  width: 5ch;
+  height: 100vh;
+  overflow: hidden;
+  transition: all 0.5s ease;
+}
+
+.profile {
+  width: 100vh;
+}
+
+.profile-image {
+  height: 3ch;
+  width: 3ch;
+}
+
+.int-item {
+  width: 100vh;
+}
+
+.i-icon {
+  font-size: 1.4em;
+}
+
+.navigation:hover {
+  width: 26ch;
+}
+.int-item-active {
+  background: #bdbdbd;
+}
+.int-item:hover {
+  background: #d6d6d6;
+}
+
+.content {
+}
+
+.service-option {
+  background: #ededed;
+}
+
+.categor {
+  height: 25ch;
+  width: 90%;
+  transition: 0.5s;
+}
+
+.categor-text {
+  font-size: 1.3em;
+}
+
+.activity-card {
+  box-shadow: 0 0 16px -10px;
+}
+
+.prop-img {
+  height: 20vh;
+  width: 20vh;
+}
+
+.prop-info .prop-title {
+  line-height: 1em;
+  font-size: 1.2em;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.status i {
+  font-size: 0.6em;
+}
+
+.profile-card {
+  box-shadow: 0 0 16px -10px;
+}
+.user-profile {
+  height: 80px;
+  width: 80px;
+}
+
+.update-pic-form {
+  position: relative;
+  bottom: 0;
+}
+
+.user-c {
+  height: 21ch;
+  overflow: hidden;
+  transition: 0.3s;
+}
+
+.custom {
+  position: relative;
+  top: 9ch;
+  width: 10ch;
+}
+
+.edit-custom {
+}
+.update-pic-form {
+  position: relative;
+  bottom: 0;
+}
+
+.info-box {
+  color: #707070;
+}
+
+.det-box {
+  background: #ebebeb;
+  font-size: 0.8em;
+}

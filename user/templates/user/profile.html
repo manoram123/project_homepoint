@@ -1,0 +1,130 @@
+{% extends 'layout.html' %}
+{% load static %}
+<link rel="stylesheet" href="{%static 'css/dashboard.css'%}">
+{% block content %}
+{% include 'navbar.html' %}
+    <div class="p-0 d-flex">
+      <div class="navigate-wrapper">
+        <div id = 'navigate' class="navigation bg-light border px-2">
+          <div class="profile d-flex mt-4">
+            <div class="profile-image rounded-circle" style = "background:url('/{{profile.image}}'); background-size:cover"></div>
+            <p class='my-0 px-3'>{{request.user.first_name}} <br><span class= 'text-primary'>Baudel</span></p>
+          </div>
+          <hr class=''>
+          <div class="interactions my-auto">
+            <div class="space"></div>
+            <ul class = 'list-unstyled'>
+              <li class = 'py-2 my-3 int-item'><a class ='nav-link text-secondary p-0' href = '/user/dashboard/'><i class="fas fa-clipboard mx-2 i-icon"></i><span class = 'mx-4'>Overview</span></a></li>
+              <li class = 'py-2 my-3 int-item int-item-active'><a class ='nav-link text-secondary p-0' href = 'profile.html'><i class="fas fa-user mx-2 i-icon"></i><span class = 'mx-4'>Profile</span></a></li>
+              <li class = 'py-2 my-3 int-item'><a class ='nav-link text-secondary p-0' href = 'listings.html'><i class="fas fa-list-alt mx-2 i-icon"></i><span class = 'mx-4'>My Listings</span></a></li>
+              <li class = 'py-2 my-3 int-item'><a class ='nav-link text-secondary p-0' href = ''><i class="fas fa-home mx-2 i-icon"></i><span class = 'mx-4'>Rentals</span></a></li>
+              <li class = 'py-2 my-3 int-item'><a class ='nav-link text-secondary p-0' href = ''><i class="fas fa-comment-alt mx-2 i-icon"></i><span class = 'mx-4'>Inbox</span></a></li>
+              <li class = 'py-2 my-3 int-item'><a class ='nav-link text-secondary p-0' href = ''><i class="fas fa-cog mx-2 i-icon"></i><span class = 'mx-4'>Settings</span></a></li>
+            </ul>
+          </div>
+          <hr>
+          <div class="space my-5 py-4"></div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="container my-5 mx-auto col-sm-12 col-xl-6 col-lg-6 col-md-6 border profile-card rounded">
+          <div class="container-fluid py-4 p-0 user-info">
+                <!-- Profile -->
+                <h4>Profile</h4>
+                <div class="rounded py-3 my-2 user-c">
+                  <div class="edit-picture update-pic-form">
+
+                    <!-- change profile -->
+                    <form class="" action="" method="post" enctype="multipart/form-data">
+                      {% csrf_token %}
+                      <input id ='default' class = 'd-none' onchange="showPreview(event)" type="file" name="profile_p" aria-describedby="profile_p" value="" accept="image/*" required>
+                      <div class="custom mx-auto text-right">
+                        <button onclick="clickDefault()" id = "custom-btn" class = "btn text-primary edit-primary" type="button" name="button"> <i class = 'fas fa-pen btn btn-primary rounded p-1'></i> </button>
+                      </div>
+                      <button id = 'save' class = 'd-none' type="submit" name="update_pic">Done</button>
+                    </form>
+                    <!-- change profile -->
+                  </div>
+                  <div class="user-profile rounded-circle mx-auto" style="background: url('/{{request.user.profile.image}}'); background-size: cover;"></div>
+                  <h5 class = 'text-center text-muted  my-0 mt-2'>Manoram Baudel</h5>
+                  <p class = 'text-center  my-0'>
+                    <i class = 'fas fa-star text-warning'></i>
+                    <i class = 'fas fa-star text-warning'></i>
+                    <i class = 'fa fa-star text-warning'></i>
+                    <i class = 'far fa-star text-muted'></i>
+                    <i class = 'far fa-star text-muted'></i>
+                  </p>
+                  <button id = 'custom-save' onclick="clickSave()" class = 'btn btn-secondary btn-sm ml-auto d-block mx-3 mt-4' type="button" name="button">Done</button>
+                </div>
+                <script type="text/javascript">
+                  const defaultBtn = document.querySelector("#default");
+                  const customtBtn = document.querySelector("#custom-btn");
+                  const defaultBtnSave = document.querySelector("#save");
+                  const space = document.querySelector(".user-c").style;
+                  const image = document.querySelector('.testimg').style;
+
+                  function clickDefault(){
+                    defaultBtn.click();
+                    space.height = "26ch"
+                  }
+
+                  function showPreview(event){
+                    if(event.target.files.length>0){
+                      var src = URL.createObjectURL(event.target.files[0]);
+                      var preview = document.querySelector('.user-profile').style;
+
+                      preview.background = "url('"+src+"')";
+                      preview.backgroundSize = 'cover'
+                    }
+                  }
+
+                  function clickSave(){
+                    defaultBtnSave.click()
+                  }
+                </script>
+                <!-- info -->
+                <div class="info-box my-3">
+                  <p class = 'm-0'><i class = 'fas fa-map-marked mr-2'></i>Address</p>
+                  <div class="det-box rounded py-2 px-3">
+                    <p class = 'm-0'>Satdobato, Lalitpur</p>
+                  </div>
+                </div>
+
+                <div class="info-box my-3">
+                  <p class = 'm-0'><i class = 'fas fa-phone-alt mr-2'></i>Phone</p>
+                  <div class="det-box rounded py-2 px-3">
+                    <p class = 'm-0'>9843749467</p>
+                    <small class = 'text-info'><i class = 'fas fa-info-circle mr-1'></i>Please <a href="#">verify</a> your phone</small>
+                  </div>
+                </div>
+
+                <div class="info-box my-3">
+                  <p class = 'm-0'><i class = 'fas fa-envelope mr-2'></i>Email</p>
+                  <div class="det-box rounded py-2 px-3">
+                    <p class = 'm-0'>baudelmanoram123@gmail.com</p>
+                  </div>
+                </div>
+
+                <div class="">
+                    <a class='btn btn-sm btn-outline-primary' href="#"><i class = 'fas fa-pen mr-1'></i>Edit Profile</a>
+                </div>
+
+                <hr>
+
+                <div class="info-box">
+                  <p class = "m-0">Security</p>
+                  <div class="det-box px-3 py-2 rounded">
+                  <a class = 'btn btn-sm btn-outline-secondary' href="#">Reset Password</a>
+                  </div>
+                </div>
+
+                <hr>
+
+              </div>
+        </div>
+      </div>
+
+    </div>
+{% include 'footer.html' %}
+{% endblock %}

@@ -1,0 +1,308 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block content %}
+{% include 'navbar.html' %}
+
+<!-- message alert -->
+{% for m in massages %}
+<div id='message-pop' class="alert text-center alert-dismissible ml-auto message-alert alert-hide">
+  <p class='m-0' id='alert-message'>Note</p>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+{% endfor %}
+<!-- message alert -->
+
+    <div class="container mx-auto">
+      <div class="cotainer col-xl-6 mx-auto col-md-8 shadow border rounded my-5 px-3 py-3">
+        <div class="poster d-flex my-3">
+          <div class="poster-image rounded-circle" style = "background: url('/{{request.user.profile.image}}'); background-size: cover;"></div>
+          <div class="poster-text mx-2">
+            <p class = 'm-0'>{{request.user.first_name}}</p>
+            <small class = 'poster-small'>Listing Hostel</small>
+          </div>
+        </div>
+        <form id = 'p-form' class="c-form" action="" method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          <small class = 'm-0'>Photoes <small class = 'font-weight-bold'>- You can add upto 6 photoes</small></small>
+          <div class="container mx-auto px-0 row border rounded">
+            <div class="col-md-3 my-3 col-sm-4">
+              <input class = 'd-none' id = 'image1' onchange = 'showPreview(event, 1)' type="file" name="image_1" aria-describedby="image_1" accept="image/*" value="">
+              <div id = 'image-preview1' class="add-image rounded d-block mx-auto">
+                <button id = 'del1' onclick = "removeImage(1)" class = 'fas fa-times-circle btn ml-auto p-1 cancel-btn' type="button" name="button"></button>
+                <button id = 'add1' onclick = "clickDefault(1)" class = 'custom-add mx-auto my-2 btn' type="button" name="button"> <i class = 'fas fa-file-image'></i><i class = 'fas fa-plus'></i> </button>
+              </div>
+            </div>
+
+            <div class="col-md-3 my-3 col-sm-4 slot1">
+              <input class = 'd-none' id = 'image2' onchange = 'showPreview(event, 2)' type="file" name="image2" multiple value="">
+              <div id = 'image-preview2' class="add-image rounded d-block mx-auto">
+                <button id = 'del2' onclick = "removeImage(2)" class = 'fas fa-times-circle btn ml-auto p-1 cancel-btn' type="button" name="button"></button>
+                <button id = 'add2' onclick = "clickDefault(2)" class = 'custom-add mx-auto my-2 btn' type="button" name="button"> <i class = 'fas fa-file-image'></i><i class = 'fas fa-plus'></i> </button>
+              </div>
+            </div>
+
+            <div class="col-md-3 my-3 col-sm-4 slot2">
+              <input class = 'd-none' id = 'image3' onchange = 'showPreview(event, 3)' type="file" name="image3" multiple value="">
+              <div id = 'image-preview3' class="add-image rounded d-block mx-auto">
+                <button id = 'del3' onclick = "removeImage(3)" class = 'fas fa-times-circle btn ml-auto p-1 cancel-btn' type="button" name="button"></button>
+                <button id = 'add3' onclick = "clickDefault(3)" class = 'custom-add mx-auto my-2 btn' type="button" name="button"> <i class = 'fas fa-file-image'></i><i class = 'fas fa-plus'></i> </button>
+              </div>
+            </div>
+
+            <div class="col-md-3 my-3 col-sm-4 slot3">
+              <input class = 'd-none' id = 'image4' onchange = 'showPreview(event, 4)' type="file" name="image4" multiple value="">
+              <div id = 'image-preview4' class="add-image rounded d-block mx-auto">
+                <button id = 'del4' onclick = "removeImage(4)" class = 'fas fa-times-circle btn ml-auto p-1 cancel-btn' type="button" name="button"></button>
+                <button id = 'add4' onclick = "clickDefault(4)" class = 'custom-add mx-auto my-2 btn' type="button" name="button"> <i class = 'fas fa-file-image'></i><i class = 'fas fa-plus'></i> </button>
+              </div>
+            </div>
+
+            <div class="col-md-3 my-3 col-sm-4 slot4">
+              <input class = 'd-none' id = 'image5' onchange = 'showPreview(event, 5)' type="file" name="image5" multiple value="">
+              <div id = 'image-preview5' class="add-image rounded d-block mx-auto">
+                <button id = 'del5' onclick = "removeImage(5)" class = 'fas fa-times-circle btn ml-auto p-1 cancel-btn' type="button" name="button"></button>
+                <button id = 'add5' onclick = "clickDefault(5)" class = 'custom-add mx-auto my-2 btn' type="button" name="button"> <i class = 'fas fa-file-image'></i><i class = 'fas fa-plus'></i> </button>
+              </div>
+            </div>
+
+            <div class="col-md-3 my-3 col-sm-4 slot5">
+              <input class = 'd-none' id = 'image6' onchange = 'showPreview(event, 6)' type="file" name="image6" multiple value="">
+              <div id = 'image-preview6' class="add-image rounded d-block mx-auto">
+                <button id = 'del6' onclick = "removeImage(6)" class = 'fas fa-times-circle btn ml-auto p-1 cancel-btn' type="button" name="button"></button>
+                <button id = 'add6' onclick = "clickDefault(6)" class = 'custom-add mx-auto my-2 btn' type="button" name="button"> <i class = 'fas fa-file-image'></i><i class = 'fas fa-plus'></i> </button>
+              </div>
+            </div>
+
+          </div>
+          <div class="my-3">
+            <input id = 'title' class = 'form-control text-field' type="text" name="title" value="" placeholder = 'Title'>
+          </div>
+          <div class="my-3">
+            <input id = 'search_input_address' class = 'form-control text-field' type="text" name="address" value="" placeholder = 'Property Address'>
+          </div>
+          <div class="my-3">
+            <input id = 'price' class = 'form-control text-field' type="number" name="price" value="" placeholder = 'Monthly Price'>
+          </div>
+          <hr>
+          <div class="">
+            <p>What services does your hostel provide?</p>
+            <div class="row">
+              <div class="mt-2 col-md-3 col-sm-4">
+                <input id = 'internet' type="checkbox" name="services" value="Internet">
+                <label for="internet" class = 't-sm'>Internet</label>
+              </div>
+              <div class="mt-2 col-md-3 col-sm-4">
+                <input id = 'gym' type="checkbox" name = "services" value="Gym">
+                <label for="gym" class = 't-sm'>Gym</label>
+              </div>
+              <div class="mt-2 col-md-3 col-sm-4">
+                <input id = 'Bathroom' type="checkbox" name="services" value="Bathroom">
+                <label for="Bathroom" class = 't-sm'>Bathroom</label>
+              </div>
+              <div class="mt-2 col-md-3 col-sm-4">
+                <input id = 'parking' type="checkbox" name="services" value="Parking">
+                <label for="parking" class = 't-sm'>Parking</label>
+              </div>
+              <div class="mt-2 col-md-3 col-sm-4">
+                <input id = 'breakfast' type="checkbox" name="services" value="Breakfast">
+                <label for="breakfast" class = 't-sm'>Breakfast</label>
+              </div>
+              <div class="mt-2 col-md-3 col-sm-4">
+                <input id = 'heater' type="checkbox" name = "services" value="Heater">
+                <label for="heater" class = 't-sm'>Heater</label>
+              </div>
+            </div>
+          </div>
+          <hr>
+          <div class="my-3">
+            <p class = 'p-0 m-0'>Property Rules</p>
+            <div class="px-2">
+              <label for="cats" class = 't-sm'>Cats Allowed</label>
+              <input id = 'cats' type="checkbox" name="rules" value="Cat Allowed">
+            </div>
+            <div class="px-2">
+              <label for="dogs" class = 't-sm'>Dogs Allowed</label>
+              <input id = 'dogs' type="checkbox" name="rules" value="Dog Allowed">
+            </div>
+          </div>
+
+          
+        <textarea form = 'p-form' class = 'form-control' name="description" rows = '8'>Property Description...</textarea>
+        <p class = 'm-0 p-desc'>Include details like property rules, amentities, payment processes and further details you may want to add.</p>
+
+          <button class = 'btn btn-sm btn-primary my-3' type = 'submit'>Done</button>
+
+        </form>
+        </div>
+        </div>
+
+        <script type="text/javascript">
+          const defaultBtn1 = document.querySelector("#image1");
+          const defaultBtn2 = document.querySelector("#image2");
+          const defaultBtn3 = document.querySelector("#image3");
+          const defaultBtn4 = document.querySelector("#image4");
+          const defaultBtn5 = document.querySelector("#image5");
+          const defaultBtn6 = document.querySelector("#image6");
+
+          const customBtn1 = document.querySelector("#add1").style;
+          const customBtn2 = document.querySelector("#add2").style;
+          const customBtn3 = document.querySelector("#add3").style;
+          const customBtn4 = document.querySelector("#add4").style;
+          const customBtn5 = document.querySelector("#add5").style;
+          const customBtn6 = document.querySelector("#add6").style;
+
+
+          function clickDefault(val){
+            if(val == 1){
+              defaultBtn1.click();
+            }
+            else if(val == 2){
+              defaultBtn2.click();
+            }
+            else if(val == 3){
+              defaultBtn3.click();
+            }
+            else if(val == 4){
+              defaultBtn4.click();
+            }
+            else if(val == 5){
+              defaultBtn5.click();
+            }
+            else if(val == 6){
+              defaultBtn6.click()
+            }
+          }
+
+          function removeImage(val){
+            if(val == 1){
+              var preview = document.querySelector('#image-preview1').style;
+              var delBtn = document.querySelector('#del1').style;
+              preview.background = 'none';
+              // document.querySelector('.slot1').style.display = 'none'
+              customBtn1.display = 'block'
+              delBtn.display = 'none';
+            }
+            if(val == 2){
+              var preview = document.querySelector('#image-preview2').style;
+              var delBtn = document.querySelector('#del2').style;
+              preview.background = 'none';
+              // document.querySelector('.slot2').style.display = 'none'
+              customBtn2.display = 'block';
+              delBtn.display = 'none';
+            }
+            if(val == 3){
+              var preview = document.querySelector('#image-preview3').style;
+              var delBtn = document.querySelector('#del3').style;
+              preview.background = 'none';
+              // document.querySelector('.slot3').style.display = 'none'
+              customBtn3.display = 'block';
+              delBtn.display = 'none';
+            }
+            if(val == 4){
+              var preview = document.querySelector('#image-preview4').style;
+              var delBtn = document.querySelector('#del4').style;
+              preview.background = 'none';
+              // document.querySelector('.slot4').style.display = 'none'
+              customBtn4.display = 'block'
+              delBtn.display = 'none';
+            }
+            if(val == 5){
+              var preview = document.querySelector('#image-preview5').style;
+              var delBtn = document.querySelector('#del5').style;
+              preview.background = 'none';
+              // document.querySelector('.slot5').style.display = 'none'
+              customBtn5.display = 'block'
+              delBtn.display = 'none';
+            }
+            if(val == 6){
+              var preview = document.querySelector('#image-preview6').style;
+              var delBtn = document.querySelector('#del6').style;
+              preview.background = 'none';
+              customBtn6.display = 'block'
+              delBtn.display = 'none';
+            }
+          }
+
+
+          function showPreview(event, ind){
+                    if(event.target.files.length>0){
+                      var src = URL.createObjectURL(event.target.files[0]);
+
+                      if(ind == 1){
+                        var delBtn = document.querySelector('#del1').style;
+                        var preview = document.querySelector('#image-preview1').style;
+                        preview.background = "url('"+src+"')";
+                        preview.backgroundSize = 'cover';
+                        customBtn1.display = 'none';
+                        delBtn.display = 'block';
+                        document.querySelector('.slot1').style.display = 'block'
+                      }
+                      if(ind == 2){
+                        var delBtn = document.querySelector('#del2').style;
+                        var preview = document.querySelector('#image-preview2').style;
+                        preview.background = "url('"+src+"')";
+                        preview.backgroundSize = 'cover'
+                        customBtn2.display = 'none';
+                        delBtn.display = 'block';
+                        document.querySelector('.slot2').style.display = 'block'
+                      }
+                      if(ind == 3){
+                        var delBtn = document.querySelector('#del3').style;
+                        var preview = document.querySelector('#image-preview3').style;
+                        preview.background = "url('"+src+"')";
+                        preview.backgroundSize = 'cover'
+                        customBtn3.display = 'none';
+                        delBtn.display = 'block';
+                        document.querySelector('.slot3').style.display = 'block'
+                      }
+                      if(ind == 4){
+                        var delBtn = document.querySelector('#del4').style;
+                        var preview = document.querySelector('#image-preview4').style;
+                        preview.background = "url('"+src+"')";
+                        preview.backgroundSize = 'cover'
+                        customBtn4.display = 'none';
+                        delBtn.display = 'block';
+                        document.querySelector('.slot4').style.display = 'block'
+                      }
+                      if(ind == 5){
+                        var delBtn = document.querySelector('#del5').style;
+                        var preview = document.querySelector('#image-preview5').style;
+                        preview.background = "url('"+src+"')";
+                        preview.backgroundSize = 'cover'
+                        customBtn5.display = 'none';
+                        delBtn.display = 'block';
+                        document.querySelector('.slot5').style.display = 'block'
+                      }
+                      if(ind == 6){
+                        var delBtn = document.querySelector('#del6').style;
+                        var preview = document.querySelector('#image-preview6').style;
+                        preview.background = "url('"+src+"')";
+                        preview.backgroundSize = 'cover';
+                        customBtn6.display = 'none';
+                        delBtn.display = 'block';
+                      }
+                    }
+                  }
+
+        </script>
+    <script>
+      var searchInput = 'search_input_address';
+
+      $(document).ready(function () {
+       var autocomplete;
+       autocomplete = new google.maps.places.Autocomplete((document.getElementById(searchInput)), {
+        types: ['geocode'],
+        componentRestrictions: {
+          country: "USA"
+        }
+       });
+
+       google.maps.event.addListener(autocomplete, 'place_changed', function () {
+        var near_place = autocomplete.getPlace();
+       });
+      });
+    </script>
+{% include 'footer.html' %}
+{% endblock %}
