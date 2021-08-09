@@ -1,12 +1,17 @@
 from accounts.models import Profile
 from django.shortcuts import render
+from user.models import Activity
+from django.contrib.auth.models import User
 
 # Create your views here.
 
 
 def user_dashboard(request):
-
-    return render(request, 'user/dashboard.html')
+    activity = Activity.objects.filter(user_id=request.user.id)
+    context = {
+        'activity': activity
+    }
+    return render(request, 'user/dashboard.html', context)
 
 
 def listings(request):

@@ -129,3 +129,10 @@ $(document).ready(function(){
         })
     })   
 }) 
+
+
+$(document).ready(function(){
+    setTimeout(function(){
+        $('.message-alert').css.display = 'none'
+    }, 5000)
+})

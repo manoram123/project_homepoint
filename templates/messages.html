@@ -1,10 +1,10 @@
 <!-- message alert -->
-{% for m in massages %}
-<div id='message-pop' class="alert text-center alert-dismissible ml-auto message-alert alert-show">
-  <p class='m-0' id='alert-message'>{{m}}</p>
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+{% for m in messages %}
+  <div class="alert alert-success text-center alert-dismissible fixed-top-rigtht fade show container col-md-3 mt-3 message-alert" data-aos = 'fade-down' data-aos-duration = '600' role="alert">
+      <p class = 'm-0'>{{ m }}</p>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
       <span aria-hidden="true">&times;</span>
-  </button>
-</div>
+      </button>
+    </div>
 {% endfor %}
 <!-- message alert -->

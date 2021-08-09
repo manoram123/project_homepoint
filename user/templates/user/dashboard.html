@@ -58,23 +58,33 @@
             <div class="d-flex">
               <h5 class = 'mx-4 my-2'>Your Activity</h5><span class = 'py-2'><i class='fas fa-chart-line'></i></span>
             </div>
-
-
+            {% if activity %}
+            {% for a in activity %}
             <div class="activity-card my-3 py-4 mx-auto row container bg-light border rounded">
-              <div class="prop-img rounded col-md-4 col-sm-4 mx-auto" style="background: url('hotel.jpg');background-position: center; background-size: cover; background-repeat: no-repeat;"></div>
+              <div class="prop-img rounded col-md-4 col-sm-4 mx-auto" style="background: url('/{{a.activity.image1}}');background-position: center; background-size: cover; background-repeat: no-repeat;"></div>
               <div class="prop-info text-secondary col-md-8 col-sm-8">
-                <p class = 'prop-title mx-md-0 mx-auto m-0'>Sumishan Hotel and Lodge Boarding Sevice/Free Wifi/Breakfast/Summer Offer</p>
-                <small class='m-0 d-block prop-type'><i class="fas fa-ad text-dark mx-1"></i>Hotel</small>
-                <small class='m-0 d-block'>From Rs. 1,400</small>
-                <small class='m-0 d-block'>Listed on 27 Jul, 2021</small>
+                <p class = 'prop-title mx-md-0 mx-auto m-0'>{{a.activity.title}}</p>
+                <small class='m-0 d-block prop-type'><i class="fas fa-ad text-dark mx-1"></i>{{a.property_type}}</small>
+                <small class='m-0 d-block'>From Rs. {{a.activity.price}}</small>
+                <small class='m-0 d-block'>Listed on {{a.date}}</small>
+                {% if not availability %}
                 <small class='m-0 d-block status'><i class="fas fa-circle text-success mx-1"></i>Available</small>
+                {% else %}
+                <small class='m-0 d-block status'><i class="fas fa-check-square text-success mx-1"></i>Full</small>
+                {% endif %}
                 <button class = 'btn btn-secondary btn-sm my-1' type="button" name="button">Edit <i class='fas fa-pen'></i> </button>
                 <button class = 'btn btn-info btn-sm my-1' type="button" name="button">View <i class='fas fa-eye'></i> </button>
                 <button class = 'btn btn-danger btn-sm' type="button" name="button">Remove <i class='fas fa-trash'></i> </button>
               </div>
             </div>
+            {% endfor %}
+            {% else %}
+            <p class = 'text-muted d-block text-center mt-5 pt-5 mb-5 pb-5'>There is nothing to show here ;(</p>
+            {% endif %}
 
-            <div class="activity-card my-3 py-4 mx-auto row container bg-light border rounded">
+            
+
+            <!-- <div class="activity-card my-3 py-4 mx-auto row container bg-light border rounded">
               <div class="prop-img rounded col-md-4 col-sm-4 mx-auto" style="background: url('room.svg');background-position: center; background-size: cover; background-repeat: no-repeat;"></div>
               <div class="prop-info text-secondary col-md-8 col-sm-8">
                 <p class = 'prop-title mx-md-0 mx-auto m-0'>Single Room for Rent- 1 Room- Internet- Attached Bathroom </p>
@@ -100,7 +110,9 @@
                 <button class = 'btn btn-info btn-sm my-1' type="button" name="button">View <i class='fas fa-eye'></i> </button>
                 <button class = 'btn btn-danger btn-sm' type="button" name="button">Remove <i class='fas fa-trash'></i> </button>
               </div>
-            </div>
+            </div> -->
+            
+            
           </div>
           <hr>
         </div>

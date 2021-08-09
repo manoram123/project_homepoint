@@ -6,7 +6,7 @@
       <!-- header -->
       {% include 'navbar.html' %}
       {% for m in messages %}
-      <div class="alert alert-success text-center alert-dismissible fixed-top fade show container col-md-3 mt-5 message-alert" data-aos = 'fade-down' data-aos-duration = '600' role="alert">
+      <div class="alert alert-success text-center alert-dismissible fixed-top-rigtht fade show container col-md-3 mt-3 message-alert" data-aos = 'fade-down' data-aos-duration = '600' role="alert">
           <p class = 'm-0'>{{ m }}</p>
           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">&times;</span>
@@ -73,11 +73,13 @@
       <div class="container p-0 px-3">
         <h4>Ideal Hostels Near Kathmandu</h4>
         <div class="scroll-box mt-4 d-flex">
+
+          {% for p in hostels %}
           <div class="box-card mx-2 pb-3 rounded shadow">
-            <div class="box-image" style = "background: url('{% static 'static_images/hsotel.jpg' %}'); background-size:cover">
+            <div class="box-image" style = "background: url('/{{p.image1}}'); background-size:cover">
             </div>
             <div class="info">
-              <p class="m-0 font-weight-bold px-2">City Boys Hostel</p>
+              <p class="m-0 font-weight-bold px-2">{{p.title}}</p>
               <div class="small px-2">
                 <div class="rating text-warning d-flex">
                   <i class = 'fas fa-star'></i>
@@ -87,7 +89,7 @@
                   <i class = 'far fa-star'></i>
                 </div>
               </div>
-              <small class = 'small text-secondary m-0 d-block px-2'>Listed by - Gokarna Adhikary</small>
+              <small class = 'small text-secondary m-0 d-block px-2'>Listed by - {{p.user.first_name}}</small>
               <small class="m-0 text-secondary px-2">Dillibazaar, Kathmandu</small>
               <small class="m-0 text-secondary px-2">10,500/month</small>
               <div class="container row m-0 mt-1 p-0">
@@ -98,6 +100,8 @@
               </div>
             </div>
           </div>
+          {% endfor %}
+
 
           <div class="box-card mx-2 shadow">
             <div class="box-image rounded" style = "background: url('{% static 'static_images/hostel3.jpeg' %}'); background-size:cover">
