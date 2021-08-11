@@ -9,6 +9,7 @@ class Services(models.Model):
     gym = models.BooleanField()
     geyser = models.BooleanField()
     parking = models.BooleanField()
+    laundry = models.BooleanField(null=True)
     additional_s = models.CharField(max_length=1000, null=True)
 
 

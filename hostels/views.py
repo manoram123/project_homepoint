@@ -26,13 +26,14 @@ def list_hostel(request):
         image4 = request.FILES.get('image4')
         image5 = request.FILES.get('image5')
         image6 = request.FILES.get('image6')
-        date_now = date.today().strftime("%d-%b-%Y")
+        date_now = date.today().strftime("%yyyy-%mm-%dd")
 
         internet = False
         gym = False
         parking = False
         breakfast = False
         geyser = False
+        laundry = False
 
         if "Internet" in services:
             internet = True
@@ -44,9 +45,10 @@ def list_hostel(request):
             breakfast = True
         if "Geyser" in services:
             geyser = True
-
+        if "Laundry" in services:
+            laundry = True
         services_s = Services.objects.create(
-            internet=internet, gym=gym, parking=parking, breakfast=breakfast, geyser=geyser, additional_s=additional_s)
+            internet=internet, gym=gym, parking=parking, breakfast=breakfast, geyser=geyser, laundry=laundry, additional_s=additional_s)
 
         hostel = Hostel.objects.create(user=request.user, title=title, address=address, price=price, services=services_s, description=description, availability=True,
                                        image1=image1, image2=image2, image3=image3, image4=image4, image5=image5, image6=image6)
@@ -61,9 +63,12 @@ def list_hostel(request):
 
 
 def hostels(request):
-    hostels = Hostel.objects.order_by('listed_date')
-    print(hostels)
-    return render(request, 'hostels/hostels.html')
+    hostels = Hostel.objects.order_by('-listed_date')
+    context = {
+        'activate_hostel': 'active',
+        'hostels': hostels
+    }
+    return render(request, 'hostels/hostels.html', context)
 
 
 def details(request, id):
