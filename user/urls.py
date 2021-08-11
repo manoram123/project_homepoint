@@ -5,5 +5,6 @@ from user import views
 
 urlpatterns = [
     path('dashboard/', views.user_dashboard),
-    path('profile/', views.profile)
+    path('profile/', views.profile),
+    path('listing-options', views.listing_options)
 ]

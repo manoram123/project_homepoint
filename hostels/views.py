@@ -5,7 +5,7 @@ from django.shortcuts import redirect, render
 from .models import Hostel
 from django.contrib import messages
 from datetime import date
-
+from hostels.models import Services
 # Create your views here.
 
 
@@ -18,6 +18,7 @@ def list_hostel(request):
         price = data.get('price')
         services = data.getlist('services')
         rules = data.getlist('rules')
+        additional_s = data.get('additional_features')
         description = data.get('description')
         image1 = request.FILES.get('image_1')
         image2 = request.FILES.get('image2')
@@ -27,11 +28,29 @@ def list_hostel(request):
         image6 = request.FILES.get('image6')
         date_now = date.today().strftime("%d-%b-%Y")
 
-        s_list = ["Internet", "Gym", "Bathroom",
-                  "Parking", "Breakfast", "Gayser"]
+        internet = False
+        gym = False
+        parking = False
+        breakfast = False
+        geyser = False
 
-        hostel = Hostel.objects.create(user=request.user, title=title, address=address, price=price, services=services, rules=rules, description=description, availability=True,
+        if "Internet" in services:
+            internet = True
+        if "Gym" in services:
+            gym = True
+        if "Parking" in services:
+            parking = True
+        if "Breakfast" in services:
+            breakfast = True
+        if "Geyser" in services:
+            geyser = True
+
+        services_s = Services.objects.create(
+            internet=internet, gym=gym, parking=parking, breakfast=breakfast, geyser=geyser, additional_s=additional_s)
+
+        hostel = Hostel.objects.create(user=request.user, title=title, address=address, price=price, services=services_s, description=description, availability=True,
                                        image1=image1, image2=image2, image3=image3, image4=image4, image5=image5, image6=image6)
+
         if hostel:
             activity = Activity.objects.create(user=request.user,
                                                activity=hostel, activity_type="listing", property_type="hostel", date=date_now)
@@ -39,3 +58,17 @@ def list_hostel(request):
             return redirect('/user/dashboard')
 
     return render(request, 'hostels/hostelform.html')
+
+
+def hostels(request):
+    hostels = Hostel.objects.order_by('listed_date')
+    print(hostels)
+    return render(request, 'hostels/hostels.html')
+
+
+def details(request, id):
+    hostel = Hostel.objects.get(id=id)
+    context = {
+        'hostel': hostel
+    }
+    return render(request, 'hostels/details.html', context)

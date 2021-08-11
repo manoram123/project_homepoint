@@ -68,7 +68,7 @@ def register(request):
                             request, 'Successfully registered!')
                         print(reg_success)
                         profile = Profile.objects.create(
-                            user=user, active_status=True, verified=False)
+                            user=user, phone=phone, active_status=True, verified=False)
                         return JsonResponse({"message": ['success', "Successfully registered! Please Wait..."]})
 
                 except Exception as e:

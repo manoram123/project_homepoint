@@ -65,10 +65,20 @@ nav .fa-bars {
   height: 100%;
 }
 
-.box-card {
+.property-link {
   height: 40ch;
   width: 52ch;
-  /* box-shadow: 0 0 15px -7px; */
+  text-decoration: none;
+  color: #8b8b8b;
+}
+
+.property-link:hover {
+  text-decoration: none;
+}
+
+.box-card {
+  height: 100%;
+  width: 100%;
   /* border-radius: .5em; */
   /* border: .2em solid #ffab4a; */
 }
@@ -256,6 +266,7 @@ nav .fa-bars {
 }
 
 .message-alert {
+  display: none;
   width: 40vh;
   position: fixed;
   top: 12vh;
@@ -263,7 +274,7 @@ nav .fa-bars {
   z-index: 999;
 }
 
-.message-alert .alert-show {
+.message-alert.alert-show {
   animation: slide_anim 1s ease forwards;
 }
 

@@ -74,8 +74,11 @@
                 <button id = 'add6' onclick = "clickDefault(6)" class = 'custom-add mx-auto my-2 btn' type="button" name="button"> <i class = 'fas fa-file-image'></i><i class = 'fas fa-plus'></i> </button>
               </div>
             </div>
-
           </div>
+          <small>
+            <small class = 'font-weight-bold'>Image added in the first slot will appear in your post.</small>
+          </small>
+
           <div class="my-3">
             <input id = 'title' class = 'form-control text-field' type="text" name="title" value="" placeholder = 'Title'>
           </div>
@@ -98,10 +101,6 @@
                 <label for="gym" class = 't-sm'>Gym</label>
               </div>
               <div class="mt-2 col-md-3 col-sm-4">
-                <input id = 'Bathroom' type="checkbox" name="services" value="Bathroom">
-                <label for="Bathroom" class = 't-sm'>Bathroom</label>
-              </div>
-              <div class="mt-2 col-md-3 col-sm-4">
                 <input id = 'parking' type="checkbox" name="services" value="Parking">
                 <label for="parking" class = 't-sm'>Parking</label>
               </div>
@@ -110,9 +109,13 @@
                 <label for="breakfast" class = 't-sm'>Breakfast</label>
               </div>
               <div class="mt-2 col-md-3 col-sm-4">
-                <input id = 'heater' type="checkbox" name = "services" value="Heater">
-                <label for="heater" class = 't-sm'>Heater</label>
+                <input id = 'geyser' type="checkbox" name = "services" value="Geyser">
+                <label for="geyser" class = 't-sm'>Geyser</label>
               </div>
+            </div>
+            <div>
+              <textarea form = 'p-form' class = 'form-control' name="additional_features" rows = '4'>Additional Features...</textarea>
+              <p class = 'm-0 p-desc'>You can describe additional features of your property in this field.</p>
             </div>
           </div>
           <hr>

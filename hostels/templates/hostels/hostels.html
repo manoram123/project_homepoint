@@ -1,0 +1,396 @@
+{% extends "layout.html" %}
+{% load static %}
+{% block content %}
+{% include "navbar.html" %}
+    <!-- <a href="home.html" class="btn btn-primary px-5 py-2 m-5"> &#8592; Back to Home</a> -->
+    <div class="container col-md-8 my-5">
+        <div class="input-group mb-3 p-0 dropdown">
+            <input type="search" class="form-control" placeholder="Search Here" aria-label="Search Here"
+                aria-describedby="basic-addon2">
+            <div class="input-group-append p-0">
+                <button class="btn btn-secondary dropdown-toggle" type="button" role="button" id="dropdownMenuButton"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Filter By
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">Lowest Prices</a>
+                    <a class="dropdown-item" href="#">15-30</a>
+                    <a class="dropdown-item" href="#">31-50</a>
+                    <a class="dropdown-item" href="#">Highest Prices</a>
+                </div>
+            </div>
+        </div>
+        <div class="container col-md-12 my-3 p-md-0 px-1">
+            <div class="row rounded">
+                <a href="#"
+                    class="col-lg-2 col-md-6 col-6 col-sm-6 p-0 my-1 btn-outline-primary border border-primary nav-link">
+                    <p class="text text-center m-0 py-2">Entire hostels</p>
+                </a>
+                <a href="#"
+                    class="col-lg-3 col-md-6 col-6 col-5 col-sm-6 p-0 my-1 btn-outline-primary border border-primary nav-link">
+                    <p class="text text-center m-0 py-2">Highest first stars</p>
+                </a>
+                <a href="#"
+                    class="col-lg-3 col-md-6 col-5 col-sm-6 p-0 my-1 btn-outline-primary border border-primary nav-link">
+                    <p class="text text-center m-0 py-2">Lowest first stars</p>
+                </a>
+                <a href="#"
+                    class="col-lg-4 col-md-6 col-7 col-sm-6 p-0 my-1 btn-outline-primary border border-primary nav-link">
+                    <p class="text text-center m-0 py-2">Distance from city center</p>
+                </a>
+            </div>
+        </div>
+        <div class="row rounded my-3 border">
+            <div class="col-lg-5 col-md-5">
+                <div class="gkl py-2">
+                    <img src="images/r1.jpg" class="rounded w-100 h-100" alt="">
+                    <div class="buttons">
+                        <a href="#" class="nav-link float-lg-left float-md-left float-left">
+                            <i class="far fa-heart"></i>
+                            Save
+                        </a>
+                        <a href="#" class="nav-link float-lg-right float-md-right float-right"
+                            style="font-size: 0.8rem;">
+                            9 Reviews
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-7 col-md-7">
+                <div class="gkl py-2">
+                    <a href="details.html" class="nav-link float-left p-0 mr-1" style="font-size: 1.2rem;">
+                        Kathmandu Boy's Hostel
+                    </a>
+                    <p class="text">
+                        <i class="fas fa-star text-warning" style="font-size: 0.7rem;"></i>
+                        <i class="fas fa-star text-warning" style="font-size: 0.7rem;"></i>
+                        <i class="fas fa-star text-warning" style="font-size: 0.7rem;"></i>
+                        <i class="fas fa-star text-warning" style="font-size: 0.7rem;"></i>
+                        <i class="fas fa-star text-warning" style="font-size: 0.7rem;"></i>
+                    </p>
+                    <div class="col-md-12 px-0" style="position: absolute; margin-top: -1.1rem; max-width: 86%;">
+                        <a href="#" class="float-left" style="font-size: 0.7rem; text-decoration: none;">
+                            <i class="fas fa-map-marker-alt text-dark" style="font-size: 0.6rem;"></i>
+                            386 NewRoad, Kathmandu
+                        </a>
+                        <!-- <span class="text float-left" style="font-size: 0.6rem;"> - Listed
+                            by:</span>
+                        <a href="#" class="float-left" style="font-size: 0.6rem; text-decoration: none;">
+                            Gokarna Adhikari
+                        </a> -->
+                    </div>
+                    <p class="text pt-3 mr-5" style="font-size: 0.9rem;">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                        Suscipit, architecto.Pariatur nihil consequatur ducimus
+                        possimus sed quod earum dolor nam repellat dolorem.
+                    </p>
+                    <p class="text m-0 p-0" style="font-size: 0.9rem;">
+                        Listed By:
+                    </p>
+                    <p class="text my-1" style="font-size: 0.9rem;">
+                        <i class="fas fa-user mr-1 text-dark"></i>
+                        Gokarna Adhikari
+                    </p>
+                    <p class="text m-0" style="font-size: 0.9rem;">
+                        <i class="fas fa-envelope mr-1 text-warning"></i>
+                        homepoint@gmail.com
+                    </p>
+                    <p class="text my-1" style="font-size: 0.9rem;">
+                        <i class="fas fa-phone-alt mr-1 text-success"></i>
+                        +977-9809597153
+                    </p>
+                    <p class="text m-0" style="font-size: 0.9rem;">
+                        <i class="fas fa-envelope mr-1 text-warning"></i>
+                        homepoint@gmail.com
+                    </p>
+                    <button class="btn btn-outline-primary px-5 py-2 mt-3 mb-2 mt-lg-0 float-lg-right float-left">Show
+                        Prices
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="row rounded my-3 border">
+            <div class="col-lg-5 col-md-5">
+                <div class="gkl py-2">
+                    <img src="images/r2.jpg" class="rounded w-100 h-100" alt="">
+                    <div class="buttons">
+                        <a href="#" class="nav-link float-lg-left float-md-left float-left">
+                            <i class="far fa-heart"></i>
+                            Save
+                        </a>
+                        <a href="#" class="nav-link float-lg-right float-md-right float-right"
+                            style="font-size: 0.8rem;">
+                            9 Reviews
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-7 col-md-7">
+                <div class="gkl py-2">
+                    <a href="details.html" class="nav-link float-left p-0 mr-1" style="font-size: 1.2rem;">
+                        Kathmandu Boy's Hostel
+                    </a>
+                    <p class="text">
+                        <i class="fas fa-star text-warning" style="font-size: 0.7rem;"></i>
+                        <i class="fas fa-star text-warning" style="font-size: 0.7rem;"></i>
+                        <i class="fas fa-star text-warning" style="font-size: 0.7rem;"></i>
+                        <i class="fas fa-star text-warning" style="font-size: 0.7rem;"></i>
+                        <i class="fas fa-star text-warning" style="font-size: 0.7rem;"></i>
+                    </p>
+                    <div class="col-md-12 px-0" style="position: absolute; margin-top: -1.1rem; max-width: 86%;">
+                        <a href="#" class="float-left" style="font-size: 0.7rem; text-decoration: none;">
+                            <i class="fas fa-map-marker-alt text-dark" style="font-size: 0.6rem;"></i>
+                            386 NewRoad, Kathmandu
+                        </a>
+                        <!-- <span class="text float-left" style="font-size: 0.6rem;"> - Listed
+                            by:</span>
+                        <a href="#" class="float-left" style="font-size: 0.6rem; text-decoration: none;">
+                            Gokarna Adhikari
+                        </a> -->
+                    </div>
+                    <p class="text pt-3 mr-5" style="font-size: 0.9rem;">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                        Suscipit, architecto.Pariatur nihil consequatur ducimus
+                        possimus sed quod earum dolor nam repellat dolorem.
+                    </p>
+                    <p class="text m-0 p-0" style="font-size: 0.9rem;">
+                        Listed By:
+                    </p>
+                    <p class="text my-1" style="font-size: 0.9rem;">
+                        <i class="fas fa-user mr-1 text-dark"></i>
+                        Gokarna Adhikari
+                    </p>
+                    <p class="text m-0" style="font-size: 0.9rem;">
+                        <i class="fas fa-envelope mr-1 text-warning"></i>
+                        homepoint@gmail.com
+                    </p>
+                    <p class="text my-1" style="font-size: 0.9rem;">
+                        <i class="fas fa-phone-alt mr-1 text-success"></i>
+                        +977-9809597153
+                    </p>
+                    <p class="text m-0" style="font-size: 0.9rem;">
+                        <i class="fas fa-envelope mr-1 text-warning"></i>
+                        homepoint@gmail.com
+                    </p>
+                    <button class="btn btn-outline-primary px-5 py-2 mt-3 mb-2 mt-lg-0 float-lg-right float-left">Show
+                        Prices
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="row rounded my-3 border">
+            <div class="col-lg-5 col-md-5">
+                <div class="gkl py-2">
+                    <img src="images/r3.jpg" class="rounded w-100 h-100" alt="">
+                    <div class="buttons">
+                        <a href="#" class="nav-link float-lg-left float-md-left float-left">
+                            <i class="far fa-heart"></i>
+                            Save
+                        </a>
+                        <a href="#" class="nav-link float-lg-right float-md-right float-right"
+                            style="font-size: 0.8rem;">
+                            9 Reviews
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-7 col-md-7">
+                <div class="gkl py-2">
+                    <a href="details.html" class="nav-link float-left p-0 mr-1" style="font-size: 1.2rem;">
+                        Kathmandu Boy's Hostel
+                    </a>
+                    <p class="text">
+                        <i class="fas fa-star text-warning" style="font-size: 0.7rem;"></i>
+                        <i class="fas fa-star text-warning" style="font-size: 0.7rem;"></i>
+                        <i class="fas fa-star text-warning" style="font-size: 0.7rem;"></i>
+                        <i class="fas fa-star text-warning" style="font-size: 0.7rem;"></i>
+                        <i class="fas fa-star text-warning" style="font-size: 0.7rem;"></i>
+                    </p>
+                    <div class="col-md-12 px-0" style="position: absolute; margin-top: -1.1rem; max-width: 86%;">
+                        <a href="#" class="float-left" style="font-size: 0.7rem; text-decoration: none;">
+                            <i class="fas fa-map-marker-alt text-dark" style="font-size: 0.6rem;"></i>
+                            386 NewRoad, Kathmandu
+                        </a>
+                        <!-- <span class="text float-left" style="font-size: 0.6rem;"> - Listed
+                            by:</span>
+                        <a href="#" class="float-left" style="font-size: 0.6rem; text-decoration: none;">
+                            Gokarna Adhikari
+                        </a> -->
+                    </div>
+                    <p class="text pt-3 mr-5" style="font-size: 0.9rem;">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                        Suscipit, architecto.Pariatur nihil consequatur ducimus
+                        possimus sed quod earum dolor nam repellat dolorem.
+                    </p>
+                    <p class="text m-0 p-0" style="font-size: 0.9rem;">
+                        Listed By:
+                    </p>
+                    <p class="text my-1" style="font-size: 0.9rem;">
+                        <i class="fas fa-user mr-1 text-dark"></i>
+                        Gokarna Adhikari
+                    </p>
+                    <p class="text m-0" style="font-size: 0.9rem;">
+                        <i class="fas fa-envelope mr-1 text-warning"></i>
+                        homepoint@gmail.com
+                    </p>
+                    <p class="text my-1" style="font-size: 0.9rem;">
+                        <i class="fas fa-phone-alt mr-1 text-success"></i>
+                        +977-9809597153
+                    </p>
+                    <p class="text m-0" style="font-size: 0.9rem;">
+                        <i class="fas fa-envelope mr-1 text-warning"></i>
+                        homepoint@gmail.com
+                    </p>
+                    <button class="btn btn-outline-primary px-5 py-2 mt-3 mb-2 mt-lg-0 float-lg-right float-left">Show
+                        Prices
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="row rounded my-3 border">
+            <div class="col-lg-5 col-md-5">
+                <div class="gkl py-2">
+                    <img src="images/r4.jpg" class="rounded w-100 h-100" alt="">
+                    <div class="buttons">
+                        <a href="#" class="nav-link float-lg-left float-md-left float-left">
+                            <i class="far fa-heart"></i>
+                            Save
+                        </a>
+                        <a href="#" class="nav-link float-lg-right float-md-right float-right"
+                            style="font-size: 0.8rem;">
+                            9 Reviews
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-7 col-md-7">
+                <div class="gkl py-2">
+                    <a href="details.html" class="nav-link float-left p-0 mr-1" style="font-size: 1.2rem;">
+                        Kathmandu Boy's Hostel
+                    </a>
+                    <p class="text">
+                        <i class="fas fa-star text-warning" style="font-size: 0.7rem;"></i>
+                        <i class="fas fa-star text-warning" style="font-size: 0.7rem;"></i>
+                        <i class="fas fa-star text-warning" style="font-size: 0.7rem;"></i>
+                        <i class="fas fa-star text-warning" style="font-size: 0.7rem;"></i>
+                        <i class="fas fa-star text-warning" style="font-size: 0.7rem;"></i>
+                    </p>
+                    <div class="col-md-12 px-0" style="position: absolute; margin-top: -1.1rem; max-width: 86%;">
+                        <a href="#" class="float-left" style="font-size: 0.7rem; text-decoration: none;">
+                            <i class="fas fa-map-marker-alt text-dark" style="font-size: 0.6rem;"></i>
+                            386 NewRoad, Kathmandu
+                        </a>
+                        <!-- <span class="text float-left" style="font-size: 0.6rem;"> - Listed
+                            by:</span>
+                        <a href="#" class="float-left" style="font-size: 0.6rem; text-decoration: none;">
+                            Gokarna Adhikari
+                        </a> -->
+                    </div>
+                    <p class="text pt-3 mr-5" style="font-size: 0.9rem;">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                        Suscipit, architecto.Pariatur nihil consequatur ducimus
+                        possimus sed quod earum dolor nam repellat dolorem.
+                    </p>
+                    <p class="text m-0 p-0" style="font-size: 0.9rem;">
+                        Listed By:
+                    </p>
+                    <p class="text my-1" style="font-size: 0.9rem;">
+                        <i class="fas fa-user mr-1 text-dark"></i>
+                        Gokarna Adhikari
+                    </p>
+                    <p class="text m-0" style="font-size: 0.9rem;">
+                        <i class="fas fa-envelope mr-1 text-warning"></i>
+                        homepoint@gmail.com
+                    </p>
+                    <p class="text my-1" style="font-size: 0.9rem;">
+                        <i class="fas fa-phone-alt mr-1 text-success"></i>
+                        +977-9809597153
+                    </p>
+                    <p class="text m-0" style="font-size: 0.9rem;">
+                        <i class="fas fa-envelope mr-1 text-warning"></i>
+                        homepoint@gmail.com
+                    </p>
+                    <button class="btn btn-outline-primary px-5 py-2 mt-3 mb-2 mt-lg-0 float-lg-right float-left">Show
+                        Prices
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="row rounded my-3 border">
+            <div class="col-lg-5 col-md-5">
+                <div class="gkl py-2">
+                    <img src="images/r5.jpg" class="rounded w-100 h-100" alt="">
+                    <div class="buttons">
+                        <a href="#" class="nav-link float-lg-left float-md-left float-left">
+                            <i class="far fa-heart"></i>
+                            Save
+                        </a>
+                        <a href="#" class="nav-link float-lg-right float-md-right float-right"
+                            style="font-size: 0.8rem;">
+                            9 Reviews
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-7 col-md-7">
+                <div class="gkl py-2">
+                    <a href="details.html" class="nav-link float-left p-0 mr-1" style="font-size: 1.2rem;">
+                        Kathmandu Boy's Hostel
+                    </a>
+                    <p class="text">
+                        <i class="fas fa-star text-warning" style="font-size: 0.7rem;"></i>
+                        <i class="fas fa-star text-warning" style="font-size: 0.7rem;"></i>
+                        <i class="fas fa-star text-warning" style="font-size: 0.7rem;"></i>
+                        <i class="fas fa-star text-warning" style="font-size: 0.7rem;"></i>
+                        <i class="fas fa-star text-warning" style="font-size: 0.7rem;"></i>
+                    </p>
+                    <div class="col-md-12 px-0" style="position: absolute; margin-top: -1.1rem; max-width: 86%;">
+                        <a href="#" class="float-left" style="font-size: 0.7rem; text-decoration: none;">
+                            <i class="fas fa-map-marker-alt text-dark" style="font-size: 0.6rem;"></i>
+                            386 NewRoad, Kathmandu
+                        </a>
+                        <!-- <span class="text float-left" style="font-size: 0.6rem;"> - Listed
+                            by:</span>
+                        <a href="#" class="float-left" style="font-size: 0.6rem; text-decoration: none;">
+                            Gokarna Adhikari
+                        </a> -->
+                    </div>
+                    <p class="text pt-3 mr-5" style="font-size: 0.9rem;">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                        Suscipit, architecto.Pariatur nihil consequatur ducimus
+                        possimus sed quod earum dolor nam repellat dolorem.
+                    </p>
+                    <p class="text m-0 p-0" style="font-size: 0.9rem;">
+                        Listed By:
+                    </p>
+                    <p class="text my-1" style="font-size: 0.9rem;">
+                        <i class="fas fa-user mr-1 text-dark"></i>
+                        Gokarna Adhikari
+                    </p>
+                    <p class="text m-0" style="font-size: 0.9rem;">
+                        <i class="fas fa-envelope mr-1 text-warning"></i>
+                        homepoint@gmail.com
+                    </p>
+                    <p class="text my-1" style="font-size: 0.9rem;">
+                        <i class="fas fa-phone-alt mr-1 text-success"></i>
+                        +977-9809597153
+                    </p>
+                    <p class="text m-0" style="font-size: 0.9rem;">
+                        <i class="fas fa-envelope mr-1 text-warning"></i>
+                        homepoint@gmail.com
+                    </p>
+                    <button class="btn btn-outline-primary px-5 py-2 mt-3 mb-2 mt-lg-0 float-lg-right float-left">Show
+                        Prices
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="container col-md-4 my-5 shadow">
+            <button class="btn btn-outline-primary rounded">Load More</button>
+        </div>
+    </div>
+{% include "footer.html" %}
+{% endblock %}
+  
+  
+

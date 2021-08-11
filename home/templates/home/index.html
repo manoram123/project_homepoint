@@ -5,14 +5,6 @@
     <div class="main pt-0" id = 'm'>
       <!-- header -->
       {% include 'navbar.html' %}
-      {% for m in messages %}
-      <div class="alert alert-success text-center alert-dismissible fixed-top-rigtht fade show container col-md-3 mt-3 message-alert" data-aos = 'fade-down' data-aos-duration = '600' role="alert">
-          <p class = 'm-0'>{{ m }}</p>
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-      {% endfor %}
       <div class="container landing mt-5 pt-5">
         <div class="row m-0">
           <div class="col-md-4">
@@ -75,11 +67,12 @@
         <div class="scroll-box mt-4 d-flex">
 
           {% for p in hostels %}
-          <div class="box-card mx-2 pb-3 rounded shadow">
+          <a class = "rounded  mx-2 property-link border p-0" href = '/hostels/details/{{p.id}}'>
+          <div class="box-card pb-3 rounded">
             <div class="box-image" style = "background: url('/{{p.image1}}'); background-size:cover">
             </div>
             <div class="info">
-              <p class="m-0 font-weight-bold px-2">{{p.title}}</p>
+              <p class="m-0 font-weight-bold px-2" style = 'width: 100%;'>{{p.title}}</p>
               <div class="small px-2">
                 <div class="rating text-warning d-flex">
                   <i class = 'fas fa-star'></i>
@@ -90,18 +83,45 @@
                 </div>
               </div>
               <small class = 'small text-secondary m-0 d-block px-2'>Listed by - {{p.user.first_name}}</small>
-              <small class="m-0 text-secondary px-2">Dillibazaar, Kathmandu</small>
-              <small class="m-0 text-secondary px-2">10,500/month</small>
+              <small class="m-0 text-secondary px-3 d-block">{{p.address}}</small>
+              <small class="m-0 text-secondary px-3 d-block">Rs. {{p.price}}/month</small>
               <div class="container row m-0 mt-1 p-0">
+                {% if p.services.internet %}
                 <small class = 'text-success small col-md-4 col-sm-4 my-1'> <i class = 'fas fa-wifi mr-1'></i>Internet</small>
+                {% endif %}
+                {% if  p.services.parking %}
                 <small class = 'text-success small col-md-4 col-sm-4 my-1'> <i class = 'fas fa-car mr-1'></i>Parking</small>
+                {% endif %}
+                {% if  p.services.breakfast %}
                 <small class = 'text-success small col-md-4 col-sm-4 my-1'> <i class = 'fas fa-utensils mr-1'></i>Breakfast</small>
+                {% endif %}
+                {% if  p.services.gym %}
                 <small class = 'text-success small col-md-4 col-sm-4 my-1'> <i class = 'fas fa-dumbbell mr-1'></i>Gym</small>
+                {% endif %}
+                {% if p.services.geyser %}
+                <small class = 'text-success small col-md-4 col-sm-4 my-1'> <i class = 'fas fa-shower mr-1'></i>Geyser</small>
+                {% endif %}
+
               </div>
             </div>
           </div>
+          </a>
           {% endfor %}
 
+
+          <!-- <div class="box-card mx-2 shadow">
+            <div class="box-image rounded" style = "background: url('{% static 'static_images/hostel3.jpeg' %}'); background-size:cover">
+            </div>
+            <div class="info">
+              <p class="m-0 font-weight-bold px-2">KTM Boys Hostel</p>
+              <p class="m-0 text-secondary px-2">Satdobato, Lalitpur</p>
+              <p class="m-0 text-secondary px-2">Price: 10,500</p>
+              <span class="mt-4 d-flex px-2">
+                <p class="btn btn-primary btn-sm">4.1</p>
+                <p class="text text-primary mx-2 mt-2">Pleasant</p>
+              </span>
+            </div>
+          </div>
 
           <div class="box-card mx-2 shadow">
             <div class="box-image rounded" style = "background: url('{% static 'static_images/hostel3.jpeg' %}'); background-size:cover">
@@ -145,15 +165,15 @@
                 <p class="text text-primary mx-2 mt-2">Good</p>
               </span>
             </div>
-          </div>
+          </div> -->
 
-
-          <div class="box-card mx-2 shadow">
+          <a class = "rounded  mx-2 property-link border p-0" href = '/hostels/details/{{p.id}}'>
+          <div class="box-card">
             <div class="box-image rounded discover" style = "background: url('{% static 'static_images/hostel.jpg' %}'); background-size:cover"></div>
             <p class="discover-quote text-light pl-4">Discover more for your best choices to stay.</p>
             <button class="browse-more d-block mx-auto px-5 text-primary py-1" type="button" name="button">Browse More</button>
           </div>
-
+          </a>
 
         </div>
       </div>

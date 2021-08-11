@@ -33,3 +33,7 @@ def profile(request):
 
     }
     return render(request, 'user/profile.html', context)
+
+
+def listing_options(request):
+    return render(request, 'user/listing-options.html')
