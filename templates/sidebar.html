@@ -1,0 +1,22 @@
+<div class="navigate-wrapper">
+    <div id = 'navigate' class="navigation bg-light border px-2">
+      <div class="profile d-flex mt-4">
+        <div class="sidebar-profile-image rounded-circle" style = "background:url('/{{request.user.profile.image}}'); background-size:cover"></div>
+        <p class='my-0 px-3'>{{request.user.first_name}}</span></p>
+      </div>
+      <hr class=''>
+      <div class="interactions my-auto">
+        <div class="space"></div>
+        <ul class = 'list-unstyled'>
+          <li class = 'py-2 my-3 int-item {{activate_overview}}'><a class ='nav-link text-secondary p-0' href = '/user/dashboard'><i class="fas fa-clipboard mx-2 i-icon"></i><span class = 'mx-4'>Overview</span></a></li>
+          <li class = 'py-2 my-3 int-item {{activate_profile}}'><a class ='nav-link text-secondary p-0' href = '/user/profile/'><i class="fas fa-user mx-2 i-icon"></i><span class = 'mx-4'>Profile</span></a></li>
+          <li class = 'py-2 my-3 int-item'><a class ='nav-link text-secondary p-0' href = '/user/listings'><i class="fas fa-list-alt mx-2 i-icon"></i><span class = 'mx-4'>My Listings</span></a></li>
+          <li class = 'py-2 my-3 int-item'><a class ='nav-link text-secondary p-0' href = ''><i class="fas fa-home mx-2 i-icon"></i><span class = 'mx-4'>Rentals</span></a></li>
+          <li class = 'py-2 my-3 int-item'><a class ='nav-link text-secondary p-0' href = '/user/inbox'><i class="fas fa-comment-alt mx-2 i-icon"></i><span class = 'mx-4'>Inbox</span></a></li>
+          <li class = 'py-2 my-3 int-item'><a class ='nav-link text-secondary p-0' href = ''><i class="fas fa-cog mx-2 i-icon"></i><span class = 'mx-4'>Settings</span></a></li>
+        </ul>
+      </div>
+      <hr>
+      <div class="space my-5 py-4"></div>
+    </div>
+  </div>

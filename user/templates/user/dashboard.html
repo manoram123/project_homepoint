@@ -4,28 +4,7 @@
 {% include 'navbar.html' %}
 {% include 'messages.html' %}
     <div class="d-flex">
-      <div class="navigate-wrapper">
-        <div id = 'navigate' class="navigation bg-light border px-2">
-          <div class="profile d-flex mt-4">
-            <div class="profile-image rounded-circle" style = "background:url('/{{request.user.profile.image}}'); background-size:cover"></div>
-            <p class='my-0 px-3'>Manoram <br><span class= 'text-primary'>Baudel</span></p>
-          </div>
-          <hr class=''>
-          <div class="interactions my-auto">
-            <div class="space"></div>
-            <ul class = 'list-unstyled'>
-              <li class = 'py-2 my-3 int-item int-item-active'><a class ='nav-link text-secondary p-0' href = 'dashboard.html'><i class="fas fa-clipboard mx-2 i-icon"></i><span class = 'mx-4'>Overview</span></a></li>
-              <li class = 'py-2 my-3 int-item'><a class ='nav-link text-secondary p-0' href = '/user/profile/'><i class="fas fa-user mx-2 i-icon"></i><span class = 'mx-4'>Profile</span></a></li>
-              <li class = 'py-2 my-3 int-item'><a class ='nav-link text-secondary p-0' href = 'listings.html'><i class="fas fa-list-alt mx-2 i-icon"></i><span class = 'mx-4'>My Listings</span></a></li>
-              <li class = 'py-2 my-3 int-item'><a class ='nav-link text-secondary p-0' href = ''><i class="fas fa-home mx-2 i-icon"></i><span class = 'mx-4'>Rentals</span></a></li>
-              <li class = 'py-2 my-3 int-item'><a class ='nav-link text-secondary p-0' href = ''><i class="fas fa-comment-alt mx-2 i-icon"></i><span class = 'mx-4'>Inbox</span></a></li>
-              <li class = 'py-2 my-3 int-item'><a class ='nav-link text-secondary p-0' href = ''><i class="fas fa-cog mx-2 i-icon"></i><span class = 'mx-4'>Settings</span></a></li>
-            </ul>
-          </div>
-          <hr>
-          <div class="space my-5 py-4"></div>
-        </div>
-      </div>
+      {% include 'sidebar.html' %}
     <div class="content container-fluid p-0 mx-auto row">
       <h4 class = 'mt-4 mx-4'>Welcome!👋</h4>
       <!-- category -->
@@ -121,7 +100,7 @@
             <h5 class='m-0'>Your Profile</h5>
             <div class="row mt-2">
               <div class="col-3 col-xl-2">
-                <div class="profile-image rounded-circle" style = "background:url('/{{request.user.profile.image}}'); background-size:cover"></div>
+                <div class="commerce-profile-image rounded-circle" style = "background:url('/{{request.user.profile.image}}'); background-size:cover"></div>
               </div>
               <div class="d-block col-9">
                 <p class='my-0 px-3'>{{request.user.first_name}}</p>

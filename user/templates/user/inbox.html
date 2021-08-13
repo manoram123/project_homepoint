@@ -1,0 +1,23 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block title %}
+<title>Inbox</title>
+{% endblock %}
+{% block content %}
+{% include 'navbar.html' %}
+    <div class = 'container mx-atuo py-5'>
+        <div class = 'container inbox-container px-2 px-lg-5 col-12 col-lg-8 py-4 rounded border'>
+            <a class = 'inbox-link' href="">
+                <div class = 'chat-container border rounded shadow py-2 px-2 d-flex'>
+                    <div class = 'on-property-image rounded-circle' style = "background: url('{% static 'static_images/room.svg' %}'); background-size: cover;"></div>
+                    <div class = 'on-texts mx-2'>
+                        <p class = 'm-0 font-weight-bold'>City Boys Hostel free wifi with futsal</p>
+                        <small class ='d-block'><small> <i class ='fas fa-user'></i> Samishan Thapa Chhetri</small></small>
+                        <small class ='d-block'>Samishan: Is this available?</small>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+{% include "footer.html" %}
+{% endblock %}

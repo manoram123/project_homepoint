@@ -26,8 +26,8 @@ def list_hostel(request):
         image4 = request.FILES.get('image4')
         image5 = request.FILES.get('image5')
         image6 = request.FILES.get('image6')
-        date_now = date.today().strftime("%yyyy-%mm-%dd")
-
+        date_now = date.today().strftime("%Y-%m-%d")
+        print(date_now)
         internet = False
         gym = False
         parking = False
@@ -50,7 +50,7 @@ def list_hostel(request):
         services_s = Services.objects.create(
             internet=internet, gym=gym, parking=parking, breakfast=breakfast, geyser=geyser, laundry=laundry, additional_s=additional_s)
 
-        hostel = Hostel.objects.create(user=request.user, title=title, address=address, price=price, services=services_s, description=description, availability=True,
+        hostel = Hostel.objects.create(user=request.user, title=title, address=address, price=price, services=services_s, description=description, listed_date=date_now, availability=True,
                                        image1=image1, image2=image2, image3=image3, image4=image4, image5=image5, image6=image6)
 
         if hostel:

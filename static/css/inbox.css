@@ -1,0 +1,12 @@
+.on-property-image {
+  height: 5ch;
+  width: 5ch;
+}
+
+.inbox-link {
+  color: #8b8b8b;
+}
+
+.inbox-link:hover {
+  text-decoration: none;
+}

@@ -3,12 +3,13 @@
 }
 .navigate-wrapper {
   width: 5ch;
-  height: 100vh;
+  height: 110vh;
   z-index: 999;
   background: red;
 }
 .navigation {
   position: sticky;
+  top: 0;
   left: 0;
   width: 5ch;
   height: 100vh;
@@ -23,6 +24,16 @@
 .profile-image {
   height: 3ch;
   width: 3ch;
+}
+
+.sidebar-profile-image {
+  height: 3ch;
+  width: 3ch;
+}
+
+.commerce-profile-image {
+  height: 5ch;
+  width: 5ch;
 }
 
 .int-item {

@@ -4,29 +4,7 @@
 {% block content %}
 {% include 'navbar.html' %}
     <div class="p-0 d-flex">
-      <div class="navigate-wrapper">
-        <div id = 'navigate' class="navigation bg-light border px-2">
-          <div class="profile d-flex mt-4">
-            <div class="profile-image rounded-circle" style = "background:url('/{{profile.image}}'); background-size:cover"></div>
-            <p class='my-0 px-3'>{{request.user.first_name}} <br><span class= 'text-primary'>Baudel</span></p>
-          </div>
-          <hr class=''>
-          <div class="interactions my-auto">
-            <div class="space"></div>
-            <ul class = 'list-unstyled'>
-              <li class = 'py-2 my-3 int-item'><a class ='nav-link text-secondary p-0' href = '/user/dashboard/'><i class="fas fa-clipboard mx-2 i-icon"></i><span class = 'mx-4'>Overview</span></a></li>
-              <li class = 'py-2 my-3 int-item int-item-active'><a class ='nav-link text-secondary p-0' href = 'profile.html'><i class="fas fa-user mx-2 i-icon"></i><span class = 'mx-4'>Profile</span></a></li>
-              <li class = 'py-2 my-3 int-item'><a class ='nav-link text-secondary p-0' href = 'listings.html'><i class="fas fa-list-alt mx-2 i-icon"></i><span class = 'mx-4'>My Listings</span></a></li>
-              <li class = 'py-2 my-3 int-item'><a class ='nav-link text-secondary p-0' href = ''><i class="fas fa-home mx-2 i-icon"></i><span class = 'mx-4'>Rentals</span></a></li>
-              <li class = 'py-2 my-3 int-item'><a class ='nav-link text-secondary p-0' href = ''><i class="fas fa-comment-alt mx-2 i-icon"></i><span class = 'mx-4'>Inbox</span></a></li>
-              <li class = 'py-2 my-3 int-item'><a class ='nav-link text-secondary p-0' href = ''><i class="fas fa-cog mx-2 i-icon"></i><span class = 'mx-4'>Settings</span></a></li>
-            </ul>
-          </div>
-          <hr>
-          <div class="space my-5 py-4"></div>
-        </div>
-      </div>
-
+      {% include 'sidebar.html' %}
       <div class="container">
         <div class="container my-5 mx-auto col-sm-12 col-xl-6 col-lg-6 col-md-6 border profile-card rounded">
           <div class="container-fluid py-4 p-0 user-info">
@@ -47,7 +25,7 @@
                     <!-- change profile -->
                   </div>
                   <div class="user-profile rounded-circle mx-auto" style="background: url('/{{request.user.profile.image}}'); background-size: cover;"></div>
-                  <h5 class = 'text-center text-muted  my-0 mt-2'>Manoram Baudel</h5>
+                  <h5 class = 'text-center text-muted  my-0 mt-2'>{{request.user.first_name}}</h5>
                   <p class = 'text-center  my-0'>
                     <i class = 'fas fa-star text-warning'></i>
                     <i class = 'fas fa-star text-warning'></i>
@@ -87,22 +65,26 @@
                 <div class="info-box my-3">
                   <p class = 'm-0'><i class = 'fas fa-map-marked mr-2'></i>Address</p>
                   <div class="det-box rounded py-2 px-3">
-                    <p class = 'm-0'>Satdobato, Lalitpur</p>
+                    <p class = 'm-0'>{{request.user.profile.address}}</p>
                   </div>
                 </div>
 
                 <div class="info-box my-3">
                   <p class = 'm-0'><i class = 'fas fa-phone-alt mr-2'></i>Phone</p>
                   <div class="det-box rounded py-2 px-3">
-                    <p class = 'm-0'>9843749467</p>
+                    <p class = 'm-0'>{{request.user.profile.phone}}</p>
+                    {% if not request.user.profile.verified %}
                     <small class = 'text-info'><i class = 'fas fa-info-circle mr-1'></i>Please <a href="#">verify</a> your phone</small>
+                    {% else %}
+                    <small><i class='fas fa-check-square text-success mr-1'></i>Verified</small>
+                    {% endif %}
                   </div>
                 </div>
 
                 <div class="info-box my-3">
                   <p class = 'm-0'><i class = 'fas fa-envelope mr-2'></i>Email</p>
                   <div class="det-box rounded py-2 px-3">
-                    <p class = 'm-0'>baudelmanoram123@gmail.com</p>
+                    <p class = 'm-0'>{{request.user.email}}</p>
                   </div>
                 </div>
 

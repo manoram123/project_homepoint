@@ -6,7 +6,7 @@ import json
 
 
 def home(request):
-    hostels = Hostel.objects.all()
+    hostels = Hostel.objects.order_by('-listed_date')[:6]
     context = {
         'active_home': 'active',
         'hostels': hostels,
