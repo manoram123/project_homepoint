@@ -10,3 +10,55 @@
 .inbox-link:hover {
   text-decoration: none;
 }
+
+.message-box-profile {
+  height: 4ch;
+  width: 4ch;
+}
+
+.message-page {
+  height: 35ch;
+  overflow: scroll;
+}
+
+.message-page::-webkit-scrollbar {
+  display: none;
+}
+
+.msg {
+  max-width: 60vw;
+}
+
+.sent .msg p {
+  background: #23a2fc;
+}
+
+.msgm {
+  max-width: 60vw;
+}
+
+.sentm .msgm p {
+  background: #23a2fc;
+}
+
+.receive-text {
+  border: 1px solid #a3a3a3;
+}
+
+.message-box-reply-on {
+  height: 4ch;
+  width: 4ch;
+}
+
+.m-type {
+  color: #8b8b8b;
+}
+
+.m-type:hover {
+  color: #8b8b8b;
+  text-decoration: none;
+}
+
+.m-type-active {
+  border-bottom: 2px solid;
+}

@@ -1,0 +1,115 @@
+{% extends "layout.html" %}
+{% load static %}
+{% block content %}
+{% include 'navbar.html' %}
+<div class = 'px-2'>
+    <div class = 'message-box container col-12 col-lg-6 border shadow rounded py-4 my-5'>
+        <div class='message-header d-flex'>
+            <div class='message-box-profile rounded-circle' style ="background: url('/{{receiver.profile.image}}'); background-size: cover;"></div>
+            <div class = 'mx-2'>
+                <p class = 'm-0'>{{receiver.first_name}}</p>
+                <small class='d-block m-0' stye>Online</small>
+            </div>
+        </div>
+        <hr>
+        <div id = '#target-div' class='message-page'>
+            {% for m in messages %}
+            {% if request.user.id == m.sender_id %}
+            <div class="sent d-flex px-2">
+                <div class="msg ml-auto">
+                  <div class="point"></div>
+                  <p class = 'text-light mx-1 px-2 py-1 rounded'>{{ m.message }}</p>
+                </div>
+            </div>
+            {% else %}
+            <div class="receive d-flex">
+                <div class="msg">
+                <a class='nav-link m-0 p-0' href=""><div class='message-box-reply-on rounded mx-2 my-1' style ="background: url('/{{m.reply_on.image1}}'); background-size: cover;"></div></a>
+                  <p class = 'receive-text text-dark mx-1 px-2 py-1 rounded'>{{ m.message}}</p>
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+        <hr>
+        <div class='message-input'>
+            <form id ='send-msg' action="" method="POST">
+                {% csrf_token %}
+                <div class = 'd-flex'>
+                    <div>
+                        <input class = 'form-control msg-input' type="text" name = 'message' autocomplete="Off" required>
+                    </div>
+                    <div class ='mx-2'>
+                        <button class='btn btn-primary' type="submit" name = 'send'>Send</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).on('submit', '#send-msg', function (e) {
+        e.preventDefault();
+        $.ajax({
+            type: "POST",
+            url: "/user/chat/{{property.id}}/{{receiver.id}}/",
+            data: {
+                message: $('.msg-input').val(),
+                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+            },
+            success: function(data){
+                $('#send-msg').trigger("reset")
+            },
+        })
+    })
+
+
+    
+    var lastMessage = {{last_msg.id}}
+    $(document).ready(function(){
+        setInterval(function(){
+            $.ajax({
+                type: "GET",
+                url: "/user/loadmessage/{{receiver.id}}",
+                success: function(response){
+                    var msg = [response.msg_id, response.message, response.sender]
+                    if(msg[1] != "null"){
+                        if(msg[0]!=lastMessage){
+                        if(msg[2] == {{request.user.id}}){
+                            var lines = '<div class="sent d-flex px-2">';
+                      lines += '<div class="msg ml-auto">';
+                      lines += '<div class="point">';
+                      lines += '</div>';
+                      lines += '<p class="text-light mx-1 px-2 py-1 rounded">'+response.message;
+                      lines += '</p>';
+                      lines += '</div>';
+                      lines += '</div>';
+                      $('.message-page').append(lines)
+                        lastMessage = response.msg_id
+                      $(".message-page").animate({ scrollTop: $(".message-page")[0].scrollHeight }, 1000);
+                        }
+                        else{
+                            var lines = '<div class="receive d-flex">';
+                            lines += '<div class="msg">';
+                            lines += '<p class="receive-text text-light mx-1 px-2 py-1 rounded">'+response.message;
+                            lines += '</p>';
+                            lines += '</div>';
+                            lines += '</div>';
+                            $('.message-page').append(lines)
+                            lastMessage = response.msg_id
+                      $(".message-page").animate({ scrollTop: $(".message-page")[0].scrollHeight }, 1000);
+                        }
+                    }
+                    }
+                }
+            })
+        },1000)
+    })
+    
+</script>
+<script type="text/javascript">
+    var targetDiv = document.querySelector('.message-page');
+    targetDiv.scrollTop = targetDiv.scrollHeight;
+</script>
+{% include 'footer.html' %}
+{% endblock %}

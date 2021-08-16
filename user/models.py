@@ -1,3 +1,4 @@
+from io import open_code
 from django.db import models
 from django.db.models.base import Model
 from hostels.models import Hostel
@@ -16,12 +17,13 @@ class Activity(models.Model):
 
 
 class ChatRoom(models.Model):
-    person_1 = models.ForeignKey(User, on_delete=models.CASCADE)
-    person_2 = models.IntegerField()
+    person_1 = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True)
+    person_2 = models.ForeignKey(User, on_delete=models.CASCADE)
 
 
 class Message(models.Model):
-    room_id = models.OneToOneField(ChatRoom, on_delete=models.CASCADE)
+    room = models.ForeignKey(ChatRoom, on_delete=models.CASCADE)
     message = models.CharField(max_length=500, null=True)
     sender = models.ForeignKey(User, on_delete=models.CASCADE)
     date = models.DateField(max_length=20, null=True)
+    reply_on = models.ForeignKey(Hostel, on_delete=models.CASCADE, null=True)

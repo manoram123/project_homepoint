@@ -9,11 +9,11 @@
                 <a class ='buying m-type mx-2 {{activate_buying}}' href="/user/inbox_buying">Buying</a>
             </div>
             {% for r,v in room.items %}
-            <a class = 'inbox-link d-block my-3' href="/user/chat/{{v.0.reply_on.id}}/{{r.person_1.user.id}}">
+            <a class = 'inbox-link d-block my-3' href="/user/chat/{{v.0.reply_on.id}}/{{r.person_2.id}}">
                 <div class = 'chat-container border rounded shadow py-2 px-2 d-flex'>
-                    <div class = 'on-property-image rounded-circle' style = "background: url('/{{r.person_1.image}}'); background-size: cover;"></div>
+                    <div class = 'on-property-image rounded-circle' style = "background: url('/{{r.person_2.profile.image}}'); background-size: cover;"></div>
                     <div class = 'on-texts mx-2'>
-                        <p class = 'm-0 font-weight-bold'>{{r.person_1.user.first_name}}</p>
+                        <p class = 'm-0 font-weight-bold'>{{r.person_2.first_name}}</p>
                         {% for m in v %}
                         {% if forloop.last %}
                         {% if m.sender == request.user %}

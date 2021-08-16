@@ -81,7 +81,7 @@ WSGI_APPLICATION = 'homepoint.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'homepoint',
+        'NAME': 'homepoint_alter',
         'USER': 'root',
         'PASSWORD': '',
         'HOST': 'localhost',

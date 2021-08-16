@@ -18,7 +18,7 @@
         const uluru = { lat: -25.344, lng: 131.036 };
         // The map, centered at Uluru
         const map = new google.maps.Map(document.getElementById("map"), {
-          zoom: 4,
+          zoom: 10,
           center: uluru,
         });
         // The marker, positioned at Uluru
@@ -338,7 +338,7 @@
                 </form>
               </div>
               <div class = 'px-3'>
-                <button class = 'btn btn-outline-success btn-sm btn-block' type="button" name="button">Talk To Owner</button>
+                <a href='/user/chat/{{hostel.id}}/{{hostel.user.id}}' class = 'btn btn-outline-success btn-sm btn-block' type="button" name="button">Talk To Owner</a>
               </div>
             </div>
           </div>
