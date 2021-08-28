@@ -1,10 +1,8 @@
 <!-- message alert -->
-{% for m in messages %}
-  <div class="alert alert-success text-center alert-dismissible fixed-top-rigtht fade show container col-md-3 mt-3 message-alert" data-aos = 'fade-down' data-aos-duration = '600' role="alert">
-      <p class = 'm-0'>{{ m }}</p>
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-{% endfor %}
+<div id='message-pop' class="alert text-center alert-dismissible ml-auto message-alert alert-hide">
+  <small class='m-0' id='alert-message'>Note</small>
+  <button type="button" class="close" aria-label="Close">
+      <span onclick="$('.alert').addClass('alert-hide')">&times</span>
+  </button>
+</div>
 <!-- message alert -->

@@ -1,8 +1,17 @@
 .features {
-  font-size: 0.9em;
+  font-size: 1em;
 }
 
 .hostel-image {
   height: 25ch;
   width: 38ch;
+}
+
+/* .extra-features::nth-line {
+  background-color: #42c433;
+} */
+
+.commenter-image {
+  height: 5ch;
+  width: 5ch;
 }

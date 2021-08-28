@@ -1,28 +1,28 @@
-*{
+* {
   font-family: poppins;
 }
 
-.poster-image{
+.poster-image {
   height: 4ch;
   width: 4ch;
 }
 
-.input-title{
+.input-title {
   background: red;
   position: relative;
   top: 3ch;
   left: 1.5ch;
-  transition: .3s;
+  transition: 0.3s;
 }
 
-.add-image{
+.add-image {
   outline: none;
   color: #707070;
   height: 10ch;
   width: 10ch;
 }
 
-.custom-add{
+.custom-add {
   display: block;
   color: #707070;
   height: 8ch;
@@ -30,37 +30,41 @@
   border: 1px dashed;
 }
 
-.cancel-btn{
+.cancel-btn {
   color: #fcfcfc;
   display: none;
 }
 
-.cancel-btn:hover{
+.cancel-btn:hover {
   color: #ff082d;
 }
 
-.add-image .fa-file-image{
+.add-image .fa-file-image {
   font-size: 2em;
 }
 
-.slot1, .slot2, .slot3, .slot4, .slot5{
+.slot1,
+.slot2,
+.slot3,
+.slot4,
+.slot5 {
   display: none;
 }
 
-.poster-small{
+.poster-small {
   display: block;
-  font-size: .7em;
-  margin-top: -.5ch;
+  font-size: 0.7em;
+  margin-top: -0.5ch;
 }
 
-.form-select{
+.form-select {
   width: 100%;
 }
 
-.p-desc{
-  font-size: .7em;
+.p-desc {
+  font-size: 0.7em;
 }
 
-.t-sm{
-  font-size: .8em;
+.t-sm {
+  font-size: 0.8em;
 }

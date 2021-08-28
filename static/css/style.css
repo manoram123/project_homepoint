@@ -324,3 +324,8 @@ nav .fa-bars {
 .small {
   font-size: 0.6em;
 }
+
+/* Rating Modal Design */
+.stars {
+  color: #a8a8a8;
+}

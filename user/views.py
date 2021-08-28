@@ -142,3 +142,8 @@ def load_message(request, contact_id):
 @login_required
 def listing_options(request):
     return render(request, 'user/listing-options.html')
+
+
+@login_required
+def rate(request, property_id):
+    pass

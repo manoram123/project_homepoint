@@ -43,12 +43,6 @@ def register(request):
         username = data['username']
         passw = data['password']
         cpassw = data['confirm_password']
-        try:
-            user = User.objects.create(id=username, name=name, email=email)
-            user.set_password(passw)
-        except Exception as e:
-            print(e)
-
         if passw != cpassw:
             return JsonResponse({"message": ['error', "Password did not match!"]})
 

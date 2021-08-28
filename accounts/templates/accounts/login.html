@@ -1,4 +1,5 @@
 {%extends 'layout.html'%}
+{% load socialaccount %}
 {% block content %}
 {% include 'navbar.html'%}
 <!-- message alert -->
@@ -40,6 +41,11 @@
                     <a href="#" class='d-block text-primary text-right small-text mt-2'>Forgot Password?</a>
                     <hr>
                 </div> <!-- form-group// -->
+
+                <div>
+                    <a class = 'btn btn-sm btn-primary' href="{% provider_login_url 'google' %}">Google</a>
+                </div>
+
                 <p class="text-center">Don't have an account? <a class="text-primary" href="/accounts/register">Create account</a> </p>
             </form>
         </article>
