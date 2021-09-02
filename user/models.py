@@ -27,3 +27,10 @@ class Message(models.Model):
     sender = models.ForeignKey(User, on_delete=models.CASCADE)
     date = models.DateField(max_length=20, null=True)
     reply_on = models.ForeignKey(Hostel, on_delete=models.CASCADE, null=True)
+
+
+class Notifications(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    date = models.DateTimeField(auto_now_add=True)
+    Notification = models.CharField(max_length=1000)
+    is_seen = models.BooleanField(default=False)

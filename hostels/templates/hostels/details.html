@@ -16,15 +16,16 @@
   // Initialize and add the map
   function initMap() {
     // The location of Uluru
-    const uluru = { lat: -25.344, lng: 131.036 };
+    const uluru = { lat: {{hostel.lat}}, lng: {{hostel.lon}} };
     // The map, centered at Uluru
     const map = new google.maps.Map(document.getElementById("map"), {
-      zoom: 10,
+      zoom: 15,
       center: uluru,
     });
     // The marker, positioned at Uluru
     const marker = new google.maps.Marker({
       position: uluru,
+      title: "Manoram",
       map: map,
     });
   }
@@ -226,7 +227,7 @@
       </div>
 
 
-      <div class="container border shadow py-3 mt-4">
+      <div class="container border rounded shadow py-3 mt-4">
         <h4>Reviews</h4>
 
         <hr class='container p-0'>
@@ -254,7 +255,7 @@
                     <input required class='star-input' id="star4" type="radio" name='rate' value='4'><label for="star4"><i class='fas fa-star stars'></i></label>
                     <input required class='star-input' id="star5" type="radio" name='rate' value='5'><label for="star5"><i class='fas fa-star stars'></i></label>
                   </div>
-                  <textarea form="review-form" class='form-control' name="review" rows="5">Write your review...</textarea>
+                  <textarea form="review-form" class='form-control' name="review" rows="5" placeholder="Write a review..."></textarea>
                   <button type="submit" class="btn btn-primary btn-sm my-2">Post</button>
                 </form>
               </div>
@@ -265,96 +266,122 @@
         </div>
 
 
-        <script>
-          $(document).on("submit", "#review-form", function (e) {
-            e.preventDefault();
-            $.ajax({
-              type: 'POST',
-              url: '/hostels/review/{{hostel.id}}',
-              data: $('#review-form').serialize(),
-              success: function (response) {
-                console.log(response.message)
-                $('.message-alert').removeClass('alert-danger');
-                $('.message-alert').addClass('alert-success');
-                $('#alert-message').html("Posted Successfully!");
-                $('.message-alert').css("display", "block");
-                $('.message-alert').removeClass('alert-hide');
-                $('.message-alert').addClass('alert-show');
-                setTimeout(function () {
-                  $('.message-alert').addClass('alert-hide');
-                  $('.message-alert').removeClass('alert-show');
-                }, 5000) //alert fadeOut
-              },
-              error: function (e) {
-                alert("error")
-              }
-            })
-          })
-        </script>
-
-
-        {% if reviews %}
-        {% for r in reviews %}
+        <!-- Comments and Replies -->
+        {% if comments %}
+        {% for c,r in comments.items %}
         <div class="container d-flex py-3">
           <div class="commenter">
-            <div class="commenter-image rounded-circle mx-auto" style="background: url('/{{r.user.profile.image}}'); background-size: cover;"></div>
-            <p class='text-center'>{{r.user.first_name}}</p>
+            <div class="commenter-image rounded-circle mx-auto" style="background: url('/{{c.user.profile.image}}'); background-size: cover;"></div>
+            <p class='text-center'>{{c.user.first_name}}</p>
           </div>
           <div class="comment px-3 rounded mx-3 py-3">
             <div class="ratings d-flex text-warning">
-              {% if r.ratings == 5 %}
+              {% if c.ratings == 5 %}
               <i class='fas fa-star'></i>
               <i class='fas fa-star'></i>
               <i class='fas fa-star'></i>
               <i class='fas fa-star'></i>
               <i class='fas fa-star'></i>
               {% endif %}
-              {% if r.ratings == 4 %}
+              {% if c.ratings == 4 %}
               <i class='fas fa-star'></i>
               <i class='fas fa-star'></i>
               <i class='fas fa-star'></i>
               <i class='fas fa-star'></i>
               <i class='far fa-star'></i>
               {% endif %}
-              {% if r.ratings == 3 %}
+              {% if c.ratings == 3 %}
               <i class='fas fa-star'></i>
               <i class='fas fa-star'></i>
               <i class='fas fa-star'></i>
               <i class='far fa-star'></i>
               <i class='far fa-star'></i>
               {% endif %}
-              {% if r.ratings == 2 %}
+              {% if c.ratings == 2 %}
               <i class='fas fa-star'></i>
               <i class='fas fa-star'></i>
               <i class='far fa-star'></i>
               <i class='far fa-star'></i>
               <i class='far fa-star'></i>
               {% endif %}
-              {% if r.ratings == 1 %}
+              {% if c.ratings == 1 %}
               <i class='fas fa-star'></i>
               <i class='far fa-star'></i>
               <i class='far fa-star'></i>
               <i class='far fa-star'></i>
-              <i class='far fa-star'></i>              {% endif %}
+              <i class='far fa-star'></i>              
+              {% endif %}
             </div>
-            <p class='text-info mt-1 mb-0 r-date'>{{r.date}}</p>
+            <p class='text-info mt-1 mb-0 r-date'>{{c.date}}</p>
             <p class='m-0'>
-              {{r.comment}}
+              {{c.comment}}
             </p>
-
             <div class="d-flex p-0 mt-2 bg-light rounded">
-              <button class="btn btn-sm text-info" type="button" name="button"> <span> <i class='far fa-heart'></i> </span>Like</button>
-              <button class="btn btn-sm text-info" type="button" name="button"> <span> <i class='fas fa-reply-all'></i> </span>Reply</button>
+              <!-- <form id = 'like' action="" method = "POST">
+                {% csrf_token %}
+                <button class="btn btn-sm text-info" type="submit" name="button"> <span> <i class='far fa-heart'></i> </span>{{r.likes}}</button>
+              </form> -->
+              <!-- <button class="btn btn-sm text-info" type="button" name="button"> <span> <i class='fas fa-reply-all'></i> </span>Reply</button> -->
             </div>
+            {% for rep in r %}
+            <div class = 'reply'>
+                <div class ='bg-light rounded py-2 my-2 mt-2 px-3'>
+                  <div class = 'd-flex'>
+                    <div class ='reply-image rounded-circle' style="background: url('/{{rep.user.profile.image}}'); background-size: cover;"></div>
+                    <div class = 'd-block'>
+                      <small class = 'mx-2 d-block'>{{rep.user.first_name}} <br><small>{{rep.date}}</small></small>
+                      <p class = 'm-0 mx-2'>{{rep.reply}}</p>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            {% endfor %}
+
+            <form action="/hostels/reply/{{c.id}}" id ='reply' method="POST">
+              {% csrf_token %}
+              <div class = 'd-flex'>
+                <input type="text" name = 'repl' class ='form-control mt-2 mr-2' >
+                <button class = 'btn btn-sm p-0 btn-outline-info mt-2 px-3' type="submit">Reply</button>
+              </div>
+            </form>
           </div>
         </div>
-        <hr class='container p-0'>
-
         {% endfor %}
+        <!-- Comments and Replies -->
+
+        <hr class='container p-0'>
         {% else %}
         <p class='d-block text-center my-4 py-5'>No reviews yet ;(</p>
         {% endif %}
       </div>
+
+      <script>
+        // Post Comment
+        $(document).on("submit", "#review-form", function (e) {
+          e.preventDefault();
+          $.ajax({
+            type: 'POST',
+            url: '/hostels/review/{{hostel.id}}',
+            data: $('#review-form').serialize(),
+            success: function (response) {
+              console.log(response.message)
+              $('.message-alert').removeClass('alert-danger');
+              $('.message-alert').addClass('alert-success');
+              $('#alert-message').html("Posted Successfully!");
+              $('.message-alert').css("display", "block");
+              $('.message-alert').removeClass('alert-hide');
+              $('.message-alert').addClass('alert-show');
+              setTimeout(function () {
+                $('.message-alert').addClass('alert-hide');
+                $('.message-alert').removeClass('alert-show');
+              }, 5000) //alert fadeOut
+            },
+            error: function (e) {
+              alert("error")
+            }
+          })
+        })
+      </script>
 
       <div class="container border rouded shadow mt-4 p-0">
         <div class="p-0" id='map'>

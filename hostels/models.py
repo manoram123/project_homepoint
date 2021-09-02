@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.fields.related import ForeignKey
+from django.utils import tree
 
 
 class Services(models.Model):
@@ -23,6 +24,8 @@ class Hostel(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     title = models.CharField(max_length=200)
     address = models.CharField(max_length=200)
+    lat = models.FloatField(null=True)
+    lon = models.FloatField(null=True)
     price = models.IntegerField()
     services = models.ForeignKey(Services, on_delete=models.CASCADE, null=True)
     rules = models.ForeignKey(Rules, on_delete=models.CASCADE, null=True)

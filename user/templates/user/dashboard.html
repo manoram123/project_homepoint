@@ -53,7 +53,7 @@
                 {% endif %}
                 <a href = '/hostels/edithostel/{{a.activity.id}}' class = 'btn btn-secondary btn-sm my-1' type="button" name="button">Edit <i class='fas fa-pen'></i> </a>
                 <button class = 'btn btn-info btn-sm my-1' type="button" name="button">View <i class='fas fa-eye'></i> </button>
-                <button class = 'btn btn-danger btn-sm' type="button" name="button">Remove <i class='fas fa-trash'></i> </button>
+                <a href="/hostels/deleteHostel/{{a.id}}" class = 'btn btn-danger btn-sm' type="button" name="button">Remove <i class='fas fa-trash'></i> </a>
               </div>
             </div>
             {% endfor %}
