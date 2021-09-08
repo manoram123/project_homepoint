@@ -12,50 +12,31 @@
               <h5 class = 'my-2'>Your Listed Properties</h5><span class = 'py-2'><i class='fas fa-list-alt mx-2'></i></span>
             </div>
 
-
+            {% if activity %}
+            {% for a in activity %}
+            {% if a.activity_type == "listing" %}
             <div class="activity-card my-3 py-4 mx-auto row container bg-light border rounded">
-              <div class="prop-img rounded col-md-4 col-sm-4 mx-auto" style="background: url('hotel.jpg');background-position: center; background-size: cover; background-repeat: no-repeat;"></div>
+              <div class="prop-img rounded col-md-4 col-sm-4 mx-auto" style="background: url('/{{a.activity.image1}}');background-position: center; background-size: cover; background-repeat: no-repeat;"></div>
               <div class="prop-info text-secondary col-md-8 col-sm-8">
-                <p class = 'prop-title mx-md-0 mx-auto m-0'>Sumishan Hotel and Lodge Boarding Sevice/Free Wifi/Breakfast/Summer Offer</p>
-                <small class='m-0 d-block prop-type'><i class="fas fa-ad text-dark mx-1"></i>Hotel</small>
-                <small class='m-0 d-block'>From Rs. 1,400</small>
-                <small class='m-0 d-block'>Listed on 27 Jul, 2021</small>
+                <p class = 'prop-title mx-md-0 mx-auto m-0'>{{a.activity.title}}</p>
+                <small class='m-0 d-block prop-type'><i class="fas fa-warehouse mr-2"></i>{{a.property_type}}</small>
+                <small class='m-0 d-block'>From Rs. {{a.activity.price}}</small>
+                <small class='m-0 d-block'>Listed on {{a.date}}</small>
+                {% if not availability %}
                 <small class='m-0 d-block status'><i class="fas fa-circle text-success mx-1"></i>Available</small>
-                <button class = 'btn btn-secondary btn-sm my-1' type="button" name="button">Edit <i class='fas fa-pen'></i> </button>
-                <button class = 'btn btn-info btn-sm my-1' type="button" name="button">View <i class='fas fa-eye'></i> </button>
-                <button class = 'btn btn-danger btn-sm' type="button" name="button">Remove <i class='fas fa-trash'></i> </button>
+                {% else %}
+                <small class='m-0 d-block status'><i class="fas fa-check-square text-success mx-1"></i>Full</small>
+                {% endif %}
+                <a href = '/hostels/edithostel/{{a.activity.id}}' class = 'btn btn-secondary btn-sm my-1' type="button" name="button">Edit <i class='fas fa-pen'></i> </a>
+                <a class = 'btn btn-info btn-sm my-1' href = '/hostels/details/{{a.activity.id}}' type="button" name="button">View <i class='fas fa-eye'></i> </a>
+                <a href="/hostels/deleteHostel/{{a.id}}" class = 'btn btn-danger btn-sm' type="button" name="button">Remove <i class='fas fa-trash'></i> </a>
               </div>
             </div>
-
-            <div class="activity-card my-3 py-4 mx-auto row container bg-light border rounded">
-              <div class="prop-img rounded col-md-4 col-sm-4 mx-auto" style="background: url('hotel.jpg');background-position: center; background-size: cover; background-repeat: no-repeat;"></div>
-              <div class="prop-info text-secondary col-md-8 col-sm-8">
-                <p class = 'prop-title mx-md-0 mx-auto m-0'>Sumishan Hotel and Lodge Boarding Sevice/Free Wifi/Breakfast/Summer Offer</p>
-                <small class='m-0 d-block prop-type'><i class="fas fa-ad text-dark mx-1"></i>Hotel</small>
-                <small class='m-0 d-block'>From Rs. 1,400</small>
-                <small class='m-0 d-block'>Listed on 27 Jul, 2021</small>
-                <small class='m-0 d-block status'><i class="fas fa-circle text-success mx-1"></i>Available</small>
-                <button class = 'btn btn-secondary btn-sm my-1' type="button" name="button">Edit <i class='fas fa-pen'></i> </button>
-                <button class = 'btn btn-info btn-sm my-1' type="button" name="button">View <i class='fas fa-eye'></i> </button>
-                <button class = 'btn btn-danger btn-sm' type="button" name="button">Remove <i class='fas fa-trash'></i> </button>
-              </div>
-            </div>
-
-            <div class="activity-card my-3 py-4 mx-auto row container bg-light border rounded">
-              <div class="prop-img rounded col-md-4 col-sm-4 mx-auto" style="background: url('hotel.jpg');background-position: center; background-size: cover; background-repeat: no-repeat;"></div>
-              <div class="prop-info text-secondary col-md-8 col-sm-8">
-                <p class = 'prop-title mx-md-0 mx-auto m-0'>Sumishan Hotel and Lodge Boarding Sevice/Free Wifi/Breakfast/Summer Offer</p>
-                <small class='m-0 d-block prop-type'><i class="fas fa-ad text-dark mx-1"></i>Hotel</small>
-                <small class='m-0 d-block'>From Rs. 1,400</small>
-                <small class='m-0 d-block'>Listed on 27 Jul, 2021</small>
-                <small class='m-0 d-block status'><i class="fas fa-circle text-success mx-1"></i>Available</small>
-                <button class = 'btn btn-secondary btn-sm my-1' type="button" name="button">Edit <i class='fas fa-pen'></i> </button>
-                <button class = 'btn btn-info btn-sm my-1' type="button" name="button">View <i class='fas fa-eye'></i> </button>
-                <button class = 'btn btn-danger btn-sm' type="button" name="button">Remove <i class='fas fa-trash'></i> </button>
-              </div>
-            </div>
-
-
+            {% endif %}
+            {% endfor %}
+            {% else %}
+            <p class = 'text-muted d-block text-center mt-5 pt-5 mb-5 pb-5'>There is nothing to show here ;(</p>
+            {% endif %}
           </div>
           <hr>
         </div>

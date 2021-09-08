@@ -4,7 +4,6 @@ from django.db.models.base import Model
 from hostels.models import Hostel
 from django.contrib.auth.models import User
 from accounts.models import Profile
-
 # Create your models here.
 
 
@@ -17,6 +16,9 @@ class Activity(models.Model):
 
 
 class ChatRoom(models.Model):
+    hostel = models.ForeignKey(Hostel, on_delete=models.CASCADE, null=True)
+    # home = models.ForeignKey(Home, on_delete=models.CASCADE)
+    # property = models.ForeignKey(Hostel, on_delete=models.CASCADE)
     person_1 = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True)
     person_2 = models.ForeignKey(User, on_delete=models.CASCADE)
 
@@ -34,3 +36,5 @@ class Notifications(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     Notification = models.CharField(max_length=1000)
     is_seen = models.BooleanField(default=False)
+    notification_user = models.ForeignKey(
+        Profile, on_delete=models.CASCADE, null=True)

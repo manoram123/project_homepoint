@@ -75,8 +75,6 @@
                 }
                 title = title.slice(0, -2)
                 if (marker !== undefined) marker.remove()
-                console.log(data)
-                // var title = data["all"][1]["textContent"]
 
                 map.panTo(e.latlng);
                 marker = L.marker(e.latlng).addTo(map)

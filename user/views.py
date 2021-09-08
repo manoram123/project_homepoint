@@ -3,13 +3,14 @@ from django.http.response import JsonResponse
 from django.contrib.auth.decorators import login_required
 
 from accounts.models import Profile
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from user.models import Activity, Message
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 from user.models import ChatRoom
 from datetime import date
 from hostels.models import Hostel
+import PIL
 # Create your views here.
 
 
@@ -25,8 +26,22 @@ def user_dashboard(request):
 
 @login_required
 def listings(request):
+    activity = Activity.objects.filter(user_id=request.user.id)
+    context = {
+        'activity': activity,
+        'activate_listings': 'int-item-active'
+    }
+    return render(request, 'user/listings.html', context)
 
-    return render(request, 'user/listings.html')
+
+@login_required
+def bookings(request):
+    activity = Activity.objects.filter(user_id=request.user.id)
+    context = {
+        'activity': activity,
+        'activate_bookings': 'int-item-active'
+    }
+    return render(request, 'user/rentals.html', context)
 
 
 @login_required
@@ -36,7 +51,6 @@ def profile(request):
     if request.method == 'POST':
         if "update_pic" in request.POST:
             image = request.FILES.get('profile_p')
-            print(image)
             profile.image = image
             profile.save()
     context = {
@@ -51,7 +65,7 @@ def profile(request):
 def inbox(request):
     last_msg = ""
     room = {}
-    Room2 = ChatRoom.objects.filter(person_2=request.user.id)
+    Room2 = ChatRoom.objects.filter(person_2_id=request.user.id)
     for r in Room2:
         messages = Message.objects.filter(room_id=r.id)
         room[r] = messages
@@ -68,7 +82,8 @@ def inbox(request):
 def inbox_buying(request):
     last_msg = ""
     room = {}
-    Room1 = ChatRoom.objects.filter(person_1=request.user.id)
+    Room1 = ChatRoom.objects.filter(person_1_id=request.user.profile.id)
+    print(Room1)
     for r in Room1:
         messages = Message.objects.filter(room_id=r.id)
         room[r] = messages
@@ -95,8 +110,9 @@ def chat(request, property_id, contact_id):
             room = ChatRoom.objects.get(
                 id=chat_room_id)
         except Exception as e:
-            create_room = ChatRoom.objects.create(
-                id=chat_room_id, person_1=request.user.profile, person_2=receiver)
+            if replied_on.user.id != request.user.id:
+                create_room = ChatRoom.objects.create(
+                    id=chat_room_id, person_1=request.user.profile, person_2=receiver, hostel=replied_on)
     if request.method == 'POST':
         data = request.POST
         message = data['message']
@@ -147,3 +163,9 @@ def listing_options(request):
 @login_required
 def rate(request, property_id):
     pass
+
+
+def delete_hostel(request, id):
+    property = Hostel.objects.get(id=id)
+    property.delete()
+    return redirect('/user/dashboard')

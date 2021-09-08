@@ -1,4 +1,5 @@
 import re
+from django.contrib.auth.decorators import login_required
 from user.models import Activity, Notifications
 from django.http import JsonResponse
 from typing import runtime_checkable
@@ -6,7 +7,7 @@ from django.shortcuts import redirect, render
 from .models import Hostel
 from django.contrib import messages
 from datetime import date
-from hostels.models import Services, Rules
+from hostels.models import Services, Rules, HostelBooking
 from home.models import Ratings, Replies
 # Create your views here.
 
@@ -80,12 +81,6 @@ def list_hostel(request):
             return redirect('/user/dashboard')
 
     return render(request, 'hostels/hostelform.html')
-
-
-def deleteHosel(request, pk):
-    hostel = Hostel.objects.get(id=pk)
-    hostel.delete()
-    return redirect('/user/dashboard/')
 
 
 def edit_hostel(request, id):
@@ -199,7 +194,7 @@ def hostels(request):
 def details(request, id):
     user = request.user
     hostel = Hostel.objects.get(id=id)
-    reviews = Ratings.objects.filter(hostel=hostel).order_by('date')
+    reviews = Ratings.objects.filter(hostel=hostel).order_by('-date')
     comments = {}
     for r in reviews:
         replies = Replies.objects.filter(comment_id=r.id)
@@ -221,15 +216,15 @@ def post_review_hostel(request, property_id):
     review = ""
     if request.method == 'POST':
         data = request.POST
-        print(data)
         stars = data.get('rate')
         review = data.get('review')
         date_now = date.today().strftime("%Y-%m-%d")
         post = Ratings.objects.create(
             user=request.user, hostel=hostel, ratings=stars, comment=review, date=date_now)
         post.save()
-        notification = Notifications.objects.create(
-            user=hostel.user, date=date_now, Notification=request.user.first_name + " posted a review in your property")
+        if hostel.user.id != request.user.id:
+            notification = Notifications.objects.create(
+                user=hostel.user, date=date_now, Notification=request.user.first_name + " posted a review in your property.")
     return JsonResponse({'message': review})
 
 
@@ -239,9 +234,31 @@ def reply_comment(request, comment_id):
     if request.method == "POST":
         data = request.POST
         reply = data.get('repl')
-        print(reply)
         s = Replies.objects.create(
             user=request.user, comment=comment, reply=reply, date=date_now)
         s.save()
 
     return JsonResponse({'message': 'posted'})
+
+
+@login_required
+def book_hostel(request, hostel_id):
+    if request.method == 'POST':
+        # booking_activity = Activity.objects.get(hostel_id=hostel_id
+        # print(booking_activity)
+        data = request.POST
+        user = request.user
+        hostel = Hostel.objects.get(id=hostel_id)
+        duration = data.get('duration')
+        adult = data.get('adult')
+        child = data.get('child')
+        member = adult + child
+        date_now = date.today().strftime("%Y-%m-%d")
+        save = HostelBooking.objects.create(
+            user=user, hostel=hostel, duration=duration, adult=adult, child=child, member=member, date=date_now)
+        save.save()
+        if save:
+            activity = Activity.objects.create(user=request.user,
+                                               activity=hostel, activity_type="booking", property_type="Hostel", date=date_now)
+            activity.save()
+    return JsonResponse({'message': "damn"})

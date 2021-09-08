@@ -1,40 +1,101 @@
-    <nav class="navbar navbar-expand-lg navbar-light border bg-light">
-      <!-- logo -->
-      <div class="logo d-flex">
-        <div class="icon mt-2">
-          <i class = 'fas fa-home'></i>
-        </div>
-        <div class="split bg-dark mt-3 mx-3"></div>
-        <div class="title">
-          <p class = 'mt-2'>Home<span>Point</span></p>
-        </div>
-      </div>
-      <!-- logo -->
-      <button class="fas fa-bars d-block d-md-none" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav mx-auto">
-            <a class="nav-item nav-link {{active_home}}" href="/">Home</a>
-          <a class="nav-item nav-link {{activate_hostel}}" href="/hostels/hostels">Hostels</a>
-          <a class="nav-item nav-link" href="#">Flats</a>
-          <a class="nav-item nav-link" href="#">Hotels</a>
-          <a class="nav-item nav-link" href="#">Rooms</a>
-          <a class="nav-item nav-link" href="#">Contacts</a>
-          <a class="nav-item nav-link" href="#">Teams</a>
-        </div>
-        <hr>
-        <div class="navbar-nav ml-auto">
-          <div class="d-flex">
-            <button onclick = "dark()" class = 'btn fas fa-moon text-secondary' type="button" name="button"></button>
-          {% if request.user.is_authenticated %}
-            <a href="" class = 'btn text-secondary'><i class = 'fas fa-bell'></i></a>
-            <a href = '/user/dashboard' class="profile-image rounded-circle mt-1 mx-2" style = "background:url('/{{request.user.profile.image}}'); background-size:cover"></a>
-            <a class = 'btn btn-outline-dark rounded mx-2 mr-5' href="/accounts/logout">Logout</a>
-          {% else %}
-            <a class = 'nav-link' href="/accounts/login">Login</a>
-            <a class = 'btn btn-primary rounded mx-5' href="/accounts/register">Sign Up</a>
-          {% endif %}
+<nav class="navbar navbar-expand-lg navbar-light border bg-light">
+  <!-- logo -->
+  <div class="logo d-flex">
+    <div class="icon mt-2">
+      <i class='fas fa-home'></i>
+    </div>
+    <div class="split bg-dark mt-3 mx-3"></div>
+    <div class="title">
+      <p class='mt-2'>Home<span>Point</span></p>
+    </div>
+  </div>
+  <!-- logo -->
+  <button class="fas fa-bars d-block d-md-none" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav mx-auto">
+      <a class="nav-item nav-link {{active_home}}" href="/">Home</a>
+      <a class="nav-item nav-link {{activate_hostel}}" href="/hostels/hostels">Hostels</a>
+      <a class="nav-item nav-link" href="#">Flats</a>
+      <a class="nav-item nav-link" href="#">Hotels</a>
+      <a class="nav-item nav-link" href="#">Rooms</a>
+      <a class="nav-item nav-link" href="#">Contacts</a>
+      <a class="nav-item nav-link" href="#">Teams</a>
+    </div>
+    <hr>
+    <div class="navbar-nav ml-auto">
+      <div class="">
+        {% if request.user.is_authenticated %}
+        <div class = 'd-flex'>
+          <button onclick="dark()" class='btn fas fa-moon text-secondary' type="button" name="button"></button>
+
+          <div id="notifi" class = ''>
+            <button class="btn notifiction_btn "><i class="fas fa-bell"></i> <span class="">0</span> </button>
+  
+              <!-- <button class='btn text-secondary d-flex m-0' id="drop-btn">
+                <i class='fas fa-bell'></i><span class = 'not-count bg-danger d-block p-2 text-center rounded-circle text-light'>0</span></button> -->
           </div>
+          <a href='/user/dashboard' class="profile-image rounded-circle mt-1 mx-2" style="background:url('/{{request.user.profile.image}}'); background-size:cover"></a>
+          <a class='btn btn-outline-dark rounded mx-2 mr-5' href="/accounts/logout">Logout</a>
         </div>
+        <div class = 'n-box  border shadow rounded bg-light mt-2'>
+        </div>
+        <script>
+          document.querySelector('.notifiction_btn').onclick = function(){
+            console.log('ajddsna');
+            document.querySelector('.n-box').classList.toggle('n-box-toggle');
+          }
+        </script>
+
+        {% else %}
+        <div class ='d-flex'>
+          <a class='nav-link' href="/accounts/login">Login</a>
+          <a class='btn btn-primary rounded mx-5' href="/accounts/register">Sign Up</a>
+        </div>
+        {% endif %}
       </div>
-    </nav>
+    </div>
+  </div>
+
+  <script>
+        $(document).ready(function(){
+            $.ajax({
+                type: 'GET',
+                url: "/notifications/",
+                dataType: "json",
+                success: function (data) {
+                  // var _notifications = JSON.parse(data.notifications)
+                  // for(i=0; i<_notifications.length; i++ ){
+                  //   n = _notifications[i].fields.Notification
+                  //   console.log(_notifications[i].fields.Notification)
+                  //   line = ``
+                  //   line += `<div class = 'd-flex'>`
+                  //   line += `<div class="mt-2 mx-2 n-image rounded-circle" style = "background: url('/{{n.profile.image}}'); background-size:cover;"></div>`
+                  //   line += `<p class = 'px-2 py-1 mt-2 n-text text-secondary'>`+ n + `</p>`
+                  //   line += `</div>`
+                  //   $('.n-box').append(line)
+                  // }
+                  d = data.notifications
+                  // for(i=0; i<d.length; i++){
+                  //     console.log(d[i][2])
+                  //     notification = d[i][0]
+                  //     image = d[i][2]
+                  //     line = ``
+                  //     line += `<div class = 'd-flex pt-2'>`
+                  //     // line += `<div class="mt-2 mx-2 n-image rounded-circle" style = "background: url("`+d[i][2]+`"); background-size:cover;"></div>`
+                  //     line += `<small>` + d[i][1] + `</small>`
+                  //     line += `<p class = 'px-4 py-1 mt-2 n-text text-secondary'>`+ notification + `</p>`
+                  //     line += `</div>`
+                  //     $('.n-box').append(line)
+                  //   console.log("   ")
+
+                  // }
+                    
+                },
+                error: function (error) {
+                    alert('error')
+                }
+            })
+        })   
+  </script>
+</nav>

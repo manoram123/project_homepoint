@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, update_last_login
 from django.db.models.fields.related import ForeignKey
 from django.utils import tree
 
@@ -39,3 +39,14 @@ class Hostel(models.Model):
     image5 = models.FileField(upload_to='static/uploads')
     image6 = models.FileField(upload_to='static/uploads')
     rating = models.IntegerField(null=True)
+
+
+class HostelBooking(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    hostel = models.ForeignKey(Hostel, on_delete=models.CASCADE)
+    date = models.DateTimeField(auto_now_add=True)
+    member = models.PositiveIntegerField()
+    adult = models.PositiveIntegerField(null=True)
+    child = models.PositiveIntegerField(null=True)
+    is_paid = models.BooleanField(default=False, null=True)
+    duration = models.IntegerField(null=True)

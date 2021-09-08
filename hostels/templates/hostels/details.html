@@ -16,18 +16,23 @@
   // Initialize and add the map
   function initMap() {
     // The location of Uluru
-    const uluru = { lat: {{hostel.lat}}, lng: {{hostel.lon}} };
-    // The map, centered at Uluru
-    const map = new google.maps.Map(document.getElementById("map"), {
-      zoom: 15,
-      center: uluru,
-    });
-    // The marker, positioned at Uluru
-    const marker = new google.maps.Marker({
-      position: uluru,
-      title: "Manoram",
-      map: map,
-    });
+    ltd = {{hostel.lat}}
+    lgt = {{hostel.lon}}
+    const uluru = {
+      lat: ltd,
+      lng: lgt
+    }
+  // The map, centered at Uluru
+  const map = new google.maps.Map(document.getElementById("map"), {
+    zoom: 15,
+    center: uluru,
+  });
+  // The marker, positioned at Uluru
+  const marker = new google.maps.Marker({
+    position: uluru,
+    title: "Manoram",
+    map: map,
+  });
   }
 </script>
 <div class="main" id='m' style='color: #666666;'>
@@ -309,7 +314,7 @@
               <i class='far fa-star'></i>
               <i class='far fa-star'></i>
               <i class='far fa-star'></i>
-              <i class='far fa-star'></i>              
+              <i class='far fa-star'></i>
               {% endif %}
             </div>
             <p class='text-info mt-1 mb-0 r-date'>{{c.date}}</p>
@@ -324,24 +329,24 @@
               <!-- <button class="btn btn-sm text-info" type="button" name="button"> <span> <i class='fas fa-reply-all'></i> </span>Reply</button> -->
             </div>
             {% for rep in r %}
-            <div class = 'reply'>
-                <div class ='bg-light rounded py-2 my-2 mt-2 px-3'>
-                  <div class = 'd-flex'>
-                    <div class ='reply-image rounded-circle' style="background: url('/{{rep.user.profile.image}}'); background-size: cover;"></div>
-                    <div class = 'd-block'>
-                      <small class = 'mx-2 d-block'>{{rep.user.first_name}} <br><small>{{rep.date}}</small></small>
-                      <p class = 'm-0 mx-2'>{{rep.reply}}</p>
-                    </div>
+            <div class='reply'>
+              <div class='bg-light rounded py-2 my-2 mt-2 px-3'>
+                <div class='d-flex'>
+                  <div class='reply-image rounded-circle' style="background: url('/{{rep.user.profile.image}}'); background-size: cover;"></div>
+                  <div class='d-block'>
+                    <small class='mx-2 d-block'>{{rep.user.first_name}} <br><small>{{rep.date}}</small></small>
+                    <p class='m-0 mx-2'>{{rep.reply}}</p>
                   </div>
                 </div>
+              </div>
             </div>
             {% endfor %}
 
-            <form action="/hostels/reply/{{c.id}}" id ='reply' method="POST">
+            <form action="/hostels/reply/{{c.id}}" id='reply' method="POST">
               {% csrf_token %}
-              <div class = 'd-flex'>
-                <input type="text" name = 'repl' class ='form-control mt-2 mr-2' >
-                <button class = 'btn btn-sm p-0 btn-outline-info mt-2 px-3' type="submit">Reply</button>
+              <div class='d-flex'>
+                <input type="text" name='repl' class='form-control mt-2 mr-2'>
+                <button class='btn btn-sm p-0 btn-outline-info mt-2 px-3' type="submit">Reply</button>
               </div>
             </form>
           </div>
@@ -441,27 +446,30 @@
             <p class='m-0'>From</p>
             <h6>Rs. {{hostel.price}}/month</h6>
           </div>
-
+          
+          {% if hostel.user.id != request.user.id %}
           <div class="jumbotron py-2 booking rounded">
-            <form class="booking-form" action="index.html" method="post">
+            <form id="bookingForm" class="booking-form" action="" method="post">
+              {% csrf_token %}
               <p class='m-0'>Living Duration</p>
               <div class="container d-flex mx-auto p-0">
-                <input id='due' class='form-control form-control-sm' type="number" name="" value="" placeholder="">
+                <input id='due' class='form-control form-control-sm' type="number" name="duration" value="" placeholder="">
                 <p class='mt-1 mx-2'>Months</p>
               </div>
               <p class='m-0'>People</p>
               <div class="d-flex">
-                <input id='due' class='form-control form-control-sm' type="number" name="" value="" placeholder="">
+                <input id='adult' class='form-control form-control-sm' type="number" name="adult" value="" placeholder="">
                 <p class='mt-1 mx-2'>Adults</p>
-                <input id='due' class='form-control form-control-sm' type="number" name="" value="" placeholder="">
+                <input id='child' class='form-control form-control-sm' type="number" name="child" value="" placeholder="">
                 <p class='mt-1 mx-2'>Child</p>
               </div>
               <p>Total Guests: </p>
-              <button class='btn btn-outline-primary my-2 btn-sm btn-block' type="button" name="button">Book Now</button>
+              <button class='btn btn-outline-primary my-2 btn-sm btn-block' type="submit" name="button">Book Now</button>
             </form>
           </div>
           <div class='px-3'>
             <a href='/user/chat/{{hostel.id}}/{{hostel.user.id}}' class='btn btn-outline-success btn-sm btn-block' type="button" name="button">Talk To Owner</a>
+            {% endif %}
           </div>
         </div>
       </div>
@@ -469,6 +477,26 @@
   </div>
 
 </div>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQR0S44XL7N7c1tGrXW92_MLzg7fLf5jw&callback=initMap&libraries=&v=weekly" async></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQR0S44XL7N7c1tGrXW92_MLzg7fLf5jw&callback=initMap&libraries=&v=weekly"
+ async></script>
+ <script>
+   $(document).ready(function(){
+     $('#bookingForm').on('submit', function(e){
+        e.preventDefault()
+       $.ajax({
+         method: 'POST',
+         url: '/hostels/bookinghostel/{{hostel.id}}',
+         dataType: 'json',
+         data: $('#bookingForm').serialize(),
+         success: function(data){
+           alert(data.message)
+         },
+         error: function(data){
+           alert('error')
+         }
+       })
+     })
+   })
+ </script>
 {% include 'footer.html' %}
 {% endblock %}

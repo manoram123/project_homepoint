@@ -329,3 +329,41 @@ nav .fa-bars {
 .stars {
   color: #a8a8a8;
 }
+
+.not-count {
+  height: 1.5ch;
+  width: 1.5ch;
+  font-size: 0.8em;
+  position: absolute;
+  top: 2ch;
+}
+
+.dropdown-menu {
+  height: 20ch;
+  width: 20ch;
+  top: 5ch;
+  right: 20ch;
+}
+
+.n-box {
+  display: none;
+  position: absolute;
+  height: 25ch;
+  width: 35ch;
+  right: 15ch;
+  z-index: 9999;
+  transition: 0.5s ease-in-out;
+}
+.n-box-toggle {
+  display: block;
+}
+
+.n-image {
+  height: 4ch;
+  width: 4ch;
+}
+
+.n-text {
+  width: 85%;
+  line-height: 1em;
+}

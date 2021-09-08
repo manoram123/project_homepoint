@@ -133,3 +133,10 @@
   background: #ebebeb;
   font-size: 0.8em;
 }
+.notifiction_box {
+  /* position: absolute; */
+  z-index: 999;
+  height: 100vh;
+  width: 50vh;
+  background: red;
+}
