@@ -44,7 +44,7 @@ class Hostel(models.Model):
 class HostelBooking(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     hostel = models.ForeignKey(Hostel, on_delete=models.CASCADE)
-    date = models.DateTimeField(auto_now_add=True)
+    date = models.DateField()
     member = models.PositiveIntegerField()
     adult = models.PositiveIntegerField(null=True)
     child = models.PositiveIntegerField(null=True)

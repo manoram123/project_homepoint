@@ -43,90 +43,166 @@
             </div>
             {% if activity %}
             {% for a in activity %}
-            <div class="activity-card my-3 py-4 mx-auto row container bg-light border rounded">
-              <div class="prop-img rounded col-md-4 col-sm-4 mx-auto" style="background: url('/{{a.activity.image1}}');background-position: center; background-size: cover; background-repeat: no-repeat;"></div>
-              <div class="prop-info text-secondary col-md-8 col-sm-8">
-                <p class = 'prop-title mx-md-0 mx-auto m-0'>{{a.activity.title}}</p>
-                <small class='m-0 d-block prop-type'><i class="fas fa-warehouse mr-2"></i>{{a.property_type}}</small>
-                <small class='m-0 d-block'>From Rs. {{a.activity.price}}</small>
-                {% if a.activity_type == "listing" %}
-                <small class='m-0 d-block'>Listed on {{a.date}}</small>
-                {% else %}
-                <small class='m-0 d-block'>Booked on {{a.date}}</small>
-                {% endif %}
-                {% if not availability %}
-                <small class='m-0 d-block status'><i class="fas fa-circle text-success mx-1"></i>Available</small>
-                {% else %}
-                <small class='m-0 d-block status'><i class="fas fa-check-square text-success mx-1"></i>Full</small>
-                {% endif %}
-                <a href = '/hostels/edithostel/{{a.activity.id}}' class = 'btn btn-dark btn-sm my-1' type="button" name="button">Edit <i class='fas fa-pen'></i> </a>
-                <a class = 'btn btn-info btn-sm my-1' href = '/hostels/details/{{a.activity.id}}' type="button" name="button">View <i class='fas fa-eye'></i> </a>
-                {% if a.activity_type == "listing" %}
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal">
-                  Remove
-                </button>
-
-                <!-- Modal -->
-                <div class="modal fade" id="exampleModal" tabindex="1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                  <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Delete Listing</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                      <div class="modal-body">
-                        Are you sure want to delete this listing?
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
-                        <a href="/user/delete-hostel/{{a.activity.id}}" type="button" class="btn btn-danger btn-sm">Confirm</a>
+              {% if a.activity %}
+              <div class="activity-card my-3 py-4 mx-auto row container bg-light border rounded">
+                <div class="prop-img rounded col-md-4 col-sm-4 mx-auto" style="background: url('/{{a.activity.image1}}');background-position: center; background-size: cover; background-repeat: no-repeat;"></div>
+                <div class="prop-info text-secondary col-md-8 col-sm-8">
+                  <p class = 'prop-title mx-md-0 mx-auto m-0'>{{a.activity.title}}</p>
+                  <small class='m-0 d-block prop-type'><i class="fas fa-warehouse mr-2"></i>{{a.property_type}}</small>
+                  <small class='m-0 d-block'>From Rs. {{a.activity.price}}</small>
+                  {% if a.activity_type == "listing" %}
+                  <small class='m-0 d-block'>Listed on {{a.date}}</small>
+                  {% else %}
+                  <small class='m-0 d-block'>Booked on {{a.date}}</small>
+                  {% endif %}
+                  {% if not availability %}
+                  <small class='m-0 d-block status'><i class="fas fa-circle text-success mx-1"></i>Available</small>
+                  {% else %}
+                  <small class='m-0 d-block status'><i class="fas fa-check-square text-success mx-1"></i>Full</small>
+                  {% endif %}
+                  {% if a.activity_type == "listing" %}
+                  <a href = '/hostels/edithostel/{{a.activity.id}}' class = 'btn btn-dark btn-sm my-1' type="button" name="button">Edit <i class='fas fa-pen'></i> </a>
+                  {% endif %}
+                  <a class = 'btn btn-info btn-sm my-1' href = '/hostels/details/{{a.activity.id}}' type="button" name="button">View <i class='fas fa-eye'></i> </a>
+                  {% if a.activity_type == "listing" %}
+                  <!-- Button trigger modal -->
+                  <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal">
+                    Remove
+                  </button>
+  
+                  <!-- Modal -->
+                  <div class="modal fade" id="exampleModal" tabindex="1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Delete Listing</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          Are you sure want to delete this listing?
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+                          <a href="/user/delete-hostel/{{a.activity.id}}" type="button" class="btn btn-danger btn-sm">Confirm</a>
+                        </div>
                       </div>
                     </div>
                   </div>
+                  {% else %}
+                  <a href="" class = 'btn btn-warning btn-sm text-light' type="button" name="button">Cancel <i class='fas fa-times'></i> </a>
+                  {% endif %}
                 </div>
-                {% else %}
-                <a href="" class = 'btn btn-warning btn-sm text-light' type="button" name="button">Cancel <i class='fas fa-times'></i> </a>
-                {% endif %}
               </div>
-            </div>
+              {% elif a.activity_home %}
+              <div class="activity-card my-3 py-4 mx-auto row container bg-light border rounded">
+                <div class="prop-img rounded col-md-4 col-sm-4 mx-auto" style="background: url('/{{a.activity_home.image1}}');background-position: center; background-size: cover; background-repeat: no-repeat;"></div>
+                <div class="prop-info text-secondary col-md-8 col-sm-8">
+                  <p class = 'prop-title mx-md-0 mx-auto m-0'>{{a.activity_home.title}}</p>
+                  <small class='m-0 d-block prop-type'><i class="fas fa-warehouse mr-2"></i>{{a.property_type}}</small>
+                  <small class='m-0 d-block'>From Rs. {{a.activity_home.price}}</small>
+                  {% if a.activity_type == "listing" %}
+                  <small class='m-0 d-block'>Listed on {{a.date}}</small>
+                  {% else %}
+                  <small class='m-0 d-block'>Booked on {{a.date}}</small>
+                  {% endif %}
+                  {% if not availability %}
+                  <small class='m-0 d-block status'><i class="fas fa-circle text-success mx-1"></i>Available</small>
+                  {% else %}
+                  <small class='m-0 d-block status'><i class="fas fa-check-square text-success mx-1"></i>Full</small>
+                  {% endif %}
+                  {% if a.activity_type == "listing" %}
+                  <a href = '/house/edithome/{{a.activity_home.id}}' class = 'btn btn-dark btn-sm my-1' type="button" name="button">Edit <i class='fas fa-pen'></i> </a>
+                  {% endif %}
+                  <a class = 'btn btn-info btn-sm my-1' href = '/house/details/{{a.activity_home.id}}' type="button" name="button">View <i class='fas fa-eye'></i> </a>
+                  {% if a.activity_type == "listing" %}
+                  <!-- Button trigger modal -->
+                  <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal">
+                    Remove
+                  </button>
+  
+                  <!-- Modal -->
+                  <div class="modal fade" id="exampleModal" tabindex="1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Delete Listing</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          Are you sure want to delete this listing?
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+                          <a href="/user/delete-home/{{a.activity_home.id}}" type="button" class="btn btn-danger btn-sm">Confirm</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  {% else %}
+                  <a href="" class = 'btn btn-warning btn-sm text-light' type="button" name="button">Cancel <i class='fas fa-times'></i> </a>
+                  {% endif %}
+                </div>
+              </div>
+              {% elif a.activity_hotel %}
+              <div class="activity-card my-3 py-4 mx-auto row container bg-light border rounded">
+                <div class="prop-img rounded col-md-4 col-sm-4 mx-auto" style="background: url('/{{a.activity_hotel.image1}}');background-position: center; background-size: cover; background-repeat: no-repeat;"></div>
+                <div class="prop-info text-secondary col-md-8 col-sm-8">
+                  <p class = 'prop-title mx-md-0 mx-auto m-0'>{{a.activity_hotel.title}}</p>
+                  <small class='m-0 d-block prop-type'><i class="fas fa-warehouse mr-2"></i>{{a.property_type}}</small>
+                  {% if a.activity_type == "listing" %}
+                  <small class='m-0 d-block'>Listed on {{a.date}}</small>
+                  {% else %}
+                  <small class='m-0 d-block'>Booked on {{a.date}}</small>
+                  {% endif %}
+                  {% if not availability %}
+                  <small class='m-0 d-block status'><i class="fas fa-circle text-success mx-1"></i>Available</small>
+                  {% else %}
+                  <small class='m-0 d-block status'><i class="fas fa-check-square text-success mx-1"></i>Full</small>
+                  {% endif %}
+                  {% if a.activity_type == "listing" %}
+                  <a href = '/hotels/edit-hotel/{{a.activity_hotel.id}}' class = 'btn btn-dark btn-sm my-1' type="button" name="button">Edit <i class='fas fa-pen'></i> </a>
+                  {% endif %}
+                  <a class = 'btn btn-info btn-sm my-1' href = '/hotels/details/{{a.activity_hotel.id}}' type="button" name="button">View <i class='fas fa-eye'></i> </a>
+                  {% if a.activity_type == "listing" %}
+                  <!-- Button trigger modal -->
+                  <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal">
+                    Remove
+                  </button>
+  
+                  <!-- Modal -->
+                  <div class="modal fade" id="exampleModal" tabindex="1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Delete Listing</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          Are you sure want to delete this listing?
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+                          <a href="/user/delete-hostel/{{a.activity.id}}" type="button" class="btn btn-danger btn-sm">Confirm</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  {% else %}
+                  <a href="" class = 'btn btn-warning btn-sm text-light' type="button" name="button">Cancel <i class='fas fa-times'></i> </a>
+                  {% endif %}
+                </div>
+              </div>
+              {% endif %}
             {% endfor %}
             {% else %}
             <p class = 'text-muted d-block text-center mt-5 pt-5 mb-5 pb-5'>There is nothing to show here ;(</p>
-            {% endif %}
-
-            
-
-            <!-- <div class="activity-card my-3 py-4 mx-auto row container bg-light border rounded">
-              <div class="prop-img rounded col-md-4 col-sm-4 mx-auto" style="background: url('room.svg');background-position: center; background-size: cover; background-repeat: no-repeat;"></div>
-              <div class="prop-info text-secondary col-md-8 col-sm-8">
-                <p class = 'prop-title mx-md-0 mx-auto m-0'>Single Room for Rent- 1 Room- Internet- Attached Bathroom </p>
-                <small class='m-0 d-block prop-type'><i class="fas fa-ad text-dark mx-1"></i>Room</small>
-                <small class='m-0 d-block'>From Rs. 4,000</small>
-                <small class='m-0 d-block'>Rented on 15 Apr, 2021</small>
-                <small class='m-0 d-block status'><i class="fas fa-check-square text-success mx-1"></i>Rented</small>
-                <button class = 'btn btn-primary btn-sm my-1' type="button" name="button">Give Review <i class='fas fa-smile'></i> </button>
-                <button class = 'btn btn-info btn-sm my-1' type="button" name="button">View <i class='fas fa-eye'></i> </button>
-                <button class = 'btn btn-danger btn-sm' type="button" name="button">Remove <i class='fas fa-trash'></i> </button>
-              </div>
-            </div>
-
-            <div class="activity-card my-3 py-4 mx-auto row container bg-light border rounded">
-              <div class="prop-img rounded col-md-4 col-sm-4 mx-auto" style="background: url('hostel.jpg');background-position: center; background-size: cover; background-repeat: no-repeat;"></div>
-              <div class="prop-info text-secondary col-md-8 col-sm-8">
-                <p class = 'prop-title mx-md-0 mx-auto m-0'>Hamro Boys Hostel-Double Sitter-24/7 Free Internet- Free Gym </p>
-                <small class='m-0 d-block prop-type'><i class="fas fa-ad text-dark mx-1"></i>Hostel</small>
-                <small class='m-0 d-block'>From Rs. 10,000</small>
-                <small class='m-0 d-block'>Stayed on 27 Jul, 2021</small>
-                <small class='m-0 d-block status'><i class="fas fa-circle text-success mx-1"></i>Available</small>
-                <button class = 'btn btn-primary btn-sm my-1' type="button" name="button">Give Review <i class='fas fa-smile'></i> </button>
-                <button class = 'btn btn-info btn-sm my-1' type="button" name="button">View <i class='fas fa-eye'></i> </button>
-                <button class = 'btn btn-danger btn-sm' type="button" name="button">Remove <i class='fas fa-trash'></i> </button>
-              </div>
-            </div> -->
-            
+            {% endif %}            
             
           </div>
           <hr>

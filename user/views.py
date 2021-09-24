@@ -1,7 +1,11 @@
+
+from accounts.auth import access_home, access_hostel, access_hotel
+from json.encoder import JSONEncoder
 from django.core.checks import messages
 from django.http.response import JsonResponse
 from django.contrib.auth.decorators import login_required
-
+from django.urls.conf import path
+from home.models import Home
 from accounts.models import Profile
 from django.shortcuts import redirect, render
 from user.models import Activity, Message
@@ -10,7 +14,14 @@ from django.http import HttpResponse
 from user.models import ChatRoom
 from datetime import date
 from hostels.models import Hostel
+from hotels.models import Booking, Package
+from hotels.models import Hotels
 import PIL
+from django.contrib.humanize.templatetags import humanize
+import ast
+from django.template.loader import render_to_string
+
+
 # Create your views here.
 
 
@@ -122,7 +133,8 @@ def chat(request, property_id, contact_id):
             room=room, message=message, sender=request.user, date=date_now, reply_on=replied_on)
         if send:
             return JsonResponse({'message': "Sent"})
-    messages = Message.objects.filter(room_id=chat_room_id)
+    messages = Message.objects.filter(
+        room_id=chat_room_id).order_by("timestamp")
     for msg in messages:
         last_msg = msg
     context = {
@@ -160,12 +172,65 @@ def listing_options(request):
     return render(request, 'user/listing-options.html')
 
 
-@login_required
-def rate(request, property_id):
-    pass
-
-
+@access_hostel
 def delete_hostel(request, id):
     property = Hostel.objects.get(id=id)
     property.delete()
     return redirect('/user/dashboard')
+
+
+@access_home
+def delete_home(request, id):
+    property = Home.objects.get(id=id)
+    property.delete()
+    return redirect('/user/dashboard')
+
+
+@access_hotel
+def manage_package_hotel(request, id):
+    hotel = Hotels.objects.get(id=id)
+    pkg = Package.objects.filter(hotel=hotel)
+    packages = {}
+    for p in pkg:
+        s = p.features
+        if len(s) > 0:
+            s = ast.literal_eval(s)
+            packages[p] = s
+
+    return render(request, 'hotels/add-package.html', {'hotel': hotel, 'packages': packages})
+
+
+@access_hotel
+def add_package_hotel(request, id):
+    hotel = Hotels.objects.get(id=id)
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        price = request.POST.get('price')
+        type_of_stay = request.POST.get('type_of_stay')
+        amentities = request.POST.getlist('amentities')
+        amenities = str(amentities)
+        add_package = Package.objects.create(hotel=hotel,
+                                             package_title=title, price=price, features=amenities, type_of_stay=type_of_stay)
+        if add_package:
+            html = render_to_string('hotels/more-package-row.html', {
+                'packages': add_package, "amenities": amentities
+            })
+
+    return JsonResponse({'message': "success", 'data': html})
+
+
+@access_hotel
+def remove_package(request, id, pkg_id):
+    pkg = Package.objects.get(id=pkg_id)
+    pkg.delete()
+    return redirect('/user/manage-package/'+str(id))
+
+
+def hotel_booking_requests(request, id):
+    hotel = Hotels.objects.get(id=id)
+    bookings = Booking.objects.filter(hotel=hotel)
+    context = {
+        'hotel': hotel,
+        'bookings': bookings
+    }
+    return render(request, 'hotels/booking-request.html', context)

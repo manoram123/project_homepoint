@@ -1,0 +1,791 @@
+{% extends "layout.html" %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+{% include 'navbar.html' %}
+{% include 'messages.html' %}
+<style type="text/css">
+  /* Set the size of the div element that contains the map */
+  #map {
+    height: 400px;
+    /* The height is 400 pixels */
+    width: 100%;
+    /* The width is the width of the web page */
+  }
+</style>
+<script>
+  // Initialize and add the map
+  function initMap() {
+    // The location of Uluru
+    ltd = {{hotel.lat}}
+    lgt = {{hotel.lon}}
+    const uluru = {
+      lat: ltd,
+      lng: lgt
+    }
+  // The map, centered at Uluru
+  const map = new google.maps.Map(document.getElementById("map"), {
+    zoom: 15,
+    center: uluru,
+  });
+  // The marker, positioned at Uluru
+  const marker = new google.maps.Marker({
+    position: uluru,
+    title: "Manoram",
+    map: map,
+  });
+  }
+</script>
+<div class="main" id='m' style='color: #666666;'>
+  <div class="container row mt-5 p-0 mx-auto">
+    <div class="left-area col-md-8 p-3">
+      <!-- <div class="property-img shadow">
+            <img class="img-fluid rounded" src="hostel3.jpeg" alt="">
+          </div> -->
+
+      <div id="carouselExampleIndicators" class="carousel slide w-100 border rounded" data-ride="carousel">
+        <ol class="carousel-indicators">
+          <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+          {% if hotel.image2 %}
+          <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+          {% endif %}
+          {% if hotel.image3 %}
+          <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+          {% endif %}
+          {% if hotel.image4 %}
+          <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+          {% endif %}
+          {% if hotel.image5 %}
+          <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
+          {% endif %}
+          {% if hotel.image6 %}
+          <li data-target="#carouselExampleIndicators" data-slide-to="5"></li>
+          {% endif %}
+        </ol>
+        <div class="carousel-inner">
+          {% if hotel.image1 %}
+          <div class="carousel-item active property-img" style="background: url('/{{hotel.image1}}'); background-size: cover;"></div>
+          {% endif %}
+          {% if hotel.image2 %}
+          <div class="carousel-item property-img" style="background: url('/{{hotel.image2}}'); background-size: cover;"></div>
+          {% endif %}
+          {% if hotel.image3 %}
+          <div class="carousel-item property-img" style="background: url('/{{hotel.image3}}'); background-size: cover;"></div>
+          {% endif %}
+          {% if hotel.image4 %}
+          <div class="carousel-item property-img" style="background: url('/{{hotel.image4}}'); background-size: cover;"></div>
+          {% endif %}
+          {% if hotel.image5 %}
+          <div class="carousel-item property-img" style="background: url('/{{hotel.image5}}'); background-size: cover;"></div>
+          {% endif %}
+          {% if hotel.image6 %}
+          <div class="carousel-item property-img" style="background: url('/{{hotel.image6}}'); background-size: cover;"></div>
+          {% endif %}
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+
+      <div class="property-tab border rounded pt-3 mt-4 d-none d-lg-block">
+        <div class="d-flex">
+          <a class='d-block mx-auto nav-link pb-0 active' href="#">
+            <div class="mx-auto p-tab-item px-1" onclick="active(0)">
+              Overview
+            </div>
+          </a>
+          <a class='d-block mx-auto nav-link pb-0' href="#">
+            <div class="mx-auto p-tab-item px-1">
+              Pricing
+            </div>
+          </a>
+          <a class='d-block mx-auto nav-link pb-0' href="#">
+            <div class="mx-auto p-tab-item px-1">
+              Reviews
+            </div>
+          </a>
+          <a class='d-block mx-auto nav-link pb-0' href="#">
+            <div class="mx-auto p-tab-item px-1">
+              Map
+            </div>
+          </a>
+          <a class='d-block mx-auto nav-link pb-0' href="#p-sum">
+            <div class="mx-auto p-tab-item px-1">
+              Bookings
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div class="container rounded border shadow mt-2 pb-2">
+        <h4 class='mt-1'>Overview</h4>
+        <hr class='container p-0'>
+        <div class="">
+          <h5 class='font-weight-bold m-0'>{{hotel.title}}</h5>
+          <p class='m-0'> <i class='fas fa-map-marker-alt mr-1'></i>{{hotel.address}}</p>
+          <p class='m-0'><i class='fas fa-phone mr-1'></i> {{hotel.user.profile.phone}}</p>
+          <p class='m-0'><i class='fas fa-user mr-1'></i>{{hotel.user.first_name}}</p>
+          <p class='m-0'><i class='fas fa-envelope mr-1'></i>{{hotel.user.email}}</p>
+          <div class="featur">
+
+            <div class="property-description">
+              <p class='mt-3'>
+                {{hotel.description|linebreaks}}
+              </p>
+            </div>
+
+            <h5 class='mt-3'>Features</h5>
+            <ul class='list-unstyled row'>
+              {% if hotel.services.internet %}
+              <li class='col-md-4 my-1'><i class='fas fa-wifi text-success mx-2'></i> Internet</li>
+              {% endif %}
+
+              {% if hotel.services.parking %}
+              <li class='col-md-4 my-1'><i class='fas fa-car text-success mx-2'></i> Parking</li>
+              {% endif %}
+
+              {% if hotel.services.breakfast %}
+              <li class='col-md-4 my-1'><i class='fas fa-utensils text-success mx-2'></i> Breakfast</li>
+              {% endif %}
+              
+            </ul>
+            <p class='mx-2 font-weight-bold'>Additional Features</p>
+            {% if hotel.services.additional_s %}
+            <div class='px-2 extra-features'>
+              {{hotel.services.additional_s|linebreaks }}
+            </div>
+            {% endif %}
+
+          </div>
+        </div>
+        <hr class='container p-0'>
+
+        <h5>Property Rules</h5>
+        <ul class='list-unstyled row'>
+          {% if hotel.rules.cat_friendly %}
+          <li class='col-md-4 my-1'><i class='fas fa-cat text-success mx-2'></i> Cat Friendly</li>
+          {% endif %}
+
+          {% if hotel.rules.dog_friendly %}
+          <li class='col-md-4 my-1'><i class='fas fa-dog text-success mx-2'></i> Dog Friendly</li>
+          {% endif %}
+
+          {% if hotel.rules.smoking_allowed %}
+          <li class='col-md-4 my-1'><i class='fas fa-smoking text-success mx-2'></i> Smoking Allowed</li>
+          {% else %}
+          <li class='col-md-4 my-1'><i class='fas fa-smoking-ban text-danger mx-2'></i> No Smoking</li>
+          {% endif %}
+        </ul>
+
+        {% if hotel.rules.additional_r %}
+        <div class='m-0 px-2 mt-3'>{{hotel.rules.additional_r|linebreaks}}</div>
+        {% endif %}
+        <hr class='container p-0'>
+        <h5>About The Owner</h5>
+        <div class="d-flex">
+          <div class="owner-profile rounded-circle" style="background: url('/{{hotel.user.profile.image}}'); background-size: cover"></div>
+          <div class="owner-info mx-3">
+            <p class='m-0'>{{hotel.user.first_name}}</p>
+            {% if hotel.user.is_active %}
+            <p class='m-0'>Status: Online</p>
+            {% else %}
+            <p class='m-0'>Status: Offline</p>
+            {% endif %}
+            {% if hotel.user.profile.verified %}
+            <p class='m-0'>Verified: Yes</p>
+            {% else %}
+            <p class='m-0'>Verified: No</p>
+            {% endif %}
+            <p class='m-0'>Response: Within 15 Minutes</p>
+            <p class='m-0'>Listed Since 2021</p>
+            <a class='btn btn-outline-primary btn-sm' href="#">See more listings</a>
+          </div>
+        </div>
+        <hr class='container p-0'>
+
+      </div>
+
+      <div class="container border rounded shadow mt-4 py-3">
+        <h4 class=''>Room Type and Pricing</h4>
+        <table class="table mt-4">
+          <tbody class = 't-table'>
+          {% if packages %}
+          {% for p,a in packages.items %}
+            <tr>
+              <td class = 'col-5'>
+                <p class = 'font-weight-bold'>{{p.package_title}}</p>
+                <small><small class = 'font-weight-bold'>Features</small></small>
+                <div class = 'row'>
+                  {% for am in a %}
+                  {% if am == "Double Bed" %}
+                  <div class = 'col-md-12'>
+                    <span><i class = 'fas fa-bed text-success'></i> <small class = ''>{{am}}</small></span>
+                  </div>
+                  {% elif am == "Single Bed" %}
+                  <div class = 'col-md-12'>
+                    <span><i class = 'fas fa-bed text-success'></i> <small class = ''>{{am}}</small></span>
+                  </div>
+                  {% elif am == "Wifi" %}
+                  <div class = 'col-md-12'>
+                    <span><i class = 'fas fa-wifi text-success'></i> <small class = ''>{{am}}</small></span>
+                  </div>
+                  {% else %}
+                  <div class = 'col-md-5'>
+                      <small class = 'badge rounded text-light' style="background: #0fd143;">{{am}}</small>
+                  </div>
+                  {% endif %}
+                  {% endfor %}    
+                </div>
+              </td>
+              <td class = 'col-3 pt-5 text-dark pl-0'>
+                {% if p.type_of_stay == '2' %}
+                <div class = 'mt-2 text-center' style="font-size: 2.5em;">
+                  <i class = 'fas fa-male'></i><i class = 'fas fa-female'></i><span style="font-size: .7em;"><i class = 'fas fa-child'></i><i class = 'fas fa-child'></i></span>
+                </div>
+                <p class = 'm-0 text-center' style="font-size: .7em; line-height: 1.6ch;">2 adults <br> 2 kids under <br> 4 years stay</p>
+                {% elif p.type_of_stay == '1' %}
+                <div class = 'mt-2 text-center' style="font-size: 2.5em;">
+                  <i class = 'fas fa-male'></i>
+                </div>
+                <p class = 'm-0 text-center' style="font-size: .7em; line-height: 1.6ch;">Single person stay</p>
+                {% endif %}
+              </td>
+              <td class = 'pt-5 text-center'>
+                <span class = 'font-weight-bold text-primary'>RS.</span><span class = 'font-weight-bold' style="font-size: 2em; color: #0fd143;">{{p.price|intcomma}}/-</span><br><small>per Night</small>
+                
+                <div class = 'mt-2'>
+                  <a onclick="fill('{{p.package_title}}', '{{p.type_of_stay}}', '{{p.price|intcomma}}', '{{p.id}}')" class = 'btn btn-sm btn-outline-primary' href="#s-card">Book Now</a>
+                </div>
+              </td>
+            </tr>
+          {% endfor %}
+          {% else %}
+          <small class = 'text-center empty mt-5' style="display: block;">Nothing to show here ;(</small>
+          {% endif %}
+          </tbody>
+        </table>
+      </div>
+
+
+      <div class="container border rounded shadow py-3 mt-4">
+        <h4>Reviews</h4>
+
+        <hr class='container p-0'>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-outline-secondary btn-sm" data-toggle="modal" data-target="#exampleModalCenter">
+          Write a review
+        </button>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content px-3">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Write a review</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form id='review-form' action="/hostels/review/{{hotel.id}}" method="POST">
+                  {% csrf_token %}
+                  <div class='ratings-stars'>
+                    <input required class='star-input' id="star1" type="radio" name='rate' value='1'><label for="star1"><i class='fas fa-star stars'></i></label>
+                    <input required class='star-input' id="star2" type="radio" name='rate' value='2'><label for="star2"><i class='fas fa-star stars'></i></label>
+                    <input required class='star-input' id="star3" type="radio" name='rate' value='3'><label for="star3"><i class='fas fa-star stars'></i></label>
+                    <input required class='star-input' id="star4" type="radio" name='rate' value='4'><label for="star4"><i class='fas fa-star stars'></i></label>
+                    <input required class='star-input' id="star5" type="radio" name='rate' value='5'><label for="star5"><i class='fas fa-star stars'></i></label>
+                  </div>
+                  <textarea form="review-form" class='form-control' name="review" rows="5" placeholder="Write a review..."></textarea>
+                  <button type="submit" class="btn btn-primary btn-sm my-2">Post</button>
+                </form>
+              </div>
+              <div class="modal-footer">
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- Comments and Replies -->
+        <div class = 'comments-all'>
+        {% if reviews %}
+        {% for c in reviews %}
+          <div class="review-post container d-flex py-3">
+            <div class="commenter">
+              <div class="commenter-image rounded-circle mx-auto" style="background: url('/{{c.user.profile.image}}'); background-size: cover;"></div>
+              <p class='text-center'>{{c.user.first_name}}</p>
+            </div>
+            <div class="comment px-3 rounded mx-3 py-3">
+              <div class="ratings d-flex text-warning">
+                {% if c.ratings == 5 %}
+                <i class='fas fa-star'></i>
+                <i class='fas fa-star'></i>
+                <i class='fas fa-star'></i>
+                <i class='fas fa-star'></i>
+                <i class='fas fa-star'></i>
+                {% endif %}
+                {% if c.ratings == 4 %}
+                <i class='fas fa-star'></i>
+                <i class='fas fa-star'></i>
+                <i class='fas fa-star'></i>
+                <i class='fas fa-star'></i>
+                <i class='far fa-star'></i>
+                {% endif %}
+                {% if c.ratings == 3 %}
+                <i class='fas fa-star'></i>
+                <i class='fas fa-star'></i>
+                <i class='fas fa-star'></i>
+                <i class='far fa-star'></i>
+                <i class='far fa-star'></i>
+                {% endif %}
+                {% if c.ratings == 2 %}
+                <i class='fas fa-star'></i>
+                <i class='fas fa-star'></i>
+                <i class='far fa-star'></i>
+                <i class='far fa-star'></i>
+                <i class='far fa-star'></i>
+                {% endif %}
+                {% if c.ratings == 1 %}
+                <i class='fas fa-star'></i>
+                <i class='far fa-star'></i>
+                <i class='far fa-star'></i>
+                <i class='far fa-star'></i>
+                <i class='far fa-star'></i>
+                {% endif %}
+              </div>
+              <p class='text-info mt-1 mb-0 r-date'>{{c.date|timesince}}</p>
+              <p class='m-0'>
+                {{c.comment}}
+              </p>
+              <div class="d-flex p-0 mt-2 bg-light rounded">
+                <!-- <form id = 'like' action="" method = "POST">
+                  {% csrf_token %}
+                  <button class="btn btn-sm text-info" type="submit" name="button"> <span> <i class='far fa-heart'></i> </span>{{r.likes}}</button>
+                </form> -->
+                <!-- <button class="btn btn-sm text-info" type="button" name="button"> <span> <i class='fas fa-reply-all'></i> </span>Reply</button> -->
+              </div>
+              {% for rep in r %}
+              <div class='reply'>
+                <div class='bg-light rounded py-2 my-2 mt-2 px-3'>
+                  <div class='d-flex'>
+                    <div class='reply-image rounded-circle' style="background: url('/{{rep.user.profile.image}}'); background-size: cover;"></div>
+                    <div class='d-block'>
+                      <small class='mx-2 d-block'>{{rep.user.first_name}} <br><small>{{rep.date | timesince}}</small></small>
+                      <p class='m-0 mx-2'>{{rep.reply}}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+  
+              <!-- <form action="" id='reply' method="POST">
+                {% csrf_token %}
+                <div class='d-flex'>
+                  <input type="text" name='repl' class='form-control mt-2 mr-2'>
+                  <button class='btn btn-sm p-0 btn-outline-info mt-2 px-3' type="submit">Reply</button>
+                </div>
+              </form>
+              <script>
+
+                //post reply
+                $(document).on("submit", "#reply", function (e) {
+                e.preventDefault();
+                $.ajax({
+                    type: 'POST',
+                    url: '/hotels/reply/{{c.id}}',
+                    data: $('#reply').serialize(),
+                    success: function (response) {
+                    $('.message-alert').removeClass('alert-danger');
+                    $('.message-alert').addClass('alert-success');
+                    $('#alert-message').html("Posted Successfully!");
+                    $('.message-alert').css("display", "block");
+                    $('.message-alert').removeClass('alert-hide');
+                    $('.message-alert').addClass('alert-show');
+                    setTimeout(function () {
+                        $('.message-alert').addClass('alert-hide');
+                        $('.message-alert').removeClass('alert-show');
+                    }, 5000) //alert fadeOut
+                    $('.comment').append(response.data)
+                    },
+                    error: function (e) {
+                      alert("error")
+                    }
+                })
+                })
+
+
+                // var url = `/hotels/load-reviews/{{hotel.id}}`
+                // previous = {{last}}
+                // console.log(previous)
+                // setInterval(function(e){
+                //     $.ajax({
+                //     url :url ,
+                //     method : 'GET',
+                //     dataType : 'json',
+                //     success: function(response){
+                //         if(response.id != previous){
+                //             $(".comments-all").append(response.data)  
+                //         }
+                //     },
+                //     error: function(resposnse){
+
+                //             }
+
+                // })
+                // }, 1000)
+            </script> -->
+            </div>
+          </div>
+        {% endfor %}
+        <!-- Comments and Replies -->
+        <div class = 'col-3 mx-auto p-0'>
+          <button id = 'load-more' class = 'btn btn-sm btn-primary mx-auto d-block'>Load More...</button>
+        </div>
+        <hr class='container p-0'>
+        {% else %}
+        <p class='empty-space text-center my-4 py-5' style = 'display: block;'>No reviews yet ;(</p>
+        {% endif %}
+        </div>
+
+      </div>
+
+      <script>
+        // Post Comment
+        $(document).on("submit", "#review-form", function (e) {
+          e.preventDefault();
+          $.ajax({
+            type: 'POST',
+            url: '/hotels/review/{{hotel.id}}',
+            data: $('#review-form').serialize(),
+            success: function (response) {
+              $('.message-alert').removeClass('alert-danger');
+              $('.message-alert').addClass('alert-success');
+              $('#alert-message').html("Posted Successfully!");
+              $('.message-alert').css("display", "block");
+              $('.message-alert').removeClass('alert-hide');
+              $('.message-alert').addClass('alert-show');
+              setTimeout(function () {
+                $('.message-alert').addClass('alert-hide');
+                $('.message-alert').removeClass('alert-show');
+              }, 5000) //alert fadeOut
+              $('.comments-all').prepend(response.data)
+              $('.empty-space').css('display', 'none')
+            },
+            error: function (e) {
+              alert("error")
+            }
+          })
+        })
+
+        //load more comments
+        var start = 1
+        var end = 2
+        var step = 1
+        // next start +=6
+        $('#load-more').on('click', function(e){
+            e.preventDefault()
+            var url = `/hotels/more-comments/{{hotel.id}}/${start}/${end}`
+            $.ajax({
+                beforeSend: function(){
+                    $("#loading").show();
+                },
+                complete: function(){
+                    $("#loading").hide();
+                },
+                url :url ,
+                method : 'GET',
+                dataType : 'json',
+                success: function(response){
+                    console.log(response)   
+                    start+= step
+                    end+= step
+                    $(".comments-all").append(response.data)
+                    
+                },
+                error: function(resposnse){
+
+                }
+
+            })
+        })
+
+      </script>
+
+      <div class="container border rouded shadow mt-4 p-0">
+        <div class="p-0" id='map'>
+
+        </div>
+      </div>
+    </div>
+
+    <div id = 's-card' class="col-md-4 ml-auto s-card">
+      <div class="activity shadow rounded mt-3" id='p-sum'>
+        <div class="container py-3">
+          <h5>Property Summary</h5>
+          <div class = 'd-flex my-3'>
+            <div class = "summ-img rounded" style="background: url('/{{hotel.image1}}'); background-position: center; background-size: cover;"></div>
+            <div>
+              <p class="text-sm m-0 px-2 font-weight-bold">{{hotel.title}}</p>
+              <div class="small px-2">
+                <div class="rating text-warning d-flex">
+                  <i class = 'fas fa-star'></i>
+                  <i class = 'fas fa-star'></i>
+                  <i class = 'fas fa-star'></i>
+                  <i class = 'far fa-star'></i>
+                  <i class = 'far fa-star'></i>
+                </div>
+              </div>
+              <small class="m-0 px-2 text-secondary mt-2 d-block">{{hotel.address}}</small>
+              <div class="container px-2 row m-0 mt-1 p-0">
+                {% if  hotel.services.breakfast %}
+                <small class = ' py-1 mr-1 small badge badge-success px-1'>Breakfast</small>
+                {% endif %}
+                {% if hotel.services.internet %}
+                <small class = ' py-1 mr-1 small badge badge-success px-1'>Internet</small>
+                {% endif %}
+                {% if  hotel.services.parking %}
+                <small class = ' py-1 mr-1 small badge badge-success px-1'>Parking</small>
+                {% endif %}
+                <small class = ' py-1 mr-1 small badge badge-success px-1'>+7</small>
+              </div>
+              <div class='px-2'>
+                <a href='/user/chat/{{hotel.id}}/{{hotel.user.id}}' class='badge badge-info mt-2 ml-auto' type="button" name="button">Ask for help</a>
+              </div>
+            </div>
+          </div>          
+          {% if hotel.user.id != request.user.id %}
+          <div class="jumbotron py-2 booking rounded px-2">
+
+            <form id="bookingForm" class="booking-form" method="post">
+              {% csrf_token %}
+              <!-- <p class='m-0'>Number of nights</p>
+              <div class="container d-flex mx-auto p-0">
+                <input id='due' class='form-control form-control-sm' type="number" name="duration" value="" placeholder="">
+                <p class='mt-1 mx-2'>Night(s)</p>
+              </div> -->
+              <p> <i class ='fas fa-info-circle'></i> Select a room you want and fill the form</p>
+              <div class="input-group">
+                <input type="text" class = 'form-control check-in' hidden value = "" placeholder="Check In" name = 'check-in' required>
+                <input type="text" class = 'form-control check-out' hidden value = "" placeholder="Check Out" name = 'check-out' required>
+              </div>
+
+              <div class = 'row mx-0'>
+                <div class = 'c-in col-md-6 d-flex py-1 px-2 pb-2' onclick = "$('.js-daterangepicker').click()">
+                  <i class = "fas fa-calendar mx-1 mt-1"></i>
+                  <small class = 'c-in-date'>Check In</small>
+                </div>
+                <div class = 'c-out col-md-6 d-flex py-1 px-2 pb-2' onclick = "$('.js-daterangepicker').click()">
+                  <i class = "fas fa-calendar mx-1 mt-1"></i>
+                  <small class = 'c-out-date'>Check Out</small>
+                </div>
+
+                <input type="text" class = 'form-control js-daterangepicker' style = 'visibility: hidden; height: 0;' name="daterange" required>              
+
+
+                <div class = 'mt-2 f-field px-2 d-flex col-12'>
+                  <i class = 'fas fa-envelope mt-2 mr-1'></i>
+                  <input class = '' name = 'email' type="email" placeholder="Email" name = 'email' required>
+                </div>
+
+                <div class = 'mt-2 f-field px-2 d-flex col-12 mb-3'>
+                  <i class = 'fas fa-phone-alt mt-2 mr-1'></i>
+                  <input class = '' name = 'phone' type="text" placeholder="Phone" name = 'phone' required>
+                </div>
+
+
+                <div class = 'col-6 p-0 pr-1'>
+                  <div class = 'f-field px-2 d-flex pt-1 mt-2'>
+                    <i class = 'fas fa-door-open mr-1'></i>
+                    <p class = 'room-type'>Room Type</p>
+                    <input id = 'pkg-id' type="text" hidden name = 'package_id'>
+                    <input id = 'input-room-type' hidden type="text" value="" name = 'room_type' required>
+                  </div>
+                </div>
+
+                <div class = 'col-6 p-0 pl-1'>
+                  <div class = 'f-field px-2 d-flex pt-1 mt-2'>
+                    <i class = 'fas fa-calendar-day mr-1'></i>
+                    <p class = 'days'>Days of stay</p>
+                    <input id = 'input-days' hidden type="number" min = '1' max = '14' value = "" name= "days" required>
+                  </div>
+                </div>
+
+                <div class = 'col-6 p-0 pr-1'>
+                  <div class = 'f-field px-2 d-flex pt-1 mt-2'>
+                    <i class = 'fas fa-male mr-1 mt-1'></i>
+                    <input id = 'adult-input' type="number" max = '2' min = '1' placeholder="Adult(s)" name = 'adults' required>
+                  </div>
+                </div>
+
+                <div class = 'col-6 p-0 pl-1'>
+                  <div class = 'f-field px-2 d-flex pt-1 mt-2'>
+                    <i class = 'fas fa-child mr-1 mt-1'></i>
+                    <input id = 'child-input' type="number" max = '2' min = '0' placeholder="Child(s)" name = 'child' required>
+                  </div>
+                </div>
+              </div>
+
+              <p class = 'mt-5 m-0 text-right mx-3'>Booking Fee: Rs. 0.00</p>
+              <p class = 'm-0 font-weight-bold text-right mx-3 total-price-hotel'>Total: Rs. 0.00</p>
+
+              <button class='btn btn-outline-primary my-1 btn-sm d-block ml-auto' type="submit" name="button">Proceed</button>
+              <script>
+              $(function() {
+                $('.js-daterangepicker').daterangepicker({
+                  opens: 'left'
+                }, function(start, end, label) {
+                  var today = new Date(start)
+                  var checkOut = new Date(end)
+                  console.log("A new date selection was made: " + today.toDateString() + ' to ' + end.format('YYYY-MM-DD'));
+                  document.querySelector('.check-in').value = today;
+                  document.querySelector('.check-out').value = checkOut;
+                  document.querySelector('.c-in-date').innerHTML = today.toDateString();
+                  document.querySelector('.c-out-date').innerHTML = checkOut.toDateString();
+                  days()
+                });
+              });
+
+
+
+
+              // Boook Fill
+
+              function formatDate(date) {
+                  var d = new Date(date),
+                      month = '' + (d.getMonth() + 1),
+                      day = '' + d.getDate(),
+                      year = d.getFullYear();
+
+                  if (month.length < 2) 
+                      month = '0' + month;
+                  if (day.length < 2) 
+                      day = '0' + day;
+
+                  return [year, month, day].join('-');
+              }
+
+              function days(){
+                startDate = document.querySelector('.check-in').value;
+                endDate = document.querySelector('.check-out').value;
+                
+                startDate = formatDate(startDate);
+                endDate = formatDate(endDate);
+
+                diffDate = new Date(endDate).getDate() - new Date(startDate).getDate();
+                document.querySelector('#input-days').value = diffDate;
+                document.querySelector('.days').innerHTML = diffDate + " Day(s)";
+              }
+
+              function fill(room_type, stay_type, price, pkg_id){
+                thisDate = new Date()
+                tomorrow = new Date(thisDate)
+                tomorrow.setDate(tomorrow.getDate() + 1)
+
+                document.querySelector('.check-in').value = thisDate.toDateString();
+                document.querySelector('.c-in-date').innerHTML = thisDate.toDateString();
+                document.querySelector('.check-out').value = tomorrow.toDateString();
+                document.querySelector('.c-out-date').innerHTML = tomorrow.toDateString();
+
+                document.querySelector('#input-room-type').value = room_type;
+                document.querySelector('.room-type').innerHTML = room_type;
+                document.querySelector('#pkg-id').value = pkg_id;
+
+                
+                days()
+
+                if (stay_type == '1'){
+                  document.querySelector('#adult-input').value = 1;
+                  document.querySelector('#child-input').value = 0;
+                }
+                else if(stay_type == '2'){
+                  document.querySelector('#adult-input').value = 2;
+                  document.querySelector('#child-input').value = 0;
+                }
+                else if(stay_type == '3'){
+                  document.querySelector('#adult-input').value = 4;
+                  document.querySelector('#child-input').value = 0;
+                }
+
+                document.querySelector('.total-price-hotel').innerHTML = "Rs."+price+".00"
+
+                // document.querySelector('.check-out').value = .toDateString();
+              }
+              </script>
+            </form>
+
+          </div>
+          {% endif %}
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQR0S44XL7N7c1tGrXW92_MLzg7fLf5jw&callback=initMap&libraries=&v=weekly"
+ async></script>
+ <script>
+
+   function success(message){
+    $('.message-alert').removeClass('alert-danger');
+            $('.message-alert').addClass('alert-success');
+            $('#alert-message').html(message);
+            $('.message-alert').css("display", "block");
+            $('.message-alert').removeClass('alert-hide');
+            $('.message-alert').addClass('alert-show');
+            setTimeout(function () {
+              $('.message-alert').addClass('alert-hide');
+              $('.message-alert').removeClass('alert-show');
+            }, 5000) //alert fadeOut
+          }
+
+      function error(message){
+        $('.message-alert').removeClass('alert-success');
+                $('.message-alert').addClass('alert-danger');
+                $('#alert-message').html(message);
+                $('.message-alert').css("display", "block");
+                $('.message-alert').removeClass('alert-hide');
+                $('.message-alert').addClass('alert-show');
+                setTimeout(function () {
+                  $('.message-alert').addClass('alert-hide');
+                  $('.message-alert').removeClass('alert-show');
+                }, 5000) //alert fadeOut
+              }
+
+   $(document).ready(function(){
+     $('#bookingForm').on('submit', function(e){
+        e.preventDefault()
+       $.ajax({
+         method: 'POST',
+         url: '/hotels/book-hotel/{{hotel.id}}',
+         dataType: 'json',
+         data: $('#bookingForm').serialize(),
+         success: function(data){
+           console.log(data.message)
+           if (data.message == "expChild"){
+            error("Total 2 children are allowed!")
+           }
+           else if (data.message == "expAdult"){
+            error("Total 3 adults are allowed!")
+           }
+           else if (data.message == "expMember"){
+            error("Total 5 people are allowed!")
+           }
+           else{
+            success(data.message)
+           }
+         },
+         error: function(data){
+            error("Something went wrong!")
+         }
+       })
+     })
+   })
+ </script>
+{% include 'footer.html' %}
+{% endblock %}

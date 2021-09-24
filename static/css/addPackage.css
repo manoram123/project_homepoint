@@ -1,0 +1,14 @@
+.p-img {
+  height: 10ch;
+}
+
+.t-opt,
+.t-opt > * {
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.t-opt:hover {
+  box-shadow: 0 0 10px -5px;
+  border-radius: 0.4em;
+}

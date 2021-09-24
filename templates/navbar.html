@@ -16,9 +16,9 @@
     <div class="navbar-nav mx-auto">
       <a class="nav-item nav-link {{active_home}}" href="/">Home</a>
       <a class="nav-item nav-link {{activate_hostel}}" href="/hostels/hostels">Hostels</a>
-      <a class="nav-item nav-link" href="#">Flats</a>
+      <a class="nav-item nav-link {{activate_flats}}" href="/house/flats/Flat">Flats</a>
       <a class="nav-item nav-link" href="#">Hotels</a>
-      <a class="nav-item nav-link" href="#">Rooms</a>
+      <a class="nav-item nav-link {{activate_rooms}}" href="/house/rooms/Single Room">Rooms</a>
       <a class="nav-item nav-link" href="#">Contacts</a>
       <a class="nav-item nav-link" href="#">Teams</a>
     </div>
@@ -38,7 +38,13 @@
           <a href='/user/dashboard' class="profile-image rounded-circle mt-1 mx-2" style="background:url('/{{request.user.profile.image}}'); background-size:cover"></a>
           <a class='btn btn-outline-dark rounded mx-2 mr-5' href="/accounts/logout">Logout</a>
         </div>
-        <div class = 'n-box  border shadow rounded bg-light mt-2'>
+        <div class = 'n-box  border shadow rounded mt-2 bg-light'>
+          <p class = 'mx-4 mt-2'>Notifications</p>
+          <hr>
+          <div class = 'n-content'> 
+
+          </div>
+          <a class = 'text-right d-block px-4' href=""><i class = 'fas fa-eye mr-1'></i><small>See All</small></a>
         </div>
         <script>
           document.querySelector('.notifiction_btn').onclick = function(){
@@ -64,33 +70,19 @@
                 url: "/notifications/",
                 dataType: "json",
                 success: function (data) {
-                  // var _notifications = JSON.parse(data.notifications)
-                  // for(i=0; i<_notifications.length; i++ ){
-                  //   n = _notifications[i].fields.Notification
-                  //   console.log(_notifications[i].fields.Notification)
-                  //   line = ``
-                  //   line += `<div class = 'd-flex'>`
-                  //   line += `<div class="mt-2 mx-2 n-image rounded-circle" style = "background: url('/{{n.profile.image}}'); background-size:cover;"></div>`
-                  //   line += `<p class = 'px-2 py-1 mt-2 n-text text-secondary'>`+ n + `</p>`
-                  //   line += `</div>`
-                  //   $('.n-box').append(line)
-                  // }
                   d = data.notifications
-                  // for(i=0; i<d.length; i++){
-                  //     console.log(d[i][2])
-                  //     notification = d[i][0]
-                  //     image = d[i][2]
-                  //     line = ``
-                  //     line += `<div class = 'd-flex pt-2'>`
-                  //     // line += `<div class="mt-2 mx-2 n-image rounded-circle" style = "background: url("`+d[i][2]+`"); background-size:cover;"></div>`
-                  //     line += `<small>` + d[i][1] + `</small>`
-                  //     line += `<p class = 'px-4 py-1 mt-2 n-text text-secondary'>`+ notification + `</p>`
-                  //     line += `</div>`
-                  //     $('.n-box').append(line)
-                  //   console.log("   ")
-
-                  // }
-                    
+                  for(i=0; i<d.length; i++){
+                      notification = d[i][1]
+                      line = ``
+                      line += `<div class = 'px-4 text-secondary'>`
+                      // line += `<div class="mt-2 mx-2 n-image rounded-circle" style = "background: url("`+d[i][2]+`"); background-size:cover;"></div>`
+                      line += `<p class = 'n-text m-0'>`+ `<strong>`+d[i][0]+`</strong>` + notification + `</p>`
+                      line += `<small class = 'd-block mt-1 n-subject'>` + d[i][3] + `</small>`
+                      line += `<small><small class = 'm-0'>` + d[i][2] + `</small></small>`
+                      line += `<hr>`
+                      line += `</div>`
+                      $('.n-content').append(line)
+                  }
                 },
                 error: function (error) {
                     alert('error')

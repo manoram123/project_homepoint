@@ -1,0 +1,205 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block content %}
+{% include 'navbar.html' %}
+{% include 'messages.html' %}
+
+    <div class ='container my-5 col-6 mx-auto p-0'>
+        <div class = 'row'>
+            <div class = 'col-md-2 p-0'>
+                <div class = 'p-img rounded' style = "background: url('{% static 'static_images/room.svg' %}'); background-size: cover; background-position:center;"></div>
+            </div>
+            <div class = 'hotel-descript px-2 col-md-10'>
+                <p class = "font-weight-bold m-0">River Side Hotel</p>
+                <small class= 'm-0'><small class = 'm-0'>Listed By - Manoram Baudel</small></small>
+            </div>
+        </div>
+        <div class = 'container shadow border mt-4 rounded'>
+            <p class = 'm-0 mt-2'>Room Type and Price</p>
+            <table class="table mt-4">
+                <!-- <thead>
+                    <tr>
+                      <th scope="col">Package</th>
+                      <th scope="col">Price</th>
+                      <th scope="col">Amentities</th>
+                    </tr>
+                  </thead> -->
+                <tbody class = 't-table'>
+                {% if packages %}
+                {% for p,a in packages.items %}
+                  <tr>
+                    <td>{{p.package_title}}</td>
+                    <td>Rs.{{p.price}}/Night</td>
+                    <td class = 'col-5'>
+                        <div class = 'row'>
+                            {% for am in a %}
+                            <div class = 'col-md-5'>
+                                <small class = 'badge rounded text-light' style="background: #0fd143;">{{am}}</small>
+                            </div>
+                            {% endfor %} 
+                        </div>
+                    </td>
+                    <td>
+                        <a class = 'btn btn-sm text-light' style="background: #ff2323;" href="/user/remove-package/{{p.hotel.id}}/{{p.id}}"><i class ='fas fa-trash-alt'></i></a>
+                    </td>
+                  </tr>
+                {% endfor %}
+                {% else %}
+                <small class = 'text-center empty mt-5' style="display: block;">Nothing to show here ;(</small>
+                {% endif %}
+                </tbody>
+              </table>
+        </div>
+        <div class = 'mt-4 shadow border rounded py-3'>
+            <p class = 'px-3 m-0 mb-4'>Add Room Type</p>
+            <form id = 'add-package' action="" method="POST">
+                {% csrf_token %}
+                <div class = 'col-5'>
+                    <input type="text" class = 'form-control' name = 'title' placeholder="Package Title">
+                </div>
+                <div class = 'col-5 mt-2'>
+                    <input type="number" class = 'form-control' name = 'price' placeholder="Price">
+                </div>
+
+                <p class="px-3 mt-5">Type Of Stay</p>
+                <div class = 'col-10 d-flex mt-2'>
+                    <div class = 'mx-3 t-opt px-3 text-center'>
+                        <input hidden onchange="change(3)" id = 'type3' type="radio" class = 'stay_type' name = 'type_of_stay' value = "1">
+                        <label id = 'f3' for="type3"><span class=" stay-label" style="font-size:2.5em;">
+                            <i class = 'fas fa-male'></i>
+                            <p class = 'd-block' style="font-size: .3em; line-height: 1.5ch;">1 Adult stay</p>
+                        </label>    
+                    </div>
+
+
+                    <div class = 'mx-3 t-opt px-3 text-center'>
+                        <input hidden onchange="change(1)" id = 'type1' type="radio" class = 'stay_type' name = 'type_of_stay' value = "2">
+                        <label id = 'f1' for="type1"><span class=" stay-label" style="font-size:2.5em;">
+                            <i class = 'fas fa-male'></i><i class = 'fas fa-female'></i></span><i class = 'fas fa-child'></i><i class = 'fas fa-child'></i>
+                            <p class = 'd-block' style="font-size: .8em; line-height: 1.5ch;">2 adults and 2 child under <br> 4 years stay</p>
+                        </label>    
+                    </div>
+
+                    <div class = 'mx-3 t-opt px-3 text-center'>
+                        <input hidden onchange="change(2)" id = 'type2' type="radio" class = 'stay_type' name = 'type_of_stay' value = "4">
+                        <label id = 'f2' for="type2"><span class=" stay-label" style="font-size:2.5em;"><i class = 'fas fa-male'></i><i class = 'fas fa-male'></i></span><span class = '' style="font-size:2.5em;"><i class = 'fas fa-male'></i><i class = 'fas fa-male'></i></span>
+                        <p class = 'd-block' style="font-size: .8em; line-height: 1.5ch;">4 adults group stay</p>
+                        </label>    
+                    </div>
+                </div>
+
+                <script>
+                    // $('.stay_type').on('checked', function(){
+                    //     $('.stay-label').css('color', "red")
+                    // })
+                    function change(val){
+                        if (val == 1){
+                            $('#f1').css('color', '#0fd143')
+                            $('#f2').css('color', 'black')
+                            $('#f3').css('color', 'black')
+                        }
+
+                        else if(val == 2){
+                            $('#f1').css('color', 'black')
+                            $('#f2').css('color', '#0fd143')
+                            $('#f3').css('color', 'black')
+                        }
+                        else{
+                            $('#f1').css('color', 'black')
+                            $('#f3').css('color', '#0fd143')
+                            $('#f2').css('color', 'black')
+                        }
+                    }
+
+                </script>
+
+                <div class = 'mt-3'>
+                    <p class = 'px-3'>Amenities</p>
+                    <div class = 'px-2'>
+                        <table class="table">
+                            <tbody>
+                              <tr>
+                                <td>
+                                    <input id = 'single-bed' value = 'Single Bed' type="checkbox" name = 'amentities'>
+                                    <label for="single-bed">Single Bed</label>
+                                </td>
+                                <td>
+                                    <input id = 'double-bed' value = 'Double Bed' type="checkbox" name = 'amentities'>
+                                    <label for="double-bed">Double Bed</label>  
+                                </td>
+                                <td>
+                                    <input id = 'wifi' value = 'Wifi' type="checkbox" name = 'amentities'>
+                                    <label for="wifi">Wifi</label>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td><input id = 'tv' value = 'TV' type="checkbox" name = 'amentities'>
+                                <label for="tv">TV</label>
+                                </td>
+                                <td>
+                                    <input id = 'ac' value = 'AC' type="checkbox" name = 'amentities'>
+                                    <label for="ac">AC</label>
+                                </td>
+                                <td><input id = 'coffee-maker' value = 'Coffee Maker' type="checkbox" name = 'amentities'>
+                                <label for="coffee-maker">Coffee Maker</label>
+                                </td>
+                              </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class =''>
+                    <button class = 'btn btn-sm btn-primary d-block ml-auto mr-3'>Add Package</button>
+                </div>
+            </form>
+            <script>
+                function success(message){
+                    $('.message-alert').removeClass('alert-danger');
+                            $('.message-alert').addClass('alert-success');
+                            $('#alert-message').html(message);
+                            $('.message-alert').css("display", "block");
+                            $('.message-alert').removeClass('alert-hide');
+                            $('.message-alert').addClass('alert-show');
+                            setTimeout(function () {
+                            $('.message-alert').addClass('alert-hide');
+                            $('.message-alert').removeClass('alert-show');
+                            }, 5000) //alert fadeOut
+                        }
+
+                function error(message){
+                    $('.message-alert').removeClass('alert-success');
+                            $('.message-alert').addClass('alert-danger');
+                            $('#alert-message').html(message);
+                            $('.message-alert').css("display", "block");
+                            $('.message-alert').removeClass('alert-hide');
+                            $('.message-alert').addClass('alert-show');
+                            setTimeout(function () {
+                            $('.message-alert').addClass('alert-hide');
+                            $('.message-alert').removeClass('alert-show');
+                            }, 5000) //alert fadeOut
+                        }
+                $('#add-package').on('submit', function(e){
+                e.preventDefault()
+                var url = `/user/add-package/{{hotel.id}}`
+                $.ajax({
+                    url :url ,
+                    method : 'POST',
+                    dataType : 'json',
+                    data : $('#add-package').serialize(),
+                    success: function(response){
+                        success("Successfully Added!")
+                        $('.t-table').append(response.data)
+                        $('.empty').css("display", "none")                       
+                    },
+                    error: function(resposnse){
+                        error("Something went wrong!")
+                    }
+
+                })
+            })
+            </script>
+        </div>
+    </div>
+
+{% include 'footer.html' %}
+{% endblock %}

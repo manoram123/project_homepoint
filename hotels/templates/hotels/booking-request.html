@@ -1,0 +1,114 @@
+{% extends 'layout.html' %}
+{% block content %}
+{% include 'navbar.html' %}
+
+
+<div class="d-flex">
+    {% include 'sidebar.html' %}
+  <div class="content container p-0 py-4 mx-auto row">
+    <div class="container-fluid mx-auto row">
+      <div class="col-md-8 mx-auto px-5">
+        <div class="user-activity my-4">
+          <div class="d-flex">
+            <h5 class = 'my-2'>Booking Requests</h5><span class = 'py-2'><i class='fas fa-archive mx-2'></i></span>
+          </div>
+          <div class="container shadow py-3">
+            <div class = 'd-flex my-3'>
+              <div class = "summ-img rounded" style="background: url('/{{hotel.image1}}'); background-position: center; background-size: cover;"></div>
+              <div>
+                <p class="text-sm m-0 px-2 font-weight-bold">{{hotel.title}}</p>
+                <div class="small px-2">
+                  <div class="rating text-warning d-flex">
+                    <i class = 'fas fa-star'></i>
+                    <i class = 'fas fa-star'></i>
+                    <i class = 'fas fa-star'></i>
+                    <i class = 'far fa-star'></i>
+                    <i class = 'far fa-star'></i>
+                  </div>
+                </div>
+                <small class="m-0 px-2 text-secondary mt-2 d-block">{{hotel.address}}</small>
+                <div class="container px-2 row m-0 mt-1 p-0">
+                  {% if  hotel.services.breakfast %}
+                  <small class = ' py-1 mr-1 small badge badge-success px-1'>Breakfast</small>
+                  {% endif %}
+                  {% if hotel.services.internet %}
+                  <small class = ' py-1 mr-1 small badge badge-success px-1'>Internet</small>
+                  {% endif %}
+                  {% if  hotel.services.parking %}
+                  <small class = ' py-1 mr-1 small badge badge-success px-1'>Parking</small>
+                  {% endif %}
+                  <small class = ' py-1 mr-1 small badge badge-success px-1'>+7</small>
+                </div>
+                <div class='px-2'>
+                </div>
+              </div>
+            </div> 
+        </div>
+        <!-- requests -->
+
+        {% for b in bookings %}
+        <div class = 'container shadow my-3 py-3 request-card'>
+          <p class = 'm-0'>Booking ID: #{{b.id}}</p>
+          <p class = 'm-0' style="font-size: .8em;">Status: {{b.status}}</p>
+          <div class = 'row text-secondary' style="font-size: .8em;">
+
+            <div class = 'col-md-6'>
+
+              <div class = 'mt-4'>
+              <p class = 'm-0'><i class = 'fas fa-door'></i>{{b.package.package_title}} x1</p>
+              <p class = 'm-0'><i class = 'fas fa-male mr-2'></i>{{b.adults}} Adult(s)</p>
+              <p class = 'm-0'>{{b.check_in_date}} - {{b.check_out_date}}</p>
+              <p class = 'm-0'>{{b.days_of_stay}} Day(s) Stay</p>
+              <hr>
+              <div class = 'd-flex'>
+                <div>
+                  <p class = 'm-0 text-dark text-left'>Booking Fee:</p>
+                </div>
+                <div class = 'ml-auto'>
+                  <p class = 'm-0 text-right'>Rs. 0.00</p>
+                </div>
+              </div>
+              <div class = 'd-flex'>
+                <div>
+                  <p class = 'm-0 text-dark text-left'>Service Charge</p>
+                </div>
+                <div class = 'ml-auto'>
+                  <p class = 'm-0 text-right'>Rs. 0.00</p>
+                </div>
+              </div>
+              <div class = 'd-flex font-weight-bold'>
+                <div>
+                  <p class = 'm-0 text-dark text-left'>Total Bill:</p>
+                </div>
+                <div class = 'ml-auto'>
+                  <p class = 'm-0 text-right'>Rs. {{b.package.price}}.00</p>
+                </div>
+              </div>
+              <small class = 'font-weight-bold text-info'>Paid Via Cash</small>
+              </div>
+
+            </div>
+
+            <div class = 'col-md-6 px-4'>
+              <p class = 'm-0 font-weight-bold'>Client Details</p>
+              <hr class = 'm-1 mr-5'>
+              <p class = 'm-0'><i class = 'fas fa-user mr-2'></i> {{b.user.first_name}}</p>
+              <p class = 'm-0'><i class = 'fas fa-envelope mr-2'></i>{{b.email}}</p>
+              <p class = 'm-0'><i class = 'fas fa-phone-alt mr-2'></i>{{b.phone}}</p>
+              <p class = 'm-0 mb-1'><i class = 'fas fa-clock mr-2'></i>Booked at {{b.booked_date|date:'g:i A'}}</p>
+              <a href="" class = 'btn btn-sm btn-outline-success mt-5 ml-auto'>Confirm</a>
+            </div>
+
+          </div>
+        </div>
+        {% endfor %}
+        </div>
+      </div>
+     </div>
+    </div>
+</div>
+
+
+
+{% include 'footer.html' %}
+{% endblock %}

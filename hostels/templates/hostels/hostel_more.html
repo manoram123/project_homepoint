@@ -1,0 +1,45 @@
+{% for h in hostels %}
+        <div class="row rounded my-3 border">
+            <div class="col-lg-5 col-md-5">
+                <div class="gkl py-2">
+                    <div class = 'hostel-image rounded' style = 'background: url("/{{h.image1}}"); background-size: cover; background-position: center;'></div>
+                </div>
+            </div>
+            <div class="col-lg-7 col-md-7">
+                <a class = 'nav-link text-secondary font-weight-bold p-0 m-0 mt-2' href="#">{{h.title}}</a>
+                <div class = "m-0" style='font-size: .6em;'>
+                    <small><i class = 'fas fa-star text-warning'></i></small>
+                    <small><i class = 'fas fa-star text-warning'></i></small>
+                    <small><i class = 'fas fa-star text-warning'></i></small>
+                    <small><i class = 'far fa-star text-warning'></i></small>
+                    <small><i class = 'far fa-star text-warning'></i></small>
+                </div>
+                <small class = 'p-0 d-block' style='font-size: .7em;'>Listed By - {{h.user.first_name}}</small>
+                <small class = 'p-0 d-block' style='font-size: .7em;'><i class = 'fas fa-map-marker-alt mr-2'></i>{{h.address}}</small>
+                <small class = 'p-0 d-block' style='font-size: .7em;'><i class = 'fas fa-phone mr-2'></i>{{h.user.profile.phone}}</small>
+                <small class = 'p-0 d-block' style='font-size: .7em;'><i class = 'fas fa-envelope mr-2'></i>{{h.user.email}}</small>
+                <small class = 'd-block my-3'>{{h.description}}</small>
+                <div class = 'features'>
+                    {% if h.services.internet %}
+                    <small class = 'mr-4'><i class = 'fas fa-wifi mr-2 text-success'></i>Internet</small>
+                    {% endif %}
+                    {% if h.services.breakfast %}
+                    <small class = 'mr-4'><i class = 'fas fa-utensils mr-2 text-success'></i>Breakfast</small>
+                    {% endif %}
+                    {% if h.services.gym %}
+                    <small class = 'mr-4'><i class = 'fas fa-dumbbell mr-2 text-success'></i>Gym</small>
+                    {% endif %}
+                    {% if h.services.parking %}
+                    <small class = 'mr-4'><i class = 'fas fa-car mr-2 text-success'></i>Parking</small>
+                    {% endif %}
+                    {% if h.services.geyser %}
+                    <small class = 'mr-4'><i class = 'fas fa-shower mr-2 text-success'></i>Hot Shower</small>
+                    {% endif %}
+                    {% if h.services.laundry %}
+                    <small class = 'mr-4'><i class = 'fas fa-tshirt mr-2 text-success'></i>Laundry</small>
+                    {% endif %}
+                </div>
+                <a class = 'btn btn-sm btn-primary mb-2 mt-4 hostel-view' href="/hostels/details/{{h.id}}">View Detail</a>
+            </div>
+        </div>
+        {% endfor %}

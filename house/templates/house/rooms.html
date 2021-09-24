@@ -1,0 +1,159 @@
+{% extends "layout.html" %}
+{% load static %}
+{% block content %}
+{% include "navbar.html" %}
+
+
+    <div class="container col-md-8 my-5" style = 'color:#575757'>
+        <!-- search -->
+        <div class="container">
+            <h4 class = 'mb-3'>Find the place you are looking for...</h4>
+            <form class="" action="" method="get">
+              <div class="search row px-3">
+                <div class="col-md-10 d-flex p-0 search-box left-rounded my-1">
+                  <div class="search-icons text-dark text-center">
+                    <span class=''> <i class='fas fa-map-marked-alt'></i> </span>
+                  </div>
+                  <input id = 'search_room' class = 'form-control' type="text" name="" value="" placeholder="Search title or location...">
+                </div>
+                <div class="col-md-2 p-0 input-group-append my-1">
+                  <button class = 'btn btn-primary btn-block right-rounded' type="button" name="button">Search</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        <!-- search -->
+        <div id="hostels_all">
+            {% for h in home %}
+            <div class="row rounded my-3 border">
+                <div class="col-lg-5 col-md-5">
+                    <div class="gkl py-2">
+                        <div class = 'hostel-image rounded' style = 'background: url("/{{h.image1}}"); background-size: cover; background-position: center;'></div>
+                    </div>
+                </div>
+                <div class="col-lg-7 col-md-7">
+                    <a class = 'nav-link text-secondary font-weight-bold p-0 m-0 mt-2' href="#">{{h.title}}</a>
+                    <div class = "m-0" style='font-size: .6em;'>
+                        <small><i class = 'fas fa-star text-warning'></i></small>
+                        <small><i class = 'fas fa-star text-warning'></i></small>
+                        <small><i class = 'fas fa-star text-warning'></i></small>
+                        <small><i class = 'far fa-star text-warning'></i></small>
+                        <small><i class = 'far fa-star text-warning'></i></small>
+                    </div>
+                    <small class = 'p-0 d-block' style='font-size: .7em;'>Listed By - {{h.user.first_name}}</small>
+                    <small class = 'p-0 d-block' style='font-size: .7em;'><i class = 'fas fa-map-marker-alt mr-2'></i>{{h.address}}</small>
+                    <small class = 'p-0 d-block' style='font-size: .7em;'><i class = 'fas fa-phone mr-2'></i>{{h.user.profile.phone}}</small>
+                    <small class = 'p-0 d-block' style='font-size: .7em;'><i class = 'fas fa-envelope mr-2'></i>{{h.user.email}}</small>
+                    <small class = 'd-block my-3'>{{h.description}}</small>
+                    <div class = 'features'>
+                        {% if h.services.internet %}
+                        <small class = 'text-success small col-md-4 col-sm-4 my-1'> <i class = 'fas fa-wifi mr-1'></i>Internet</small>
+                        {% endif %}
+                        {% if  h.services.parking %}
+                        <small class = 'text-success small col-md-4 col-sm-4 my-1'> <i class = 'fas fa-car mr-1'></i>Parking</small>
+                        {% endif %}
+                        {% if  h.services.water %}
+                        <small class = 'text-success small col-md-4 col-sm-4 my-1'> <i class = 'fas fa-faucet mr-1'></i>24/7 Water</small>
+                        {% endif %}
+                    </div>
+                    <a class = 'btn btn-sm btn-primary mb-2 mt-4 hostel-view' href="/house/details/{{h.id}}">View Detail</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="container col-2 mx-auto my-5 p-0">
+            <button id="load-more" class="btn btn-outline-primary rounded w-100 btn-sm">Load More...</button>
+        </div>
+    </div>
+{% include "footer.html" %}
+<script>
+    var start = 2
+    var end = 3
+    var step = 1
+    // next start +=6
+    $('#load-more').on('click', function(e){
+        e.preventDefault()
+        var url = `/house/load-more/${start}/${end}/Single Room`
+        $.ajax({
+            beforeSend: function(){
+                $("#loading").show();
+            },
+            complete: function(){
+                $("#loading").hide();
+            },
+            url :url ,
+            method : 'GET',
+            dataType : 'json',
+            success: function(response){
+                console.log(response)   
+                start+= step
+                end+= step
+                $("#hostels_all").append(response.data)
+                
+            },
+            error: function(resposnse){
+
+            }
+
+        })
+    })
+ 
+    $('#search-form').on('submit', function(e){
+        e.preventDefault()
+        var url = `/hostels/search/` + $("#search_hostel").val()
+        $.ajax({
+            beforeSend: function(){
+                $("#loading").show();
+            },
+            complete: function(){
+                $("#loading").hide();
+            },
+            url :url ,
+            method : 'GET',
+            dataType : 'json',
+            success: function(response){
+                console.log(response)   
+                $("#hostels_all").html(response.data)
+                
+            },
+            error: function(resposnse){
+
+            }
+
+        })
+    })
+    var delayTimer;
+    $('#search_room').on('change input', function(e){
+        var val = e.target.value
+        if(val.length >0){
+            clearTimeout(delayTimer);
+            
+        var url = `/house/search/` + val
+            delayTimer = setTimeout(function() {
+                    // Do the ajax stuff
+                    $.ajax({
+            url :url ,
+            method : 'GET',
+            dataType : 'json',
+            success: function(response){
+                console.log(response)   
+                $("#hostels_all").html(response.data)
+                
+            },
+            error: function(resposnse){
+
+            }
+
+        })
+            }, 1000); //
+            $("#load-more").hide()
+        }else{
+            $("#load-more").show()
+        }
+    })
+
+</script>
+{% endblock %}
+  
+  
+

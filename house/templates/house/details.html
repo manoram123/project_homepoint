@@ -1,0 +1,607 @@
+{% extends "layout.html" %}
+{% load static %}
+{% block content %}
+{% include 'navbar.html' %}
+{% include 'messages.html' %}
+<style type="text/css">
+  /* Set the size of the div element that contains the map */
+  #map {
+    height: 400px;
+    /* The height is 400 pixels */
+    width: 100%;
+    /* The width is the width of the web page */
+  }
+</style>
+<script>
+  // Initialize and add the map
+  function initMap() {
+    // The location of Uluru
+    ltd = {{home.lat}}
+    lgt = {{home.lon}}
+    const uluru = {
+      lat: ltd,
+      lng: lgt
+    }
+  // The map, centered at Uluru
+  const map = new google.maps.Map(document.getElementById("map"), {
+    zoom: 15,
+    center: uluru,
+  });
+  // The marker, positioned at Uluru
+  const marker = new google.maps.Marker({
+    position: uluru,
+    title: "Manoram",
+    map: map,
+  });
+  }
+</script>
+<div class="main" id='m' style='color: #666666;'>
+  <div class="container row mt-5 p-0 mx-auto">
+    <div class="left-area col-md-8 p-3">
+      <!-- <div class="property-img shadow">
+            <img class="img-fluid rounded" src="hostel3.jpeg" alt="">
+          </div> -->
+
+      <div id="carouselExampleIndicators" class="carousel slide w-100 border rounded" data-ride="carousel">
+        <ol class="carousel-indicators">
+          <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+          {% if home.image2 %}
+          <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+          {% endif %}
+          {% if home.image3 %}
+          <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+          {% endif %}
+          {% if home.image4 %}
+          <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+          {% endif %}
+          {% if home.image5 %}
+          <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
+          {% endif %}
+          {% if home.image6 %}
+          <li data-target="#carouselExampleIndicators" data-slide-to="5"></li>
+          {% endif %}
+        </ol>
+        <div class="carousel-inner">
+          {% if home.image1 %}
+          <div class="carousel-item active property-img" style="background: url('/{{home.image1}}'); background-size: cover;"></div>
+          {% endif %}
+          {% if home.image2 %}
+          <div class="carousel-item property-img" style="background: url('/{{home.image2}}'); background-size: cover;"></div>
+          {% endif %}
+          {% if home.image3 %}
+          <div class="carousel-item property-img" style="background: url('/{{home.image3}}'); background-size: cover;"></div>
+          {% endif %}
+          {% if home.image4 %}
+          <div class="carousel-item property-img" style="background: url('/{{home.image4}}'); background-size: cover;"></div>
+          {% endif %}
+          {% if home.image5 %}
+          <div class="carousel-item property-img" style="background: url('/{{home.image5}}'); background-size: cover;"></div>
+          {% endif %}
+          {% if home.image6 %}
+          <div class="carousel-item property-img" style="background: url('/{{home.image6}}'); background-size: cover;"></div>
+          {% endif %}
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+
+      <div class="property-tab border rounded pt-3 mt-4 d-none d-lg-block">
+        <div class="d-flex">
+          <a class='d-block mx-auto nav-link pb-0 active' href="#">
+            <div class="mx-auto p-tab-item px-1" onclick="active(0)">
+              Overview
+            </div>
+          </a>
+          <a class='d-block mx-auto nav-link pb-0' href="#">
+            <div class="mx-auto p-tab-item px-1">
+              Pricing
+            </div>
+          </a>
+          <a class='d-block mx-auto nav-link pb-0' href="#">
+            <div class="mx-auto p-tab-item px-1">
+              Reviews
+            </div>
+          </a>
+          <a class='d-block mx-auto nav-link pb-0' href="#">
+            <div class="mx-auto p-tab-item px-1">
+              Map
+            </div>
+          </a>
+          <a class='d-block mx-auto nav-link pb-0' href="#p-sum">
+            <div class="mx-auto p-tab-item px-1">
+              Bookings
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div class="container rounded border shadow mt-2 pb-2">
+        <h4 class='mt-1'>Overview</h4>
+        <hr class='container p-0'>
+        <div class="">
+          <h5 class='font-weight-bold m-0'>{{home.title}}</h5>
+          <p class='m-0'> <i class='fas fa-map-marker-alt mr-1'></i>{{home.address}}</p>
+          <p class='m-0'><i class='fas fa-phone mr-1'></i> {{home.user.profile.phone}}</p>
+          <p class='m-0'><i class='fas fa-user mr-1'></i>{{home.user.first_name}}</p>
+          <p class='m-0'><i class='fas fa-envelope mr-1'></i>{{home.user.email}}</p>
+          <div class="featur">
+
+            <div class="property-description">
+              <p class='mt-3'>
+                {{home.description|linebreaks}}
+              </p>
+            </div>
+
+            <h5 class='mt-3'>Features</h5>
+            <ul class='list-unstyled row'>
+              {% if home.services.internet %}
+              <li class='col-md-4 my-1'><i class='fas fa-wifi text-success mx-2'></i> Internet</li>
+              {% endif %}
+
+              {% if home.services.parking %}
+              <li class='col-md-4 my-1'><i class='fas fa-car text-success mx-2'></i> Parking</li>
+              {% endif %}
+
+              {% if home.services.water %}
+              <li class='col-md-4 my-1'><i class='fas fa-faucet text-success mx-2'></i>24/7 Water</li>
+              {% endif %}
+              
+            </ul>
+            <p class='mx-2 font-weight-bold'>Additional Features</p>
+            {% if home.services.additional_s %}
+            <div class='px-2 extra-features'>
+              {{home.services.additional_s|linebreaks }}
+            </div>
+            {% endif %}
+
+          </div>
+        </div>
+        <hr class='container p-0'>
+
+        <h5>Property Rules</h5>
+        <ul class='list-unstyled row'>
+          {% if home.rules.cat_friendly %}
+          <li class='col-md-4 my-1'><i class='fas fa-cat text-success mx-2'></i> Cat Friendly</li>
+          {% endif %}
+
+          {% if home.rules.dog_friendly %}
+          <li class='col-md-4 my-1'><i class='fas fa-dog text-success mx-2'></i> Dog Friendly</li>
+          {% endif %}
+
+          {% if home.rules.smoking_allowed %}
+          <li class='col-md-4 my-1'><i class='fas fa-smoking text-success mx-2'></i> Smoking Allowed</li>
+          {% else %}
+          <li class='col-md-4 my-1'><i class='fas fa-smoking-ban text-danger mx-2'></i> No Smoking</li>
+          {% endif %}
+        </ul>
+
+        {% if home.rules.additional_r %}
+        <div class='m-0 px-2 mt-3'>{{home.rules.additional_r|linebreaks}}</div>
+        {% endif %}
+        <hr class='container p-0'>
+        <h5>About The Owner</h5>
+        <div class="d-flex">
+          <div class="owner-profile rounded-circle" style="background: url('/{{home.user.profile.image}}'); background-size: cover"></div>
+          <div class="owner-info mx-3">
+            <p class='m-0'>{{home.user.first_name}}</p>
+            {% if home.user.is_active %}
+            <p class='m-0'>Status: Online</p>
+            {% else %}
+            <p class='m-0'>Status: Offline</p>
+            {% endif %}
+            {% if home.user.profile.verified %}
+            <p class='m-0'>Verified: Yes</p>
+            {% else %}
+            <p class='m-0'>Verified: No</p>
+            {% endif %}
+            <p class='m-0'>Response: Within 15 Minutes</p>
+            <p class='m-0'>Listed Since 2021</p>
+            <a class='btn btn-outline-primary btn-sm' href="#">See more listings</a>
+          </div>
+        </div>
+        <hr class='container p-0'>
+
+      </div>
+
+      <div class="container border rounded shadow mt-4 py-3">
+        <h4 class=''>Pricing</h4>
+        <hr class='container p-0 mt-0'>
+        <div class="d-flex">
+          <div class="price-tab-item mx-auto">
+            <p class='m-0 text-center'> <i class='fas fa-money-bill-alt text-success'></i> </p>
+            <p class='m-0 font-weight-bold text-center'>Monthly Paid: </p>
+            <p class='m-0 text-center'>Rs. {{home.price}}/-</p>
+          </div>
+          <div class="price-tab-item mx-auto">
+            <p class='m-0 text-center'> <i class='fas fa-hand-holding-usd'></i> </p>
+            <p class='m-0 font-weight-bold text-center'>Negotiable: </p>
+            <p class='m-0 text-center'>No</p>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="container border rounded shadow py-3 mt-4">
+        <h4>Reviews</h4>
+
+        <hr class='container p-0'>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-outline-secondary btn-sm" data-toggle="modal" data-target="#exampleModalCenter">
+          Write a review
+        </button>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content px-3">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Write a review</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form id='review-form' action="/hostels/review/{{home.id}}" method="POST">
+                  {% csrf_token %}
+                  <div class='ratings-stars'>
+                    <input required class='star-input' id="star1" type="radio" name='rate' value='1'><label for="star1"><i class='fas fa-star stars'></i></label>
+                    <input required class='star-input' id="star2" type="radio" name='rate' value='2'><label for="star2"><i class='fas fa-star stars'></i></label>
+                    <input required class='star-input' id="star3" type="radio" name='rate' value='3'><label for="star3"><i class='fas fa-star stars'></i></label>
+                    <input required class='star-input' id="star4" type="radio" name='rate' value='4'><label for="star4"><i class='fas fa-star stars'></i></label>
+                    <input required class='star-input' id="star5" type="radio" name='rate' value='5'><label for="star5"><i class='fas fa-star stars'></i></label>
+                  </div>
+                  <textarea form="review-form" class='form-control' name="review" rows="5" placeholder="Write a review..."></textarea>
+                  <button type="submit" class="btn btn-primary btn-sm my-2">Post</button>
+                </form>
+              </div>
+              <div class="modal-footer">
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- Comments and Replies -->
+        <div class = 'comments-all'>
+        {% if comments %}
+        {% for c,r in comments.items %}
+          <div class="review-post container d-flex py-3">
+            <div class="commenter">
+              <div class="commenter-image rounded-circle mx-auto" style="background: url('/{{c.user.profile.image}}'); background-size: cover;"></div>
+              <p class='text-center'>{{c.user.first_name}}</p>
+            </div>
+            <div class="comment px-3 rounded mx-3 py-3">
+              <div class="ratings d-flex text-warning">
+                {% if c.ratings == 5 %}
+                <i class='fas fa-star'></i>
+                <i class='fas fa-star'></i>
+                <i class='fas fa-star'></i>
+                <i class='fas fa-star'></i>
+                <i class='fas fa-star'></i>
+                {% endif %}
+                {% if c.ratings == 4 %}
+                <i class='fas fa-star'></i>
+                <i class='fas fa-star'></i>
+                <i class='fas fa-star'></i>
+                <i class='fas fa-star'></i>
+                <i class='far fa-star'></i>
+                {% endif %}
+                {% if c.ratings == 3 %}
+                <i class='fas fa-star'></i>
+                <i class='fas fa-star'></i>
+                <i class='fas fa-star'></i>
+                <i class='far fa-star'></i>
+                <i class='far fa-star'></i>
+                {% endif %}
+                {% if c.ratings == 2 %}
+                <i class='fas fa-star'></i>
+                <i class='fas fa-star'></i>
+                <i class='far fa-star'></i>
+                <i class='far fa-star'></i>
+                <i class='far fa-star'></i>
+                {% endif %}
+                {% if c.ratings == 1 %}
+                <i class='fas fa-star'></i>
+                <i class='far fa-star'></i>
+                <i class='far fa-star'></i>
+                <i class='far fa-star'></i>
+                <i class='far fa-star'></i>
+                {% endif %}
+              </div>
+              <p class='text-info mt-1 mb-0 r-date'>{{c.date|timesince}}</p>
+              <p class='m-0'>
+                {{c.comment}}
+              </p>
+              <div class="d-flex p-0 mt-2 bg-light rounded">
+                <!-- <form id = 'like' action="" method = "POST">
+                  {% csrf_token %}
+                  <button class="btn btn-sm text-info" type="submit" name="button"> <span> <i class='far fa-heart'></i> </span>{{r.likes}}</button>
+                </form> -->
+                <!-- <button class="btn btn-sm text-info" type="button" name="button"> <span> <i class='fas fa-reply-all'></i> </span>Reply</button> -->
+              </div>
+              {% for rep in r %}
+              <div class='reply'>
+                <div class='bg-light rounded py-2 my-2 mt-2 px-3'>
+                  <div class='d-flex'>
+                    <div class='reply-image rounded-circle' style="background: url('/{{rep.user.profile.image}}'); background-size: cover;"></div>
+                    <div class='d-block'>
+                      <small class='mx-2 d-block'>{{rep.user.first_name}} <br><small>{{rep.date | timesince}}</small></small>
+                      <p class='m-0 mx-2'>{{rep.reply}}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+  
+              <!-- <form action="" id='reply' method="POST">
+                {% csrf_token %}
+                <div class='d-flex'>
+                  <input type="text" name='repl' class='form-control mt-2 mr-2'>
+                  <button class='btn btn-sm p-0 btn-outline-info mt-2 px-3' type="submit">Reply</button>
+                </div>
+              </form>
+              <script>
+
+                //post reply
+                $(document).on("submit", "#reply", function (e) {
+                e.preventDefault();
+                $.ajax({
+                    type: 'POST',
+                    url: '/house/reply/{{c.id}}',
+                    data: $('#reply').serialize(),
+                    success: function (response) {
+                    $('.message-alert').removeClass('alert-danger');
+                    $('.message-alert').addClass('alert-success');
+                    $('#alert-message').html("Posted Successfully!");
+                    $('.message-alert').css("display", "block");
+                    $('.message-alert').removeClass('alert-hide');
+                    $('.message-alert').addClass('alert-show');
+                    setTimeout(function () {
+                        $('.message-alert').addClass('alert-hide');
+                        $('.message-alert').removeClass('alert-show');
+                    }, 5000) //alert fadeOut
+                    $('.comment').append(response.data)
+                    },
+                    error: function (e) {
+                      alert("error")
+                    }
+                })
+                })
+
+
+                // var url = `/house/load-reviews/{{home.id}}`
+                // previous = {{last}}
+                // console.log(previous)
+                // setInterval(function(e){
+                //     $.ajax({
+                //     url :url ,
+                //     method : 'GET',
+                //     dataType : 'json',
+                //     success: function(response){
+                //         if(response.id != previous){
+                //             $(".comments-all").append(response.data)  
+                //         }
+                //     },
+                //     error: function(resposnse){
+
+                //             }
+
+                // })
+                // }, 1000)
+            </script> -->
+            </div>
+          </div>
+        {% endfor %}
+        <!-- Comments and Replies -->
+        <div class = 'col-3 mx-auto p-0'>
+          <button id = 'load-more' class = 'btn btn-sm btn-primary mx-auto d-block'>Load More...</button>
+        </div>
+        <hr class='container p-0'>
+        {% else %}
+        <p class='empty-space text-center my-4 py-5' style = 'display: block;'>No reviews yet ;(</p>
+        {% endif %}
+        </div>
+
+      </div>
+
+      <script>
+        // Post Comment
+        $(document).on("submit", "#review-form", function (e) {
+          e.preventDefault();
+          $.ajax({
+            type: 'POST',
+            url: '/house/review/{{home.id}}',
+            data: $('#review-form').serialize(),
+            success: function (response) {
+              $('.message-alert').removeClass('alert-danger');
+              $('.message-alert').addClass('alert-success');
+              $('#alert-message').html("Posted Successfully!");
+              $('.message-alert').css("display", "block");
+              $('.message-alert').removeClass('alert-hide');
+              $('.message-alert').addClass('alert-show');
+              setTimeout(function () {
+                $('.message-alert').addClass('alert-hide');
+                $('.message-alert').removeClass('alert-show');
+              }, 5000) //alert fadeOut
+              $('.comments-all').prepend(response.data)
+              $('.empty-space').css('display', 'none')
+            },
+            error: function (e) {
+              alert("error")
+            }
+          })
+        })
+
+        //load more comments
+        var start = 1
+        var end = 2
+        var step = 1
+        // next start +=6
+        $('#load-more').on('click', function(e){
+            e.preventDefault()
+            var url = `/house/more-comments/{{home.id}}/${start}/${end}`
+            $.ajax({
+                beforeSend: function(){
+                    $("#loading").show();
+                },
+                complete: function(){
+                    $("#loading").hide();
+                },
+                url :url ,
+                method : 'GET',
+                dataType : 'json',
+                success: function(response){
+                    console.log(response)   
+                    start+= step
+                    end+= step
+                    $(".comments-all").append(response.data)
+                    
+                },
+                error: function(resposnse){
+
+                }
+
+            })
+        })
+
+      </script>
+
+      <div class="container border rouded shadow mt-4 p-0">
+        <div class="p-0" id='map'>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 ml-auto s-card">
+      <div class="activity shadow rounded mt-3" id='p-sum'>
+        <div class="container py-3">
+          <h5>Property Summary</h5>
+          <p class="text-sm m-0">{{home.title}}</p>
+          <small class='d-block mb-4'>
+            <small class=''><i class='fas fa-circle text-success' style='font-size: .6em;'></i> Single Room</small>
+            <small class='mx-2'><i class='fas fa-circle text-success' style='font-size: .6em;'></i> Kitchen</small>
+            <small class='mx-2'><i class='fas fa-circle text-success' style='font-size: .6em;'></i> Bathroom</small>
+          </small>
+          <hr class='m-1'>
+          {% if home.services.internet %}
+          <p class="text-sm px-3 m-0 d-flex">Internet <span class="d-block ml-auto mx-5"><i class='fas fa-check-circle text-success'></i></span></p>
+          {% else %}
+          <p class="text-sm px-3 m-0 d-flex">Internet <span class="d-block ml-auto mx-5"><i class='fas fa-times-circle text-danger'></i></span></p>
+          {% endif %}
+          <hr class='m-1 mb-2'>
+          
+          {% if home.services.parking %}
+          <p class="text-sm px-3 m-0 d-flex">Parking <span class="d-block ml-auto mx-5"><i class='fas fa-check-circle text-success'></i></span></p>
+          {% else %}
+          <p class="text-sm px-3 m-0 d-flex">Parking <span class="d-block ml-auto mx-5"><i class='fas fa-times-circle text-danger'></i></span></p>
+          {% endif %}
+          <hr class='m-1 mb-2'>
+          {% if home.services.water %}
+          <p class="text-sm px-3 m-0 d-flex">24/7 Water <span class="d-block ml-auto mx-5"><i class='fas fa-check-circle text-success'></i></span></p>
+          {% else %}
+          <p class="text-sm px-3 m-0 d-flex">24/7 Water <span class="d-block ml-auto mx-5"><i class='fas fa-times-circle text-danger'></i></span></p>
+          {% endif %}
+          <hr class='m-1 mb-2'>
+          <div class="price">
+            <p class='m-0'>From</p>
+            <h6>Rs. {{home.price}}/month</h6>
+          </div>
+          
+          {% if home.user.id != request.user.id %}
+          <div class="jumbotron py-2 booking rounded">
+            <form id="bookingForm" class="booking-form" action="" method="post">
+              {% csrf_token %}
+              <p class='m-0'>Living Duration</p>
+              <div class="container d-flex mx-auto p-0">
+                <input id='due' class='form-control form-control-sm' type="number" name="duration" value="" placeholder="">
+                <p class='mt-1 mx-2'>Months</p>
+              </div>
+              <p class='m-0'>People</p>
+              <div class="d-flex">
+                <input id='adult' class='form-control form-control-sm' type="number" name="adult" value="" placeholder="">
+                <p class='mt-1 mx-2'>Adults</p>
+                <input id='child' class='form-control form-control-sm' type="number" name="child" value="" placeholder="">
+                <p class='mt-1 mx-2'>Child</p>
+              </div>
+              <p>Total Guests: </p>
+              <button class='btn btn-outline-primary my-2 btn-sm btn-block' type="submit" name="button">Book Now</button>
+            </form>
+          </div>
+          <div class='px-3'>
+            <a href='/user/chat/{{home.id}}/{{home.user.id}}' class='btn btn-outline-success btn-sm btn-block' type="button" name="button">Talk To Owner</a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQR0S44XL7N7c1tGrXW92_MLzg7fLf5jw&callback=initMap&libraries=&v=weekly"
+ async></script>
+ <script>
+
+   function success(message){
+    $('.message-alert').removeClass('alert-danger');
+            $('.message-alert').addClass('alert-success');
+            $('#alert-message').html(message);
+            $('.message-alert').css("display", "block");
+            $('.message-alert').removeClass('alert-hide');
+            $('.message-alert').addClass('alert-show');
+            setTimeout(function () {
+              $('.message-alert').addClass('alert-hide');
+              $('.message-alert').removeClass('alert-show');
+            }, 5000) //alert fadeOut
+          }
+
+      function error(message){
+        $('.message-alert').removeClass('alert-success');
+                $('.message-alert').addClass('alert-danger');
+                $('#alert-message').html(message);
+                $('.message-alert').css("display", "block");
+                $('.message-alert').removeClass('alert-hide');
+                $('.message-alert').addClass('alert-show');
+                setTimeout(function () {
+                  $('.message-alert').addClass('alert-hide');
+                  $('.message-alert').removeClass('alert-show');
+                }, 5000) //alert fadeOut
+              }
+
+   $(document).ready(function(){
+     $('#bookingForm').on('submit', function(e){
+        e.preventDefault()
+       $.ajax({
+         method: 'POST',
+         url: '/house/book-rent-home/{{home.id}}',
+         dataType: 'json',
+         data: $('#bookingForm').serialize(),
+         success: function(data){
+           console.log(data.message)
+           if (data.message == "expChild"){
+            error("Total 2 children are allowed!")
+           }
+           else if (data.message == "expAdult"){
+            error("Total 3 adults are allowed!")
+           }
+           else if (data.message == "expMember"){
+            error("Total 5 people are allowed!")
+           }
+           else{
+            success("You have requested a booking!")
+           }
+         },
+         error: function(data){
+            error("Something went wrong!")
+         }
+       })
+     })
+   })
+ </script>
+{% include 'footer.html' %}
+{% endblock %}

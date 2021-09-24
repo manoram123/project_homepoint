@@ -20,3 +20,47 @@
   height: 3ch;
   width: 3ch;
 }
+
+.c-in {
+  background-color: white;
+  border-radius: 0.3em 0 0 0.3em;
+  border-right: 1px solid rgb(189, 189, 189);
+}
+
+.c-out {
+  background-color: white;
+  border-radius: 0 0.3em 0.3em 0;
+  border-left: 1px solid rgb(189, 189, 189);
+}
+
+.num-child,
+.num-adult {
+  background-color: white;
+  height: 3ch;
+  width: 5ch;
+  border: none;
+  outline: none;
+  border-radius: 0.3em 0.3em 0.3em 0.3em;
+}
+
+.summ-img {
+  height: 12ch;
+  width: 10ch;
+}
+
+.f-field {
+  background-color: white;
+  height: 3ch;
+  /* width: 20ch; */
+  border: none;
+  outline: none;
+  border-radius: 0.3em 0.3em 0.3em 0.3em;
+}
+
+.f-field input {
+  background-color: none;
+  width: 90%;
+  border: none;
+  outline: none;
+  font-size: 0.8em;
+}

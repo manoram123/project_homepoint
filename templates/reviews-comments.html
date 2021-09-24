@@ -1,0 +1,64 @@
+<div class="container d-flex py-3">
+    <div class="commenter">
+      <div class="commenter-image rounded-circle mx-auto" style="background: url('/{{post.user.profile.image}}'); background-size: cover;"></div>
+      <p class='text-center'>{{post.user.first_name}}</p>
+    </div>
+    <div class="comment px-3 rounded mx-3 py-3">
+      <div class="ratings d-flex text-warning">
+        {% if post.ratings == '5' %}
+        <i class='fas fa-star'></i>
+        <i class='fas fa-star'></i>
+        <i class='fas fa-star'></i>
+        <i class='fas fa-star'></i>
+        <i class='fas fa-star'></i>
+        {% endif %}
+        {% if post.ratings == '4' %}
+        <i class='fas fa-star'></i>
+        <i class='fas fa-star'></i>
+        <i class='fas fa-star'></i>
+        <i class='fas fa-star'></i>
+        <i class='far fa-star'></i>
+        {% endif %}
+        {% if post.ratings == '3' %}
+        <i class='fas fa-star'></i>
+        <i class='fas fa-star'></i>
+        <i class='fas fa-star'></i>
+        <i class='far fa-star'></i>
+        <i class='far fa-star'></i>
+        {% endif %}
+        {% if post.ratings == '2' %}
+        <i class='fas fa-star'></i>
+        <i class='fas fa-star'></i>
+        <i class='far fa-star'></i>
+        <i class='far fa-star'></i>
+        <i class='far fa-star'></i>
+        {% endif %}
+        {% if post.ratings == '1' %}
+        <i class='fas fa-star'></i>
+        <i class='far fa-star'></i>
+        <i class='far fa-star'></i>
+        <i class='far fa-star'></i>
+        <i class='far fa-star'></i>
+        {% endif %}
+      </div>
+      <p class='text-info mt-1 mb-0 r-date'>{{post.date}}</p>
+      <p class='m-0'>
+        {{post.comment}}
+      </p>
+      <div class="d-flex p-0 mt-2 bg-light rounded">
+        <!-- <form id = 'like' action="" method = "POST">
+          {% csrf_token %}
+          <button class="btn btn-sm text-info" type="submit" name="button"> <span> <i class='far fa-heart'></i> </span>{{r.likes}}</button>
+        </form> -->
+        <!-- <button class="btn btn-sm text-info" type="button" name="button"> <span> <i class='fas fa-reply-all'></i> </span>Reply</button> -->
+      </div>
+      <!-- <form action="" id='reply' method="POST">
+        {% csrf_token %}
+        <div class='d-flex'>
+          <input type="text" name='repl' class='form-control mt-2 mr-2'>
+          <button class='btn btn-sm p-0 btn-outline-info mt-2 px-3' type="submit">Reply</button>
+        </div>
+      </form> -->
+    </div>
+  </div>
+</div>

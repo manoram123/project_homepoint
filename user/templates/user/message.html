@@ -19,6 +19,7 @@
                 <div class="msg ml-auto">
                   <div class="point"></div>
                   <p class = 'text-light mx-1 px-2 py-1 rounded'>{{ m.message }}</p>
+                  <span class = 'timestamp mx-1 px-2 py-1'>{{m.timestamp|timesince}} ago</span>
                 </div>
             </div>
             {% else %}
@@ -26,6 +27,7 @@
                 <div class="msg">
                 <a class='nav-link m-0 p-0' href=""><div class='message-box-reply-on rounded mx-2 my-1' style ="background: url('/{{m.reply_on.image1}}'); background-size: cover;"></div></a>
                   <p class = 'receive-text text-dark mx-1 px-2 py-1 rounded'>{{ m.message}}</p>
+                  <span class = 'timestamp mx-1 px-2 py-1'>{{m.timestamp|timesince}} ago</span>
                 </div>
             </div>
             {% endif %}

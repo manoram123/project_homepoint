@@ -3,7 +3,7 @@
 }
 .navigate-wrapper {
   width: 5ch;
-  height: 110vh;
+  /* height: ; */
   z-index: 999;
   background: red;
 }

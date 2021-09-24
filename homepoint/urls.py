@@ -23,5 +23,7 @@ urlpatterns = [
     path('account/', include('allauth.urls')),
     path('', include('home.urls')),
     path('user/', include('user.urls')),
-    path('hostels/', include('hostels.urls'))
+    path('hostels/', include('hostels.urls')),
+    path('house/', include('house.urls')),
+    path('hotels/', include('hotels.urls'))
 ]

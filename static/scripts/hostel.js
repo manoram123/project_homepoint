@@ -47,6 +47,7 @@ function clickDefault(val){
         // document.querySelector('.slot1').style.display = 'none'
         customBtn1.display = 'block'
         delBtn.display = 'none';
+
     }
 
     if(val == 2){
@@ -57,6 +58,9 @@ function clickDefault(val){
         // document.querySelector('.slot2').style.display = 'none'
         customBtn2.display = 'block';
         delBtn.display = 'none';
+        
+        var _old = document.querySelector('#image2_value');
+        _old.value = ""
     }
     if(val == 3){
         var preview = document.querySelector('#image-preview3').style;
@@ -66,6 +70,9 @@ function clickDefault(val){
         // document.querySelector('.slot3').style.display = 'none'
         customBtn3.display = 'block';
         delBtn.display = 'none';
+                
+        var _old = document.querySelector('#image3_value');
+        _old.value = ""
     }
     if(val == 4){
         var preview = document.querySelector('#image-preview4').style;
@@ -75,6 +82,9 @@ function clickDefault(val){
         // document.querySelector('.slot4').style.display = 'none'
         customBtn4.display = 'block'
         delBtn.display = 'none';
+                
+        var _old = document.querySelector('#image4_value');
+        _old.value = ""
     }
     if(val == 5){
         var preview = document.querySelector('#image-preview5').style;
@@ -84,6 +94,9 @@ function clickDefault(val){
         // document.querySelector('.slot5').style.display = 'none'
         customBtn5.display = 'block'
         delBtn.display = 'none';
+                
+        var _old = document.querySelector('#image5_value');
+        _old.value = ""
     }
     if(val == 6){
         var preview = document.querySelector('#image-preview6').style;
@@ -92,6 +105,9 @@ function clickDefault(val){
         preview.background = 'none';
         customBtn6.display = 'block'
         delBtn.display = 'none';
+                
+        var _old = document.querySelector('#image6_value');
+        _old.value = ""
     }
 }
 
@@ -108,6 +124,7 @@ function showPreview(event, ind){
             customBtn1.display = 'none';
             delBtn.display = 'block';
             document.querySelector('.slot1').style.display = 'block';
+
         }
 
         if(ind == 2){

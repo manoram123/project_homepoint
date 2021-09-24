@@ -348,7 +348,7 @@ nav .fa-bars {
 .n-box {
   display: none;
   position: absolute;
-  height: 25ch;
+  height: 38ch;
   width: 35ch;
   right: 15ch;
   z-index: 9999;
@@ -366,4 +366,41 @@ nav .fa-bars {
 .n-text {
   width: 85%;
   line-height: 1em;
+  font-size: 0.9em;
+  width: 100%;
+}
+
+.n-content {
+  height: 28ch;
+  width: 100%;
+  overflow-y: scroll;
+}
+
+.n-content::-webkit-scrollbar {
+  display: none;
+}
+
+.n-subject {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.list-property-box {
+  height: 30ch;
+}
+
+.subscribe-input {
+  height: 4ch;
+}
+
+.subs-btn {
+  height: 4ch;
+  background-color: none;
+  border: 1px solid #4d5dee;
+}
+
+.hotel-image {
+  height: 20ch;
+  width: 25ch;
 }
