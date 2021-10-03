@@ -8,6 +8,7 @@ from accounts.models import Profile
 
 # Create your views here.
 from accounts.auth import unauthenticated_user
+from user.models import Activity, Notifications
 
 
 @unauthenticated_user
@@ -43,6 +44,7 @@ def register(request):
         username = data['username']
         passw = data['password']
         cpassw = data['confirm_password']
+        print(passw)
         if passw != cpassw:
             return JsonResponse({"message": ['error', "Password did not match!"]})
 
@@ -53,17 +55,14 @@ def register(request):
                 return JsonResponse({"message": ['error', "Username is already taken!"]})
             else:
                 try:
+
                     user = User.objects.create(
                         username=username, first_name=name, email=email)
                     user.set_password(passw)
                     user.save()
-                    if user:
-                        reg_success = messages.info(
-                            request, 'Successfully registered!')
-                        print(reg_success)
-                        profile = Profile.objects.create(
-                            user=user, phone=phone, active_status=True, verified=False)
-                        return JsonResponse({"message": ['success', "Successfully registered! Please Wait..."]})
+                    Profile.objects.create(user=user,
+                                           phone=phone, active_status=True, verified=False)
+                    return JsonResponse({"message": ['success', "Successfully registered! Please Wait..."]})
 
                 except Exception as e:
                     print(e)
